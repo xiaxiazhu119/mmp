@@ -1,0 +1,31 @@
+@import '~style/variables';
+@import '~style/mixins';
+
+$sign-in-form-size: 500px;
+#sign-in-form-container {
+  position: absolute;
+  top: 14%;
+  left: 50%;
+  width: $sign-in-form-size;
+  height: $sign-in-form-size;
+  margin-left: -$sign-in-form-size/2;
+  padding: $spacing-lg-x;
+  border-radius: $spacing;
+  text-align: center;
+
+  #sign-in-form {
+    margin: 0 auto;
+
+    .form-ctrl-container {
+      // width: 100%;
+      margin-bottom: $spacing-lg;
+    }
+
+  }
+
+  > .title {
+    margin-bottom: $spacing-lg-x*2;
+    font-size: $font-size-extra;
+  }
+
+}

@@ -1,0 +1,23 @@
+@import '~style/variables';
+@import '~style/mixins';
+
+#app-cms-top-nav {
+  // @include position(fixed, 2);
+  width: 100%;
+  height: $app-cms-top-nav-height;
+  margin-bottom: $spacing;
+  padding: $spacing $spacing-lg $spacing $app-cms-sidebar-nav-min-width;
+
+  #top-nav-user-info {
+    float: right;
+
+    #t-n-avatar {
+      width: 40px;
+      height: 40px;
+      margin-right: $spacing;
+      border-radius: 50%;
+    }
+
+  }
+
+}

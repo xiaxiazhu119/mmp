@@ -1,0 +1,23 @@
+<div id="app-cms-top-nav">
+
+  <div id="top-nav-user-info">
+
+    <img id="t-n-avatar" src="/assets/img/avatar.png" alt="">
+
+    <span>{{user.name}}</span>
+
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>arrow_drop_down</mat-icon>
+    </button>
+
+    <mat-menu #menu="matMenu">
+      <!-- <button mat-menu-item (click)="goToProfile()">个人信息</button>
+      <mat-divider></mat-divider> -->
+      <button mat-menu-item (click)="editPwd()">密码修改</button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item (click)="signOut()">退出</button>
+    </mat-menu>
+
+  </div>
+
+</div>

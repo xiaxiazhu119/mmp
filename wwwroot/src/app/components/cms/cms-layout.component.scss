@@ -1,0 +1,28 @@
+@import '~style/variables';
+@import '~style/mixins';
+
+
+#app-cms-container {
+  @include position(fixed, 1);
+  // padding-top: $app-admin-top-nav-height;
+  padding-left: $app-cms-sidebar-nav-min-width;
+  padding-bottom: 80px;
+  overflow-x: hidden;
+  // overflow-y: auto;
+  // overflow:auto;
+
+  #app-content-animation-container {
+    position: relative;
+    height: 100%;
+    padding: 0 $spacing-lg-x;
+    overflow: auto;
+     //overflow: scroll;
+
+    #app-content-container {
+      padding-bottom: $spacing-lg-x;
+      @include fade-out($time-short);
+    }
+
+  }
+
+}

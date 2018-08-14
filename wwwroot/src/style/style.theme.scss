@@ -1,0 +1,13 @@
+@import "variables.theme";
+
+body,
+a {
+  //background: $bg;
+  color: $base-color;
+}
+
+
+
+.common-divider {
+  background: $common-gray-lighter;
+}

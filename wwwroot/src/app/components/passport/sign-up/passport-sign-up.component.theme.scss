@@ -1,0 +1,68 @@
+@import '~style/variables.theme';
+@import '~style/mixins';
+
+#sign-up-form-container {
+  color: $white;
+
+  .title {}
+
+  .sub-title {
+
+    > .text-warning {
+      color: $app-mat-amber;
+    }
+
+  }
+
+  #sign-up-form {
+
+      > .form-groups {
+
+        > .form-control {
+          @include bg-transparent-black(.1);
+          color: $white;
+
+          @include input-placeholder() {
+            @include color-transparent-white(.6);
+          }
+
+          &.slt-form-control {
+
+            > option {
+              @include color-transparent-white(.5);
+              @include bg-transparent-black(.6);
+            }
+
+            > option:checked {
+              color: $white;
+              @include bg-transparent-black(.7);
+            }
+
+          }
+
+        }
+
+      }
+
+      .btn-primary {
+        background: $app-primary-color;
+
+        &:hover {
+          background: $app-primary-color-dark;
+        }
+
+      }
+
+      .btn-link {
+        @include color-transparent-white(.6);
+
+        &:hover {
+          color: $white;
+        }
+
+      }
+
+  }
+
+
+}

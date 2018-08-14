@@ -1,0 +1,162 @@
+@import "variables";
+@import "mixins";
+
+html {
+  font-size: $font-initial;
+}
+
+body,
+pre {
+  position: relative;
+  min-width: $body-min-width;
+  width: 100%;
+  height: 100%;
+  //overflow: hidden;
+  //color: $gray-light;
+  font-size: $font-size-base;
+  font-family: $font-family;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+
+  li {
+    list-style-type: none;
+  }
+
+}
+
+h1 {
+  font-size: $font-size-largest;
+}
+
+h2 {
+  font-size: $font-size-larger;
+}
+
+h3 {
+  font-size: $font-size-large;
+}
+
+h4 {
+  font-size: $font-size-base;
+}
+
+h5 {
+  font-size: $font-size-small;
+}
+
+h6 {
+  font-size: $font-size-smaller;
+}
+
+a {
+  cursor: pointer;
+}
+
+pre {
+  background: none;
+  padding: 0;
+  margin: 0;
+  border: none;
+  white-space: pre-wrap;
+  border-radius: 0;
+}
+
+.common-divider {
+  height: 1px;
+  margin: $spacing 0;
+  overflow: hidden;
+}
+
+.strong {
+  font-weight: $font-weight-bold;
+}
+
+.padding {
+  padding: $spacing !important;
+
+  &-sm {
+    padding: $spacing*.5 !important;
+  }
+
+  &-md {
+    padding: $spacing-md !important;
+  }
+
+  &-lg {
+    padding: $spacing-lg !important;
+  }
+
+  &-lg-x {
+    padding: $spacing-lg-x !important;
+  }
+
+}
+
+.m-r {
+  margin-right: $spacing !important;
+
+  &-sm {
+    padding: $spacing*.5 !important;
+  }
+
+  &-md {
+    margin-right: $spacing-md !important;
+  }
+
+  &-lg {
+    margin-right: $spacing-lg !important;
+  }
+
+  &-lg-x {
+    margin-right: $spacing-lg-x !important;
+  }
+
+}
+
+i {
+  &.close {
+    font-style: normal;
+  }
+}
+
+.table {
+
+  > thead,
+  > tbody,
+  > tfoot {
+
+    > tr {
+
+      > th,
+      > td {
+        vertical-align: middle;
+      }
+
+    }
+
+  }
+
+}
+
+.arrow-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+
+  > .arrow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: $common-border-width $common-border-style transparent;
+    transform: rotate(45deg);
+    -ms-transform: rotate(45deg); /* IE 9 */
+    -moz-transform: rotate(45deg); /* Firefox */
+    -webkit-transform: rotate(45deg); /* Safari 和 Chrome */
+    -o-transform: rotate(45deg); /* Opera */
+  }
+
+}

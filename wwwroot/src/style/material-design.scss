@@ -1,0 +1,342 @@
+@import '~@angular/material/theming';
+@import "variables";
+@import "mixins";
+// Plus imports for other components in your app.
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue.
+$candy-app-primary: mat-palette($mat-pink);
+$candy-app-accent: mat-palette($mat-pink, A200, A100, A400);
+// The warn palette is optional (defaults to red).
+$candy-app-warn: mat-palette($mat-red);
+// Create the theme object (a Sass map containing all of the palettes).
+$candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-app-warn);
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+//@include angular-material-theme($candy-app-theme);
+/*
+@include mat-button-theme($candy-app-theme);
+@include mat-form-field-theme($candy-app-theme)
+@include mat-input-theme($candy-app-theme);
+@include mat-select-theme($candy-app-theme);
+*/
+
+//@include mat-menu-theme($candy-app-theme);
+//@include mat-dialog-theme($candy-app-theme);
+.mat-candy-theme {
+  @include angular-material-theme($candy-app-theme);
+}
+
+// Define an alternate dark theme.
+//$dark-primary: mat-palette($mat-blue-grey);
+//$dark-accent: mat-palette($mat-amber, A200, A100, A400);
+//$dark-warn: mat-palette($mat-deep-orange);
+//$dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+// Include the alternative theme styles inside of a block with a CSS class. You can make this
+// CSS class whatever you want. In this example, any component inside of an element with
+// `.unicorn-dark-theme` will be affected by this alternate dark theme instead of the default theme.
+//.unicorn-dark-theme {
+//  @include angular-material-theme($dark-theme);
+//}
+//.mat-form-field-underline {
+//  background-color: $common-gray-lighter-dark;
+//}
+//
+//.mat-form-field-placeholder {
+//  color: rgba(0, 0, 0, .54);
+//}
+$mat-bs-theme-primary: mat-palette($mat-blue, A400);
+$mat-bs-theme-accent: mat-palette($mat-yellow, A400, A200, A600);
+$mat-bs-theme-warn: mat-palette($mat-red, A400);
+$mat-bs-theme: mat-light-theme($mat-bs-theme-primary, $mat-bs-theme-accent, $mat-bs-theme-warn);
+$mat-success-theme-primary: mat-palette($mat-green);
+$mat-success-theme: mat-light-theme($mat-success-theme-primary, $mat-bs-theme-accent, $mat-bs-theme-warn);
+.mat-bs-theme {
+  @include angular-material-theme($mat-bs-theme);
+}
+
+.mat-success-theme {
+  @include angular-material-theme($mat-success-theme);
+}
+
+.mat-text-success {
+  color: mat-color($mat-success-theme-primary);
+}
+
+.mat-text-warn {
+  color: mat-color($candy-app-warn);
+}
+
+.mat-text-accent {
+  color: mat-color($candy-app-accent);
+}
+
+.mat-button,
+.mat-icon-button,
+.mat-raised-button {
+  &.mat-success-btn {
+    background-color: mat-color($mat-success-theme-primary);
+    color: $white;
+    &[disabled] {
+      background-color: rgba(0, 0, 0, .12);
+      color: rgba(0, 0, 0, .26);
+    }
+  }
+  &.mat-bs-primary-btn {
+    background-color: mat-color($mat-bs-theme-primary);
+    color: $white;
+  }
+}
+
+$primary-theme: $mat-bs-theme-primary;
+$secondary-theme: $candy-app-primary;
+@function get-color($color, $key: 400) {
+  @return map-get($color, $key);
+}
+
+$app-mat-grey: get-color($mat-grey);
+$app-mat-grey-light: get-color($mat-grey, 100);
+$app-mat-grey-lighter: lighten($app-mat-grey-light, 1.5%);
+$app-mat-deep-orange: get-color($mat-deep-orange);
+$app-mat-amber: get-color($mat-amber);
+$app-mat-blue: get-color($mat-blue, A700);
+$app-mat-blue-light: get-color($mat-blue, 600);
+$app-mat-blue-dark: get-color($mat-blue, 900);
+$app-mat-indigo: get-color($mat-indigo);
+$app-mat-purple: get-color($mat-purple);
+$app-mat-light-green: get-color($mat-light-green);
+$app-mat-green: get-color($mat-green);
+$app-mat-red: get-color($mat-red, A400);
+$app-mat-pink: get-color($mat-pink, A200);
+/*
+$default-palette-key: 400;
+$app-mat-grey: map-get($mat-grey, $default-palette-key);
+$app-mat-grey-light: map-get($mat-grey, 100);
+$app-mat-grey-lighter: lighten($app-mat-grey-light, 1.5%);
+$app-mat-deep-orange: map-get($mat-deep-orange, $default-palette-key);
+$app-mat-amber: map-get($mat-amber, $default-palette-key);
+$app-mat-blue: map-get($mat-blue, $default-palette-key);
+$app-mat-indigo: map-get($mat-indigo, $default-palette-key);
+$app-mat-purple: map-get($mat-purple, $default-palette-key);
+$app-mat-light-green: map-get($mat-light-green, $default-palette-key);
+$app-mat-green: map-get($mat-green, $default-palette-key);
+$app-mat-red: map-get($mat-red, $default-palette-key);
+*/
+
+$app-primary-color: mat-color($primary-theme);
+$app-primary-color-light: mat-color($primary-theme);
+$app-primary-color-dark: darken($app-primary-color, 8%); //04f
+// ori:004ea2
+$app-secondary-color: mat-color($secondary-theme);
+$app-warn-color: mat-color($candy-app-warn);
+$app-accent-color: mat-color($candy-app-accent);
+$app-success-color: $app-mat-green;
+@mixin component-disabled($bg, $color) {
+  .mat-fab.mat-accent[disabled],
+  .mat-fab.mat-primary[disabled],
+  .mat-fab.mat-warn[disabled],
+  .mat-fab[disabled][disabled],
+  .mat-mini-fab.mat-accent[disabled],
+  .mat-mini-fab.mat-primary[disabled],
+  .mat-mini-fab.mat-warn[disabled],
+  .mat-mini-fab[disabled][disabled],
+  .mat-raised-button.mat-accent[disabled],
+  .mat-raised-button.mat-primary[disabled],
+  .mat-raised-button.mat-warn[disabled],
+  .mat-raised-button[disabled][disabled] {
+    background-color: $bg;
+    color: $color;
+  }
+}
+
+.mat-button,
+.mat-raised-button,
+.mat-icon-button,
+.mat-menu-item,
+.mat-fab,
+.mat-mini-fab,
+.mat-form-field,
+.mat-tooltip,
+.mat-option-text,
+.mat-simple-snackbar,
+.mat-dialog-title {
+  font-family: $font-family;
+}
+
+.mat-tooltip,
+.mat-menu-item,
+.mat-option {
+  font-size: $font-size-base; //color: $gray-light;
+}
+
+.mat-input-container {
+  &.mat-form-field {
+    &-xs {
+      width: 50px;
+      &-x {
+        width: 75px;
+      }
+    }
+    &-sm {
+      width: 100px;
+      &-x {
+        width: 125px;
+      }
+    }
+    &-md {
+      width: 150px;
+    }
+    &-lg {
+      width: 200px;
+      &-x {
+        width: 250px;
+      }
+      &-xx {
+        width: 300px;
+      }
+    }
+    &-50 {
+      width: 50%;
+    }
+    &-75 {
+      width: 75%;
+    }
+    &-100 {
+      width: 100%;
+    }
+  }
+}
+
+.mat-button,
+.mat-icon-button,
+.mat-raised-button {
+  //color: $gray-light;
+  &-lg {
+    padding: 0 30;
+    line-height: 50px;
+  }
+
+}
+
+$mat-checkbox-default-wh: 20px;
+$mat-checkbox-ripple-default-wh: 50px;
+$mat-checkbox-ripple-default-position: -15px;
+$mat-ripple-md-scale: .8;
+@mixin ripple-md() {
+  width: $mat-checkbox-ripple-default-wh * $mat-ripple-md-scale;
+  height: $mat-checkbox-ripple-default-wh * $mat-ripple-md-scale;
+  top: $mat-checkbox-ripple-default-position * $mat-ripple-md-scale;
+  left: $mat-checkbox-ripple-default-position * $mat-ripple-md-scale;
+  border-radius: $mat-checkbox-ripple-default-wh * .5;
+}
+
+.mat-checkbox-md {
+  $scale: .7;
+  >label {
+    font-weight: $font-weight-normal !important;
+  }
+  .mat-checkbox-inner-container {
+    @include get-square($mat-checkbox-default-wh * $scale);
+    .mat-checkbox-ripple {
+      @include ripple-md(); // @include get-square($mat-checkbox-ripple-default-wh * $scale);
+      // top: $mat-checkbox-ripple-default-position * $scale;
+      // left: $mat-checkbox-ripple-default-position * $scale;
+    }
+  }
+}
+
+.mat-checkbox-thin {
+  .mat-checkbox-frame {
+    border-width: 1px;
+  }
+}
+
+.mat-expansion-panel {
+  color: $base-color;
+  .mat-expansion-panel-header {
+    padding: 0 $spacing-lg;
+    &.mat-expanded {
+      //height: 56px !important;
+      background: $app-mat-grey-light;
+    }
+  }
+  .mat-expansion-panel-body {
+    padding-top: $spacing-lg;
+  }
+}
+
+.mat-dialog-actions:last-child {
+  margin-bottom: -14px;
+}
+
+.mat-simple-snackbar-icon-action {
+  .mat-simple-snackbar-action {
+    font-size: $font-size-largest;
+  }
+}
+
+.mat-slide-toggle {
+  position: relative;
+  top: 4px;
+}
+
+.mat-dialog-container {
+  .mat-raised-button.mat-primary,
+  .mat-fab.mat-primary,
+  .mat-mini-fab.mat-primary {
+    .mat-button-focus-overlay {
+      background: none;
+    }
+  }
+}
+
+.material-icons {
+  text-rendering: optimizeLegibility;
+  font-feature-settings: 'liga';
+}
+
+.mat-candy-theme {
+  .mat-form-field-ripple {
+    //background-color: #e91e63;
+    background-color: $app-secondary-color !important;
+  }
+  .mat-focused {
+    .mat-form-field-placeholder {
+      //color: #e91e63;
+      color: $app-secondary-color !important;
+    }
+    .mat-form-field-underline {
+      //background-color: #e91e63;
+      background-color: $app-secondary-color !important;
+    }
+  }
+}
+
+.mat-bs-theme {
+  @include component-disabled($common-gray-lighter, $white);
+  .mat-form-field-underline {
+    background-color: rgba(0, 0, 0, 0.15);
+  }
+  .app-inverse {
+    @include component-disabled(rgba(255, 255, 255, .12), rgba(255, 255, 255, .3));
+    .mat-form-field-placeholder {
+      color: rgba(255, 255, 255, .54);
+    }
+    .mat-form-field-underline {
+      background-color: rgba(255, 255, 255, .7);
+    }
+    .mat-focused {}
+  }
+  .mat-form-field-label {
+    color: $gray-dark;
+  }
+  .mat-tab-group.mat-primary .mat-ink-bar,
+  .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+    background-color: $app-primary-color;
+  }
+}

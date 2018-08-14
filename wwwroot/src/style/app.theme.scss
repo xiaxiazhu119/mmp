@@ -1,0 +1,119 @@
+@import "style.theme";
+
+.component-title {
+  color: $gray-dark;
+
+  &:before {
+    background: $app-warn-color;
+  }
+
+}
+
+.app-data-list {
+
+  &.striped {
+
+    .app-data-row {
+      background: $white;
+
+      &:nth-child(even),
+      &.even {
+        background: $app-mat-grey-lighter;
+      }
+
+    }
+
+  }
+
+  .app-data-row {
+
+    .app-data-column {
+      border-top-color: $common-border-color;
+    }
+
+  }
+
+  .app-data-header {
+
+    .app-data-row {
+
+      .app-data-column {
+        border-bottom-color: $common-border-color;
+      }
+
+    }
+
+  }
+
+}
+
+
+.app-tag {
+
+  &.pending {
+    color: $app-mat-grey;
+  }
+
+  &.pending-review {
+    color: $app-mat-grey;
+  }
+
+  &.pending-approval {
+    color: $app-mat-amber;
+  }
+
+  &.draft {
+    color: $app-mat-deep-orange;
+  }
+
+  &.submited {
+    color: $app-mat-green;
+  }
+
+  &.denied {
+    color: $app-mat-red;
+  }
+
+  &.passed {
+    color: $app-mat-green;
+  }
+
+}
+
+.app-label {
+  color: $white;
+
+  &.pending {
+    background-color: $app-mat-grey;
+  }
+
+  &.pending-review {
+    background-color: $app-mat-grey;
+  }
+
+  &.pending-approval {
+    background-color: $app-mat-amber;
+  }
+
+  &.draft {
+    background-color: $app-mat-deep-orange;
+  }
+
+  &.submited {
+    background-color: $app-mat-green;
+  }
+
+  &.denied {
+    background-color: $app-mat-red;
+  }
+
+  &.passed {
+    background-color: $app-mat-green;
+  }
+
+  > .attention {
+    background-color: $white;
+    color: $app-mat-pink;
+  }
+
+}

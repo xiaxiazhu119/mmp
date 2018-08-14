@@ -1,0 +1,22 @@
+@import "~style/variables.theme";
+@import "~style/mixins";
+
+.app-pagination-container {
+
+  .pagination > li > a,
+  .pagination > li > span {
+    //color: $mat-primary-color;
+  }
+
+  .pagination > .active > a,
+  .pagination > .active > a:focus,
+  .pagination > .active > a:hover,
+  .pagination > .active > span,
+  .pagination > .active > span:focus,
+  .pagination > .active > span:hover {
+    //background-color: $mat-primary-color;
+    //border-color: $mat-primary-color;
+    //color: $white;
+  }
+
+}

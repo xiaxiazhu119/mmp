@@ -1,0 +1,124 @@
+@import "style";
+@import "mixins";
+.container {
+  width: $min-width-limited;
+}
+
+.search-condition-container {
+  margin-bottom: $spacing;
+}
+
+.component-title {
+  margin-top: 0;
+  margin-bottom: $spacing-lg;
+  &:before {
+    content: '';
+    width: 2px;
+    height: 19px;
+    display: block;
+    float: left;
+    margin-right: 8px;
+  }
+}
+
+.data-list-container {
+  &.lg {
+    @include style-data-list($spacing*1.2);
+  }
+}
+
+$app-data-list-base-z-index: 1;
+.app-data-list {
+  .app-data-header,
+  .app-data-body {
+    display: table;
+    @include active-bigger();
+    .app-data-row {
+      display: table-row;
+      .app-data-column {
+        display: table-cell;
+        padding: 8px;
+        border-top-width: $common-border-width;
+        border-top-style: $common-border-style;
+        vertical-align: middle;
+        &.index {
+          width: 5%;
+        }
+        &.operation {
+          width: 15%;
+        }
+      }
+    }
+  }
+  .app-data-header {
+    margin-bottom: -1px;
+    font-weight: $font-weight-bold;
+    .app-data-row {
+      .app-data-column {
+        border-top: none;
+        border-bottom-width: $common-border-width*2;
+        border-bottom-style: $common-border-style;
+      }
+    }
+  }
+}
+
+.app-elevation {
+  @extend .mat-elevation-z4;
+}
+
+.tab-item-container {
+  padding: $spacing-lg;
+  .tab-operation-container {
+    margin-left: -$spacing-lg;
+  }
+}
+
+.app-tag,
+.app-label {
+  position: relative;
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  vertical-align: middle;
+  &.draft {}
+  &.saved {}
+  &.submited {}
+  &.denied {}
+  &.passed {}
+  >.attention {
+    position: absolute;
+    top: -40%;
+    right: -17%;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    >.icon {
+      position: relative;
+      top: -1px;
+      left: -1px;
+    }
+  }
+}
+
+.app-label {
+  min-width: 70px;
+}
+
+.app-mat-dialog-container {
+  &-md {
+    width: 400px;
+  }
+  &-lg {
+    width: 600px;
+  }
+}
+
+.app-footer {
+  @include position(fixed, 1);
+  top: inherit;
+  bottom: 0;
+  height: auto;
+  padding: $spacing-lg 0;
+  text-align: center;
+}

@@ -1,0 +1,91 @@
+@import '~style/variables';
+@import '~style/mixins';
+
+.app-icon-nav-list {
+
+  .nav-icon {
+    display: block;
+    text-decoration: none;
+    line-height: 1;
+
+    > i {
+      font-size: $font-size-extra;
+    }
+
+  }
+
+}
+
+#app-cms-sidebar-nav {
+  @include position(fixed, 3);
+  width: $app-cms-sidebar-nav-min-width;
+
+  #app-cms-sidebar-nav-main-container {
+    float: left;
+    width: $app-cms-sidebar-nav-min-width;
+
+    #logo-container {
+      //height: $app-top-nav-height;
+      padding: $spacing-lg-xx 0;
+      text-align: center;
+
+      > img {
+        width: 48px;
+      }
+
+    }
+
+
+  }
+
+  #app-cms-sidebar-nav-list {
+
+    .nav-item {
+      position: relative;
+
+      .nav-item-container {
+        position: relative;
+        margin-bottom: $spacing-lg-x;
+        text-align: center;
+        opacity: .5;
+
+        &.active,
+        &:hover {
+          opacity: 1;
+        }
+
+        &.active {
+
+          .arrow-container {
+            display: block;
+          }
+
+        }
+
+        $arrow-container-size: 20px;
+        $arrow-size: 16px;
+        .arrow-container {
+          display: none;
+          top: 20%;
+          left: auto;
+          right: 0;
+          width: 10px;
+          height: 20px;
+
+          > .arrow {
+            top: 2px;
+            left: 3px;
+            width: $arrow-size;
+            height: $arrow-size;
+            background: #fff;
+          }
+
+        }
+
+      }
+
+    }
+
+  }
+
+}

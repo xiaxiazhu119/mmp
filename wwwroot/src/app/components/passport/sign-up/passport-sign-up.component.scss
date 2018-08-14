@@ -1,0 +1,39 @@
+@import '~style/variables';
+@import '~style/mixins';
+
+
+#sign-up-form-container {
+  padding-top: $spacing-lg-xx;
+
+  .title {
+    margin-bottom: $spacing-lg-xx;
+    font-size: $font-size-extra;
+    font-weight: $font-weight-bold;
+  }
+
+  .sub-title {
+    margin-bottom: $spacing-lg-xx;
+  }
+
+  #sign-up-form {
+
+      > .form-groups {
+        margin-bottom: $spacing;
+
+        > .form-control {
+          width: 32%;
+          margin-right: $spacing;
+          border: none;
+        }
+
+      }
+
+      .btn {
+        width: 20%;
+      }
+
+  }
+
+
+
+}

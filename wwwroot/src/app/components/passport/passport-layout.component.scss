@@ -1,0 +1,14 @@
+@import '~style/variables';
+@import '~style/mixins';
+
+#app-passport-container {
+  @include position(fixed, 1);
+
+  > #app-passport-footer {
+    @include position-absolute(2);
+    top: auto;
+    bottom: $spacing-lg-x;
+    height: auto;
+    text-align: center;
+  }
+}

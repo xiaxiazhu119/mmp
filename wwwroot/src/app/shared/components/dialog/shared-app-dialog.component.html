@@ -1,0 +1,14 @@
+<div class="app-mat-dialog-container">
+
+  <h2 *ngIf="config.title !== ''" mat-dialog-title class="app-mat-dialog-title">{{config.title}}</h2>
+
+  <mat-dialog-content *ngIf="!config.useComponent" class="app-mat-dialog-content-container">{{config.content}}</mat-dialog-content>
+
+  <ng-template #dynamicComponentContainer></ng-template>
+
+  <div *ngIf="config.hasAction" class="app-mat-dialog-action-container">
+    <button *ngIf="config.hasConfirmBtn" type="button" mat-raised-button color="primary" (click)="confirm()" [class.m-r-lg]="config.hasCancelBtn">{{config.confirmBtnTxt}}</button>
+    <button *ngIf="config.hasCancelBtn" type="button" mat-button (click)="cancel()">{{config.cancelBtnTxt}}</button>
+  </div>
+
+</div>

@@ -1,0 +1,10 @@
+<li id="{{navItem.id}}" class="nav-item">
+  <!-- <div class="nav-item-container" matTooltip="{{navItem.toolTipTitle}}" [matTooltipPosition]="tooltipPosition" [class.active]="navItem.active">
+    <a (click)="goTo(navItem)" role="button" class="nav-icon"><i class="material-icons">{{navItem.icon}}</i>{{navItem.toolTipTitle}}</a>
+    <span class="arrow-container"><span class="arrow"></span></span>
+  </div> -->
+  <div class="nav-item-container" [class.active]="navItem.active">
+    <a (click)="goTo(navItem)" role="button" class="nav-icon"><i class="material-icons">{{navItem.icon}}</i><br>{{navItem.toolTipTitle}}</a>
+    <span class="arrow-container"><span class="arrow"></span></span>
+  </div>
+</li>

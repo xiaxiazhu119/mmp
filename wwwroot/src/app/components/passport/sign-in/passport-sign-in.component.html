@@ -1,0 +1,26 @@
+<div id="sign-in-form-container">
+
+  <h1 class="title">稿件综合管理平台</h1>
+
+
+  <div id="sign-in-form">
+
+    <p class="form-ctrl-container">
+      <input type="text" class="form-control input-lg" [(ngModel)]="user.userName" maxlength="30" placeholder="用户名" (keydown.enter)="signIn()">
+    </p>
+    <p class="form-ctrl-container">
+      <input type="password" class="form-control input-lg" [(ngModel)]="user.pwdOri" maxlength="30" placeholder="密码" (keydown.enter)="signIn()">
+    </p>
+    <p class="form-ctrl-container">
+      <button class="btn btn-primary btn-full-width btn-lg" (click)="signIn()" [disabled]="isSubmit">{{signInBtnTxt}}</button>
+    </p>
+    <p class="form-ctrl-container">
+      <button class="btn btn-success btn-full-width btn-lg" (click)="goToSignUp()">投稿老师点此注册</button>
+    </p>
+    <p class="text-left">
+      <span class="text-primary">忘记密码、登录异常等问题，</span>请致电：021-xxxxxxxx
+    </p>
+  </div>
+
+
+</div>

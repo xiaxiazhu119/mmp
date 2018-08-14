@@ -1,0 +1,80 @@
+$rem-base: 1rem;
+
+$font-size-extra: $rem-base * 3.2;
+$font-size-largest: $rem-base * 2.2;
+$font-size-larger: $rem-base * 1.8;
+$font-size-large: $rem-base * 1.6;
+$font-size-base: $rem-base * 1.4;
+$font-size-small: $rem-base * 1.2;
+$font-size-smaller: $rem-base;
+$font-family: "Microsoft YaHei", Roboto, "Helvetica Neue", "Microsoft YaHei", sans-serif, Arial, Verdana, serif;
+$font-initial: 62.5%;
+
+$common-gray-lighter: #ddd;
+$common-gray-lighter-dark: #ccc;
+
+$common-border-width: 1px;
+$common-border-style: solid;
+$common-border-color: $common-gray-lighter;
+$common-border-color-darker: $common-gray-lighter-dark;
+
+$common-shadow-color: $common-gray-lighter;
+$common-shadow-blur: $font-size-base;
+$common-shadow-v-offset: 0;
+$common-shadow-h-offset: 0;
+
+$common-box-shadow: $common-shadow-h-offset $common-shadow-v-offset $common-shadow-blur $common-shadow-color;
+
+$common-paragraph-spacing: $font-size-smaller;
+
+$gray-base: #000;
+$gray-darker: lighten($gray-base, 13.5%); // #222
+$gray-dark: lighten($gray-base, 20%); // #333
+$gray: lighten($gray-base, 33.5%); // #555
+$gray-light: lighten($gray-base, 46.7%); // #777
+$gray-light-888: lighten($gray-base, 53.33%); // #888
+$gray-lighter: lighten($gray-base, 60%); // #999
+$gray-lightest: lighten($gray-base, 93.5%); // #eee
+
+$font-weight-bold: 600;
+$font-weight-normal: 400;
+
+$white: #fff;
+$white-gray: darken($white, 2%);  //#fafafa
+
+$color-dark-rate: 9.5%;
+$color-darker-rate: 13.5%;
+$color-darkest-rate: 20%;
+
+$border-radius: 0;
+
+$spacing: 10px;
+$spacing-md: $spacing * 1.5;
+$spacing-lg: $spacing * 2;
+$spacing-lg-x: $spacing * 3;
+$spacing-lg-xx: $spacing * 4;
+
+$min-width-limited: 1200px;
+$max-width-limited: 1920px;
+
+$body-min-width: $min-width-limited;
+
+$header-height: 70px;
+
+$app-cms-sidebar-nav-min-width: 80px;
+$app-main-container-min-width: $body-min-width - $app-cms-sidebar-nav-min-width;
+$app-cms-top-nav-height: 60px;
+
+$base-color: $gray;
+$title-color: $gray-dark;
+
+$time-shortest: .1s;
+$time-shorter: .2s;
+$time-short: .3s;
+$time-default: .5s;
+
+//@mixin get-box-shadow($x,$y,$blur,$color) {
+//  -webkit-box-shadow: $x $y $blur $color;
+//  -moz-box-shadow: $x $y $blur $color;
+//  box-shadow: $x $y $blur $color;
+//}

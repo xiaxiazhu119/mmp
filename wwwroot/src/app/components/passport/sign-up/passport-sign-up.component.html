@@ -1,0 +1,56 @@
+<div id="sign-up-form-container">
+
+  <div class="container">
+
+    <h1 class="title text-center">稿件综合管理平台</h1>
+
+    <h3 class="sub-title text-center">投稿教师账户注册，<span class="text-warning">全部为必填项！</span></h3>
+
+    <div id="sign-up-form">
+      <h3>1. 登录设置</h3>
+      <div class="form-groups form-inline">
+        <input type="text" class="form-control input-lg" [(ngModel)]="user.userName" maxlength="30" placeholder="用户名" (keydown.enter)="signUp()">
+        <input type="password" class="form-control input-lg" [(ngModel)]="pwd" maxlength="30" placeholder="设置密码" (keydown.enter)="signUp()">
+        <input type="password" class="form-control input-lg" [(ngModel)]="confirmPwd" maxlength="30" placeholder="确认密码" (keydown.enter)="signUp()">
+      </div>
+      <p>&nbsp;</p>
+      <h3>2. 个人信息</h3>
+      <div class="form-groups form-inline">
+        <input type="text" class="form-control input-lg" [(ngModel)]="userProfile.name" maxlength="30" placeholder="真实姓名" (keydown.enter)="signUp()">
+        <input type="text" class="form-control input-lg" [(ngModel)]="userProfile.mobile" maxlength="20" placeholder="手机号码" (keydown.enter)="signUp()">
+        <input type="text" class="form-control input-lg" [(ngModel)]="userProfile.email" maxlength="100" placeholder="电子邮件" (keydown.enter)="signUp()">
+      </div>
+      <p>&nbsp;</p>
+      <h3>3. 单位信息</h3>
+      <div class="form-groups form-inline">
+        <select class="form-control slt-form-control input-lg" [(ngModel)]="userProfile.province" (change)="onProvinceChange($event)">
+            <option value="0">省/直辖市</option>
+            <option *ngFor="let province of provinceList" [value]="province.id">{{province.name}}</option>
+        </select>
+        <select class="form-control slt-form-control input-lg" [(ngModel)]="userProfile.city" (change)="onCityChange($event)">
+          <option value="0">市</option>
+          <option *ngFor="let city of cityList" [value]="city.id">{{city.name}}</option>
+        </select>
+        <select class="form-control slt-form-control input-lg" [(ngModel)]="userProfile.district" (change)="onDistrictChange($event)">
+          <option value="0">区</option>
+          <option *ngFor="let district of districtList" [value]="district.id">{{district.name}}</option>
+        </select>
+      </div>
+      <div class="form-groups form-inline">
+        <input type="text" class="form-control input-lg" [(ngModel)]="userProfile.companyName" maxlength="50" placeholder="单位名称" (keydown.enter)="signUp()">
+        <input type="text" class="form-control input-lg" [(ngModel)]="userProfile.companyAddress" maxlength="100" placeholder="单位地址" (keydown.enter)="signUp()">
+        <input type="text" class="form-control input-lg" [(ngModel)]="userProfile.companyZipCode" maxlength="10" placeholder="单位邮编" (keydown.enter)="signUp()">
+      </div>
+
+      <p>&nbsp;</p>
+
+      <div class="text-center">
+          <button class="btn btn-primary btn-lg" (click)="signUp()">注册</button>
+          <button class="btn btn-link btn-lg" (click)="goToSignIn()">登录</button>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

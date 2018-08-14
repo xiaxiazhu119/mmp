@@ -1,0 +1,228 @@
+@import "variables";
+@mixin clear-fix() {
+  &::before,
+  &::after {
+    display: block;
+    content: '';
+    clear: both;
+  }
+}
+
+@mixin position($position, $z) {
+  position: $position;
+  top: 0;
+  left: 0;
+  z-index: $z;
+  width: 100%;
+  height: 100%;
+}
+
+@mixin position-absolute($z) {
+  @include position(absolute, $z);
+}
+
+@mixin style-data-list($pd) {
+  .table > tbody > tr td,
+  .table > tbody > tr > th,
+  .table > tfoot > tr > td,
+  .table > tfoot > tr > th,
+  .table > thead > tr > td,
+  .table > thead > tr > th {
+    padding: $pd;
+  }
+}
+
+@mixin text-overflow-ellipsis($max-width) {
+  display: inline-block;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin get-square($size) {
+  width: $size;
+  height: $size;
+}
+
+@mixin transition($prop, $time:$time-default, $delay:$time-default) {
+  $prop: #{$prop};
+  $delay: #{$delay};
+  -webkit-transition: $prop $time ease-in-out;
+  -moz-transition: $prop $time ease-in-out;
+  -ms-transition: $prop $time ease-in-out;
+  -o-transition: $prop $time ease-in-out;
+  transition: $prop $time ease-in-out;
+  /*
+  -webkit-transition: $prop $time ease-in-out, $delay;
+  -moz-transition: $prop $time ease-in-out, $delay;
+  -ms-transition: $prop $time ease-in-out, $delay;
+  -o-transition: $prop $time ease-in-out, $delay;
+  transition: $prop $time ease-in-out, $delay;
+  */
+}
+
+@mixin transition-all-linear($time:$time-default) {
+  transition: $time all linear;
+}
+
+@mixin fade-in($time:$time-default) {
+  visibility: visible;
+  opacity: 1;
+  @include transition(all, $time);
+  &.fade-in {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+
+@mixin fade-out($time:$time-default) {
+  visibility: hidden;
+  opacity: 0;
+  @include transition(all, $time);
+  &.fade-out {
+    visibility: visible;
+    opacity: 1;
+  }
+  @-webkit-keyframes fade {
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes fade {
+    100% {
+      opacity: 1;
+    }
+  }
+}
+
+@mixin slide-RTL($time:$time-default) {
+  visibility: hidden; //left: 400%;
+  right: -400%;
+  opacity: 0;
+  @include transition(all, $time);
+  &.slide-rtl {
+    visibility: visible;
+    right: 0;
+    left: 0;
+    opacity: 1;
+  }
+}
+
+@mixin slide-down($height, $time:$time-default) {
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+  opacity: 0;
+  @include transition(all, $time);
+  &.slide-down {
+    height: $height; //overflow: inherit;
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+@mixin active-bigger($zIndex:1, $time:$time-shortest) {
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: $zIndex;
+  width: 100%;
+  @include transition(all, $time);
+  &.active-bigger {
+    top: -7px;
+    left: -1%;
+    z-index: $zIndex+1;
+    width: 102%;
+  }
+}
+
+@mixin scale-LTR($width, $defaultWidth:0, $time:$time-short) {
+  width: $defaultWidth;
+  @include transition(all, $time);
+  &.scale-ltr {
+    width: $width;
+  }
+}
+
+@mixin scale-WH-LTR($width, $height, $time:$time-short) {
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  @include transition(all, $time);
+  &.scale-wh-ltr {
+    width: $width;
+    height: $height;
+  }
+}
+
+@mixin bg-transparent-white($opacity) {
+  background: rgba(255, 255, 255, $opacity);
+}
+
+@mixin bg-transparent-black($opacity) {
+  background: rgba(0, 0, 0, $opacity);
+}
+
+@mixin bg-transparent-same-rgb($rgb, $opacity) {
+  background: rgba($rgb, $rgb, $rgb, $opacity);
+}
+
+@mixin bg-transparent-base($r, $g, $b, $opacity) {
+  background: rgba($r, $g, $b, $opacity);
+}
+
+@mixin color-transparent-white($opacity) {
+  color: rgba(255, 255, 255, $opacity);
+}
+
+@mixin color-transparent-black($opacity) {
+  color: rgba(0, 0, 0, $opacity);
+}
+
+@mixin color-transparent-same-rgb($rgb, $opacity) {
+  color: rgba($rgb, $rgb, $rgb, $opacity);
+}
+
+@mixin color-transparent-base($r, $g, $b, $opacity) {
+  color: rgba($r, $g, $b, $opacity);
+}
+
+@mixin box-shadow-base($offset-x, $offset-y, $blur, $color) {
+  -webkit-box-shadow: $offset-x $offset-y $blur $color;
+  -moz-box-shadow: $offset-x $offset-y $blur $color;
+  box-shadow: $offset-x $offset-y $blur $color;
+}
+
+@mixin box-shadow-down($offset-y, $blur, $color) {
+  @include box-shadow-base(0, $offset-y, $blur, $color);
+}
+
+
+@mixin input-placeholder() {
+  $selector: '';
+  $prefixes: (
+      moz: "::-moz",
+      webkit: "::-webkit",
+      ie: ":-ms"
+  );
+  @each $prop, $value in $prefixes {
+      @if $prop != "moz" {
+          $selector: #{$value}-input-placeholder;
+      } @else {
+          $selector: #{$value}-placeholder;
+      }
+      @if & {
+          &#{$selector} {
+              @content;
+          }
+      } @else {
+          #{$selector} {
+              @content;
+          }
+      }
+  }
+  &::placeholder {
+    @content;
+  }
+}

@@ -1,0 +1,30 @@
+<div id="app-cms-container">
+  <app-cms-sidebar-nav [routeModuleId]="routeModuleId"></app-cms-sidebar-nav>
+
+  <div id="app-content-animation-container">
+
+    <app-cms-top-nav [user]="user" (signOuted)="onSignOut($event)"></app-cms-top-nav>
+
+    <div [hidden]="!appComponentLoading">
+      <app-loading-cube-grid></app-loading-cube-grid>
+    </div>
+
+    <div id="app-content-container" [class.fade-out]="appComponentLoaded">
+
+      <div [hidden]="appComponentLoading">
+        <h2 *ngIf="pageTitle" class="component-title">{{pageTitle}}</h2>
+
+        <router-outlet></router-outlet>
+      </div>
+
+    </div>
+
+  </div>
+
+
+</div>
+
+
+<div class="app-footer">
+    主办单位：上海市学习型社会建设服务指导中心、上海开放大学<br>技术支持：上海教育软件发展有限公司
+</div>

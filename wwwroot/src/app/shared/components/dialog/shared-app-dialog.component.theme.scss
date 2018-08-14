@@ -1,0 +1,16 @@
+@import "~style/variables.theme";
+
+.app-mat-dialog-container {
+  color: $base-color;
+
+  .app-mat-dialog-title {
+    color: $title-color;
+  }
+
+  .app-mat-dialog-content-container {
+  }
+
+  .app-mat-dialog-action-container {
+  }
+
+}

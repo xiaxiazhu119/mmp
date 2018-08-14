@@ -1,0 +1,17 @@
+@import "~style/variables";
+@import "~style/mixins";
+
+.app-pagination-container {
+  text-align: right;
+
+  .app-bootstrap-pagination,
+  .page-size-selection {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .page-size-selection {
+    margin-top: -1px;
+  }
+
+}

@@ -1,0 +1,11 @@
+@import '~style/variables.theme';
+@import '~style/mixins';
+
+#app-passport-container {
+  background: transparent linear-gradient(0, $app-mat-blue-dark 1%, $app-mat-blue-light 99%) repeat scroll 0% 0%;
+
+  > #app-passport-footer {
+    @include color-transparent-white(.3);
+  }
+
+}

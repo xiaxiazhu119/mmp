@@ -1,0 +1,66 @@
+<div id="app-cms-manuscript-list-container">
+
+  <div class="search-condition-container">
+
+    <mat-form-field class="mat-form-field-md m-r-lg">
+      <mat-select class="sc-slt" placeholder="稿件状态" [(ngModel)]="sc.status">
+        <mat-option (click)="sc.status = undefined">全部</mat-option>
+        <mat-option *ngFor="let s of statusList" [value]="s.id">{{s.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="mat-form-field-lg m-r-lg">
+      <input matInput placeholder="关键字" class="form-ctrl" [(ngModel)]="sc.keyword" maxlength="20">
+      <button *ngIf="sc.keyword" mat-icon-button (click)="clearKeyword()" matSuffix>
+        <i class="close sc-close">&times;</i>
+      </button>
+    </mat-form-field>
+
+    <button mat-raised-button (click)="search();" class="m-r-lg" color="primary"><i class="material-icons">search</i> 检索</button>
+
+    <button mat-raised-button (click)="goToEdit()" class="m-r-lg mat-success-btn"><i class="material-icons">add</i> 立即投稿</button>
+
+    <!-- <button mat-raised-button color="warn"><i class="material-icons">file_upload</i> 导入信息</button> -->
+
+  </div>
+
+  <div class="data-list-container lg app-elevation">
+
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <!-- <th></th> -->
+        <th>标题</th>
+        <th>投稿人</th>
+        <th>作者</th>
+        <th>拟投栏目</th>
+        <th>投稿日期</th>
+        <th>所属地区</th>
+        <th>稿件状态</th>
+        <th>评审意见</th>
+        <th class="text-center">操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of dataList;let i = index">
+        <td>{{data.title}}</td>
+        <td>{{data.userName}}</td>
+        <td>{{data.authorName}}</td>
+        <td>{{data.categoryName}}</td>
+        <td>{{data.createTimeFmt}}</td>
+        <td>{{data.provinceName}} - {{data.cityName}} - {{data.districtName}}</td>
+        <td>{{data.statusName}}</td>
+        <td> - </td>
+        <td class="text-center info-data-list-op">
+          <button mat-button class="m-r" title="编辑"><i class="material-icons">create</i></button>
+          <button mat-button color="warn" title="删除"><i class="material-icons">delete_forever</i></button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+  <app-pagination [appPaginationConfig]="pgCfg" (pageChanged)="onPageChange($event)"></app-pagination>
+
+</div>

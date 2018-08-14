@@ -1,0 +1,17 @@
+@import "~style/variables";
+
+.app-mat-dialog-container {
+  min-width: 300px;
+
+  .app-mat-dialog-title {
+  }
+
+  .app-mat-dialog-content-container {
+    margin-bottom: $spacing * 2.4;
+  }
+
+  .app-mat-dialog-action-container {
+    text-align: center;
+  }
+
+}

@@ -1,0 +1,48 @@
+<div id="app-cms-magazine-list-container">
+
+  <div class="search-condition-container">
+
+    <mat-form-field class="mat-form-field-lg m-r-lg">
+      <input matInput placeholder="关键字" class="form-ctrl" [(ngModel)]="sc.keyword" maxlength="20">
+      <button *ngIf="sc.keyword" mat-icon-button (click)="clearKeyword()" matSuffix>
+        <i class="close sc-close">&times;</i>
+      </button>
+    </mat-form-field>
+
+    <mat-form-field class="mat-form-field-md m-r-lg">
+      <mat-select class="sc-slt" placeholder="栏目" [(ngModel)]="sc.termId">
+        <mat-option (click)="sc.termId = undefined">全部</mat-option>
+        <mat-option *ngFor="let term of termList" [value]="term.key">{{term.value}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="mat-form-field-lg m-r-lg">
+      <input matInput placeholder="关键字" class="form-ctrl" [(ngModel)]="sc.keyword" maxlength="20">
+      <button *ngIf="sc.keyword" mat-icon-button (click)="clearKeyword()" matSuffix>
+        <i class="close sc-close">&times;</i>
+      </button>
+    </mat-form-field>
+
+    <mat-form-field class="mat-form-field-lg m-r-lg">
+      <input matInput placeholder="关键字" class="form-ctrl" [(ngModel)]="sc.keyword" maxlength="20">
+      <button *ngIf="sc.keyword" mat-icon-button (click)="clearKeyword()" matSuffix>
+        <i class="close sc-close">&times;</i>
+      </button>
+    </mat-form-field>
+
+    <mat-form-field class="mat-form-field-md m-r-lg">
+      <mat-select class="sc-slt" placeholder="年度" [(ngModel)]="sc.termId">
+        <mat-option (click)="sc.termId = undefined">全部</mat-option>
+        <mat-option *ngFor="let term of termList" [value]="term.key">{{term.value}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button (click)="search();" class="m-r-lg" color="primary"><i class="material-icons">search</i> 检索</button>
+
+    <button mat-raised-button (click)="goToEdit()" class="m-r-lg mat-success-btn"><i class="material-icons">add</i> 创建信息</button>
+
+    <button mat-raised-button color="warn"><i class="material-icons">file_upload</i> 导入信息</button>
+
+  </div>
+
+</div>

@@ -1,0 +1,36 @@
+<div id="app-cms-user-profile-pwd">
+
+  <p>
+    <mat-form-field class="mat-form-field-lg-xx m-r-lg" [class.mat-form-field-invalid]="invalid.originalPwd">
+      <input [type]="si.op ? 'text' : 'password'" matInput placeholder="原密码" class="form-ctrl" [(ngModel)]="up.originalPwd" maxlength="20">
+      <button mat-icon-button (click)="switchIpt('op')" matSuffix>
+        <i class="material-icons">{{si.op ? 'visibility_off' : 'visibility' }}</i>
+      </button>
+      <mat-hint *ngIf="invalid.originalPwd" class="mat-text-warn">{{invalid.originalPwd}}</mat-hint>
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field class="mat-form-field-lg-xx m-r-lg" [class.mat-form-field-invalid]="invalid.newPwd">
+      <input [type]="si.np ? 'text' : 'password'" matInput placeholder="新密码" class="form-ctrl" [(ngModel)]="up.newPwd" maxlength="20">
+      <button mat-icon-button (click)="switchIpt('np')" matSuffix>
+        <i class="material-icons">{{si.np ? 'visibility_off' : 'visibility' }}</i>
+      </button>
+      <mat-hint *ngIf="invalid.newPwd" class="mat-text-warn">{{invalid.newPwd}}</mat-hint>
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field class="mat-form-field-lg-xx m-r-lg" [class.mat-form-field-invalid]="invalid.confirmPwd">
+      <input [type]="si.cp ? 'text' : 'password'" matInput placeholder="确认新密码" class="form-ctrl" [(ngModel)]="up.confirmPwd" maxlength="20">
+      <button mat-icon-button (click)="switchIpt('cp')" matSuffix>
+        <i class="material-icons">{{si.cp ? 'visibility_off' : 'visibility' }}</i>
+      </button>
+      <mat-hint *ngIf="invalid.confirmPwd" class="mat-text-warn">{{invalid.confirmPwd}}</mat-hint>
+    </mat-form-field>
+  </p>
+
+  <p>
+    <button mat-raised-button (click)="savePwd();" class="m-r-lg" color="primary" [disabled]="isSubmit">确定</button>
+  </p>
+</div>

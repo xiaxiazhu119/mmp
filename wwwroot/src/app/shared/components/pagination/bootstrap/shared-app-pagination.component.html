@@ -1,0 +1,28 @@
+<div class="app-pagination-container form-inline">
+
+  <div class="app-bootstrap-pagination-container">
+
+    <pagination
+      [totalItems]="appPaginationConfig.totalItems"
+      [(ngModel)]="appPaginationConfig.currentPage"
+      [maxSize]="appPaginationConfig.maxSize"
+      class="app-bootstrap-pagination {{appPaginationConfig.size}}"
+      [boundaryLinks]="appPaginationConfig.boundaryLinks"
+      [rotate]="appPaginationConfig.rotate"
+      ngClass="{{appPaginationConfig.customClass}}"
+      previousText="{{appPaginationConfig.previousText}}"
+      nextText="{{appPaginationConfig.nextText}}"
+      firstText="{{appPaginationConfig.firstText}}"
+      lastText="{{appPaginationConfig.lastText}}"
+      (pageChanged)="onPageChange($event)"
+      pageBtnClass="{{appPaginationConfig.pageBtnClass}}"
+      itemsPerPage="{{appPaginationConfig.itemsPerPage}}"
+    >
+    </pagination>
+    <select *ngIf="appPaginationConfig.hasPageSizeSelection" class="form-control page-size-selection" (change)="onPageSizeChange($event)">
+        <option *ngFor="let ps of appPaginationConfig.pageSizeSelection" [value]="ps">{{ps}}</option>
+    </select>
+
+  </div>
+
+</div>

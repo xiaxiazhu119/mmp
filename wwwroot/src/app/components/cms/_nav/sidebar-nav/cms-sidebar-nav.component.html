@@ -1,0 +1,17 @@
+<div id="app-cms-sidebar-nav">
+
+  <div id="app-cms-sidebar-nav-main-container">
+
+      <div id="logo-container">
+        <img src="/assets/img/logo.png" alt="">
+      </div>
+
+      <ul id="app-cms-sidebar-nav-list" class="app-icon-nav-list">
+        <ng-template ngFor let-navItem [ngForOf]="appSidebarNavList" let-i="index">
+          <app-cms-sidebar-nav-item [navItem]="navItem" (activated)="onActivate($event)"></app-cms-sidebar-nav-item>
+        </ng-template>
+      </ul>
+
+  </div>
+
+</div>

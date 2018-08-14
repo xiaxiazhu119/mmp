@@ -1,0 +1,39 @@
+@import 'variables';
+
+.btn {
+  border: none;
+
+  &.no-padding {
+    padding: 0;
+
+    &.active,
+    &:active {
+      box-shadow: none;
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+  }
+
+  &.btn-full-width {
+    width: 100%;
+  }
+
+  &.btn-lg {
+    padding-top: $spacing + 5;
+    padding-bottom: $spacing + 5;
+    font-size: $font-size-base;
+  }
+
+}
+
+.btn,
+.form-control {
+  // border-radius: 0;
+}
+
+.input-lg {
+  font-size: $font-size-base;
+}

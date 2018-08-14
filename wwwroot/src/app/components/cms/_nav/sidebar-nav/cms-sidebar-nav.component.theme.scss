@@ -1,0 +1,24 @@
+@import '~style/variables.theme';
+@import '~style/mixins';
+
+#app-cms-sidebar-nav {
+  background: transparent linear-gradient(80deg, darken($app-primary-color, 30%) 1%, darken($app-primary-color, 10%) 99%) repeat scroll 0% 0%;
+
+
+  #app-cms-sidebar-nav-list {
+
+    .nav-item {
+
+      .nav-item-container {
+
+        a {
+          color: $white;
+        }
+
+      }
+
+    }
+
+  }
+
+}

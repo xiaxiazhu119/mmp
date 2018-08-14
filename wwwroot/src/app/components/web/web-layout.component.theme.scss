@@ -1,0 +1,40 @@
+@import "~style/variables.theme";
+@import "~style/mixins";
+
+#app-web-container {
+
+  > .navbar {
+    @include bg-transparent-same-rgb(50, 0.8);
+    // border-bottom-color: $white;
+    @include box-shadow-down(3px,8px,$common-shadow-color);
+
+    .navbar-nav {
+
+      > .nav {
+
+        > .nav-item {
+          border-bottom-color: transparent;
+
+          &:hover,
+          &.active {
+            border-bottom-color: $white;
+
+            > a {
+              color: $white;
+            }
+
+          }
+
+          > a {
+            color: $common-gray-lighter;
+          }
+
+        }
+
+      }
+
+    }
+
+  }
+
+}
