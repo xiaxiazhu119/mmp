@@ -7,6 +7,8 @@ import { MatInputModule, MatSelectModule, MatButtonModule, MatIconModule, MatSna
 import { CmsManuscriptListRoutingModule } from './cms-manuscript-list-routing.module';
 import { CmsManuscriptListComponent } from './cms-manuscript-list.component';
 
+import { ManuscriptListOperationModule } from './operation/manuscript-list-operation.module';
+
 import { AppPaginationModule } from '@app/pagination';
 
 @NgModule({
@@ -15,6 +17,7 @@ import { AppPaginationModule } from '@app/pagination';
     FormsModule, ReactiveFormsModule,
     MatInputModule, MatSelectModule, MatButtonModule, MatSnackBarModule, MatCheckboxModule, MatTooltipModule,
     AppPaginationModule,
+    ManuscriptListOperationModule,
     CmsManuscriptListRoutingModule
   ],
   declarations: [CmsManuscriptListComponent],

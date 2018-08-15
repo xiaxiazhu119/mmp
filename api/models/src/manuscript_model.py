@@ -78,6 +78,7 @@ class ManuscriptAuthor(BaseModel):
         self.district = kw.get('district')
         self.district_name = kw.get('district_name')
         self.name = kw.get('name')
+        self.name = kw.get('author_name')
         self.tel = kw.get('tel')
         self.email = kw.get('email')
         self.company_name = kw.get('company_name')

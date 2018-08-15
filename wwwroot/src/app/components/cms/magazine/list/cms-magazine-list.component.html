@@ -10,39 +10,59 @@
     </mat-form-field>
 
     <mat-form-field class="mat-form-field-md m-r-lg">
-      <mat-select class="sc-slt" placeholder="栏目" [(ngModel)]="sc.termId">
-        <mat-option (click)="sc.termId = undefined">全部</mat-option>
-        <mat-option *ngFor="let term of termList" [value]="term.key">{{term.value}}</mat-option>
+      <mat-select class="sc-slt" placeholder="栏目" [(ngModel)]="sc.category">
+        <mat-option (click)="sc.category = undefined">全部</mat-option>
+        <mat-option *ngFor="let c of categoryList" [value]="c.id">{{c.name}}</mat-option>
       </mat-select>
     </mat-form-field>
 
     <mat-form-field class="mat-form-field-lg m-r-lg">
-      <input matInput placeholder="关键字" class="form-ctrl" [(ngModel)]="sc.keyword" maxlength="20">
-      <button *ngIf="sc.keyword" mat-icon-button (click)="clearKeyword()" matSuffix>
+      <input matInput placeholder="作者" class="form-ctrl" [(ngModel)]="sc.authorName" maxlength="20">
+      <button *ngIf="sc.authorName" mat-icon-button (click)="clearAuthorName()" matSuffix>
         <i class="close sc-close">&times;</i>
       </button>
     </mat-form-field>
 
     <mat-form-field class="mat-form-field-lg m-r-lg">
-      <input matInput placeholder="关键字" class="form-ctrl" [(ngModel)]="sc.keyword" maxlength="20">
-      <button *ngIf="sc.keyword" mat-icon-button (click)="clearKeyword()" matSuffix>
+      <input matInput placeholder="作者单位" class="form-ctrl" [(ngModel)]="sc.companyName" maxlength="20">
+      <button *ngIf="sc.companyName" mat-icon-button (click)="clearCompanyName()" matSuffix>
         <i class="close sc-close">&times;</i>
       </button>
-    </mat-form-field>
-
-    <mat-form-field class="mat-form-field-md m-r-lg">
-      <mat-select class="sc-slt" placeholder="年度" [(ngModel)]="sc.termId">
-        <mat-option (click)="sc.termId = undefined">全部</mat-option>
-        <mat-option *ngFor="let term of termList" [value]="term.key">{{term.value}}</mat-option>
-      </mat-select>
     </mat-form-field>
 
     <button mat-raised-button (click)="search();" class="m-r-lg" color="primary"><i class="material-icons">search</i> 检索</button>
 
-    <button mat-raised-button (click)="goToEdit()" class="m-r-lg mat-success-btn"><i class="material-icons">add</i> 创建信息</button>
+  </div>
 
-    <button mat-raised-button color="warn"><i class="material-icons">file_upload</i> 导入信息</button>
+  <div class="data-list-container lg app-elevation" *ngIf="pgCfg.totalItems > 0">
+
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <!-- <th></th> -->
+        <th>栏目</th>
+        <th>文章标题</th>
+        <th>作者</th>
+        <th>作者单位</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of dataList;let i = index">
+        <td>{{data.categoryName}}</td>
+        <td>{{data.title}}</td>
+        <td>{{data.authorName}}</td>
+        <td>{{data.companyName}}</td>
+        <td> - </td>
+        <td class="text-center info-data-list-op">
+        </td>
+      </tr>
+      </tbody>
+    </table>
 
   </div>
+
+  <app-pagination [appPaginationConfig]="pgCfg" (pageChanged)="onPageChange($event)"></app-pagination>
+
+  <p class="no-data" *ngIf="pgCfg.totalItems === 0">{{noDataTxt}}</p>
 
 </div>

@@ -4,23 +4,19 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MatInputModule, MatSelectModule, MatButtonModule, MatIconModule, MatSnackBarModule, MatCheckboxModule, MatTooltipModule } from '@angular/material';
 
-import { CmsCandidateListRoutingModule } from './cms-candidate-list-routing.module';
-import { CmsCandidateListComponent } from './cms-candidate-list.component';
+import { ManuscriptListOperationComponent } from './manuscript-list-operation.component';
 
-import { AppPaginationModule } from '@app/pagination';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule, ReactiveFormsModule,
     MatInputModule, MatSelectModule, MatButtonModule, MatSnackBarModule, MatCheckboxModule, MatTooltipModule,
-    AppPaginationModule,
-    CmsCandidateListRoutingModule
   ],
-  declarations: [CmsCandidateListComponent],
-  exports: [CmsCandidateListComponent],
+  declarations: [ManuscriptListOperationComponent],
+  exports: [ManuscriptListOperationComponent],
   entryComponents: [],
-  schemas: []
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class CmsCandidateListModule {
+export class ManuscriptListOperationModule {
 }

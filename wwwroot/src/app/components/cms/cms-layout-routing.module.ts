@@ -42,7 +42,11 @@ const manuscriptRoutes: Route = {
       loadChildren: manuscriptModules.detail.module
     },
     {
-      path: manuscriptModules.edit.path,
+      path: manuscriptModules.create.path,
+      loadChildren: manuscriptModules.create.module
+    },
+    {
+      path: manuscriptModules.edit.path + manuscriptModules.edit.params,
       loadChildren: manuscriptModules.edit.module
     },
     {

@@ -67,6 +67,24 @@ $app-data-list-base-z-index: 1;
   @extend .mat-elevation-z4;
 }
 
+.no-data {
+  padding: $spacing-lg 0;
+  text-align: center;
+}
+
+.app-operation-container {
+
+  >.op-item {
+    margin-right: $spacing;
+
+    &:last-child{
+      margin-right: 0;
+    }
+
+  }
+
+}
+
 .tab-item-container {
   padding: $spacing-lg;
   .tab-operation-container {

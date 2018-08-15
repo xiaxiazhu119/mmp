@@ -7,11 +7,14 @@ import { MatInputModule, MatSelectModule, MatButtonModule, MatIconModule, MatSna
 import { CmsMagazineListRoutingModule } from './cms-magazine-list-routing.module';
 import { CmsMagazineListComponent } from './cms-magazine-list.component';
 
+import { AppPaginationModule } from '@app/pagination';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule, ReactiveFormsModule,
     MatInputModule, MatSelectModule, MatButtonModule, MatSnackBarModule, MatCheckboxModule, MatTooltipModule,
+    AppPaginationModule,
     CmsMagazineListRoutingModule
   ],
   declarations: [CmsMagazineListComponent],

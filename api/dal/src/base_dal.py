@@ -1,6 +1,6 @@
 
 # -*- coding: utf-8 -*-
-
+import sys
 import psycopg2
 from psycopg2.extras import DictCursor, RealDictCursor
 

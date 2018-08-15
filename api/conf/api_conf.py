@@ -85,6 +85,22 @@ API_CONF = {
                     'msg': 'manuscript create failed'
                 }
             },
+            'edit': {
+                'success': {
+                    'code': 20000003,
+                    'msg': 'manuscript edit success'
+                },
+                'failed': {
+                    'code': -20000003,
+                    'msg': 'manuscript edit failed'
+                }
+            },
+            'info': {
+                'success': {
+                    'code': 20000002,
+                    'msg': 'manuscript get info success'
+                },
+            },
         }
     }
 }

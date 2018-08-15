@@ -41,9 +41,49 @@ export class ModelTransferService {
         districtName: d['district_name'],
         authorName: d['author_name'],
         companyName: d['company_name'],
+        isPublish: d['publish_id'] > 0,
+        isConfirm: d['confirm_id'] > 0,
+        isStored: d['store_id'] > 0
       });
     });
     return list;
+  }
+
+  transferManuscriptInfoModel(data: any): ManuscriptInfoModel {
+    return {
+      id: data['id'],
+      title: data['title'],
+      keywords: data['keywords'],
+      subject: data['subject'],
+      result: data['result'],
+      category: data['category'],
+      categoryName: data['category_name'],
+      file: data['file'],
+      status: data['status'],
+      userId: data['user_id'],
+      userName: data['user_name'],
+      createTime: (new Date(data['create_time'])).format('yyyy-MM-dd'),
+      isPublished: data['is_published'],
+      isSelf: data['is_self'],
+      periodicalCategory: data['periodical_category'],
+      periodicalCategoryName: data['periodical_category_name'],
+      periodicalSummary: data['periodical_summary']
+    };
+  }
+
+  transferManuscriptAuthorModel(data: any): ManuscriptAuthorModel {
+    return {
+      manuscriptId: data['manuscript_id'],
+      province: data['province'],
+      city: data['city'],
+      district: data['district'],
+      name: data['name'],
+      tel: data['tel'],
+      email: data['email'],
+      companyName: data['company_name'],
+      companyAddress: data['company_address'],
+      companyZipCode: data['company_zip_code'],
+    };
   }
 
 

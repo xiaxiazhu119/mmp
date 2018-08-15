@@ -1,5 +1,5 @@
 import { BaseSearch } from './base.model';
-import { ManuscriptStatusEnum } from '@app/enums';
+import { ManuscriptStatusEnum, ManuscriptSearchTypeEnum } from '@app/enums';
 
 
 export class ManuscriptSearchModel extends BaseSearch {
@@ -7,9 +7,14 @@ export class ManuscriptSearchModel extends BaseSearch {
   category?: number;
   year?: number;
   term?: number;
-  author?: string;
-  company?: string;
+  authorName?: string;
+  companyName?: string;
   status?: number;
+  isConfirm?: boolean;
+  province?: number;
+  city?: number;
+  district?: number;
+  type: ManuscriptSearchTypeEnum;
 }
 
 export class ManuscriptListModel {
@@ -27,6 +32,9 @@ export class ManuscriptListModel {
   districtName: string;
   authorName: string;
   companyName: string;
+  isPublish?: boolean;
+  isConfirm?: boolean;
+  isStored?: boolean;
 }
 
 export class ManuscriptInfoModel {
@@ -44,6 +52,7 @@ export class ManuscriptInfoModel {
   periodicalCategoryName?: string;
   periodicalSummary: string;
   status: number;
+  statusName?: string;
   userId: number;
   userName?: string;
   createTime: string;
@@ -59,11 +68,11 @@ export class ManuscriptInfoModel {
 export class ManuscriptAuthorModel {
   manuscriptId: number;
   province: number;
-  provinceName: string;
+  provinceName?: string;
   city: number;
-  cityName: string;
+  cityName?: string;
   district: number;
-  districtName: string;
+  districtName?: string;
   name: string;
   tel: string;
   email: string;

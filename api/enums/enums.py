@@ -10,18 +10,14 @@ class MethodEnum(Enum):
     DELETE = 4
 
 
-class NewsCategoryEnum(Enum):
-    C1 = 1
-    C2 = 2
-
-
 class ManuscriptStatusEnum(Enum):
     Pending = 1
-    Return = 2
-    Edited = 3
-    Refused = 4
-    Stored = 5
-    Published = 6
+    Canceled = 2
+    Return = 3
+    Edited = 4
+    Refused = 5
+    Stored = 6
+    Published = 7
 
 
 class EnumClass(object):

@@ -46,7 +46,7 @@ export class AppRoutingService {
     let routerModule = this.getRouteConfig();
     for (let i = 0, j = keys.length; i < j; i++) {
       const key = keys[i];
-      if (key === '') {
+      if (key === '' || !isNaN(Number(key))) {
         continue;
       }
       routerModule = routerModule.modules[key];

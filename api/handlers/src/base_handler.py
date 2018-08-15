@@ -66,7 +66,7 @@ class BaseHandler(Resource):
         return self.get_request_json_data('data')
 
     def get_request_json_data(self, key):
-        
+
         if self.base_request is not None and self.base_request.mimetype != 'multipart/form-data':
             request_data = self.base_request.get_data().decode('utf8')
             if request_data != '':
@@ -81,7 +81,7 @@ class BaseHandler(Resource):
 
         return self.__request_json_data[key]
 
-    def get_request_args(self,key):
+    def get_request_args(self, key):
         if self.base_request is not None and len(self.base_request.args) > 0:
             encrypted_arg = self.base_request.args[key]
             arg = self.crypto.decrypt_by_aes(encrypted_arg)
@@ -90,10 +90,9 @@ class BaseHandler(Resource):
 
         return None
 
-
-    def build_response(self, keys=[], data=None):
+    def build_response(self, keys=[], data=None, use_encrypt=True):
         response = ApiConf.get_response(keys)
-        return self.build_response_base(response['code'], response['msg'], data)
+        return self.build_response_base(response['code'], response['msg'], data, use_encrypt=use_encrypt)
         # rsp = {
         #     'code': code,
         #     'msg': msg,
@@ -102,11 +101,12 @@ class BaseHandler(Resource):
         # # return Utils.json_dumps(rsp)
         # return rsp
 
-    def build_response_base(self, code=1, msg='ok', data=None):
+    def build_response_base(self, code=1, msg='ok', data=None, use_encrypt=True):
+        data = data if type(data) is str else Utils.json_dumps_dict(data)
         rsp = {
             'code': code,
             'msg': msg,
-            'data': '' if data is None else self.crypto.encrypt_by_aes(data if type(data) is str else Utils.json_dumps_dict(data))
+            'data': '' if data is None else (self.crypto.encrypt_by_aes(data) if use_encrypt else data)
         }
         # return Utils.json_dumps(rsp)
         return rsp

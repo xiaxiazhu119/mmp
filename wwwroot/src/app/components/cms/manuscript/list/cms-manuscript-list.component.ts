@@ -1,13 +1,11 @@
 import { Component, OnChanges, OnInit, SimpleChange, Input } from '@angular/core';
 
-import '@app/interfaces';
-
 import { AppService, PassportService, UserService, AppRoutingService, ManuscriptService } from '@app/service/app';
 import { DialogService, SnackBarService, DialogBaseService } from '@app/service/ui';
 import { CommonService, UtilsService, ModelTransferService } from '@app/service/common';
 import { ManuscriptSearchModel, ManuscriptListModel } from '@app/models';
 import { DialogConfig, AppPaginationConfig } from '@app/models/ui';
-import { EnumClass } from '@app/enums';
+import { EnumClass, ManuscriptSearchTypeEnum } from '@app/enums';
 import { AppCmsBaseComponent } from '@app/cmsBaseComponent';
 
 @Component({
@@ -37,6 +35,7 @@ export class CmsManuscriptListComponent extends AppCmsBaseComponent implements O
 
     const appCmsRouteConfig = appRoutingService.getCmsRouteConfig();
     this.manuscriptRouteConfig = appCmsRouteConfig.modules.manuscript;
+    this.sc.type = ManuscriptSearchTypeEnum.Manuscript;
 
   }
 
@@ -51,8 +50,8 @@ export class CmsManuscriptListComponent extends AppCmsBaseComponent implements O
     this.sc.keyword = undefined;
   }
 
-  goToEdit(): void {
-    this.commonService.routerNavigate(this.manuscriptRouteConfig.modules.edit.link);
+  goToCreate(): void {
+    this.commonService.routerNavigate(this.manuscriptRouteConfig.modules.create.link);
   }
 
   search(pageIndex?: number): void {
@@ -63,6 +62,23 @@ export class CmsManuscriptListComponent extends AppCmsBaseComponent implements O
   onPageChange(e: any): void {
     // console.log(e)
     this.search(Number(e));
+  }
+
+  onOperationEmit(e: any): void {
+    console.log(e);
+    switch (e.key) {
+      case 'edit':
+        this.commonService.routerNavigate([this.manuscriptRouteConfig.modules.edit.link, e.data.id]);
+        break;
+      case 'cancel':
+        break;
+      case 'upload':
+        break;
+      case 'confirm':
+        break;
+      default:
+        break;
+    }
   }
 
   //#endregion
@@ -77,8 +93,8 @@ export class CmsManuscriptListComponent extends AppCmsBaseComponent implements O
         // console.log(data);
         if (data.data) {
           const d = JSON.parse(this.utilsService.decryptByAES(data.data));
-          console.log(d);
-          console.log(d.list);
+          // console.log(d);
+          // console.log(d.list);
           this.dataList = this.modelTransferService.transferManuscriptListModel(d.list);
           this.pgCfg.totalItems = d.total;
         }

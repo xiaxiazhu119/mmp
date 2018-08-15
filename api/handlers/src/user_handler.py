@@ -9,6 +9,8 @@ from utils.crypto import Crypto
 from utils.utils import Utils
 
 class UserBaseHandler(BaseHandler):
+
+    _ctrl = UserController()
     
     def gen_token(self, user):
         plain_text = str(user.id) + ',' + str(user.permission_group) + ',' + Utils.now()
@@ -48,8 +50,7 @@ class UserSignInHandler(UserBaseHandler):
         if user_name is None or pwd is None:
             return self.build_response(['common', 'request-invalid'])
 
-        ctrl = UserController()
-        user = ctrl.sign_in(user_name, pwd)
+        user = self._ctrl.sign_in(user_name, pwd)
 
         if user is None:
             return self.build_response(['user', 'sign-in', 'failed'])
@@ -76,8 +77,7 @@ class UserSignUpHandler(UserBaseHandler):
         up_th = UserProfileModelTransferHelper()
         profile_model = up_th.transfer_to_py(profile)
 
-        ctrl = UserController()
-        user_model = ctrl.sign_up(user_model, profile_model)
+        user_model = self._ctrl.sign_up(user_model, profile_model)
 
         if user_model is None:
           return self.build_response(['user', 'sign-up', 'repeat'])
@@ -98,7 +98,6 @@ class UserPwdHandler(UserBaseHandler):
     def post(self):
         data = self.get_common_request_json_data()
         ps = data.split('_')
-        ctrl = UserController()
-        r = ctrl.update_pwd(self.user_id, ps[0], ps[1])
+        r = self._ctrl.update_pwd(self.user_id, ps[0], ps[1])
 
         return self.build_response(['user', 'pwd', 'success' if r > 0 else 'failed'])

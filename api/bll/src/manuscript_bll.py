@@ -9,12 +9,14 @@ class ManuscriptBLL(object):
     def __init__(self, *args):
         pass
 
+    def get_info(self, id):
+        return self.__dal.get_info(id)
+
     def create(self, info, author):
         return self.__dal.create(info, author)
-        pass
 
     def edit(self, info, author):
-        pass
+        return self.__dal.edit(info, author)
 
     def get_list(self, sc):
         return self.__dal.get_list(sc)

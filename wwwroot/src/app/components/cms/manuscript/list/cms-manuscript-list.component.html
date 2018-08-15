@@ -18,13 +18,13 @@
 
     <button mat-raised-button (click)="search();" class="m-r-lg" color="primary"><i class="material-icons">search</i> 检索</button>
 
-    <button mat-raised-button (click)="goToEdit()" class="m-r-lg mat-success-btn"><i class="material-icons">add</i> 立即投稿</button>
+    <button mat-raised-button (click)="goToCreate()" class="m-r-lg mat-success-btn"><i class="material-icons">add</i> 立即投稿</button>
 
     <!-- <button mat-raised-button color="warn"><i class="material-icons">file_upload</i> 导入信息</button> -->
 
   </div>
 
-  <div class="data-list-container lg app-elevation">
+  <div class="data-list-container lg app-elevation" *ngIf="pgCfg.totalItems > 0">
 
     <table class="table table-striped">
       <thead>
@@ -52,8 +52,7 @@
         <td>{{data.statusName}}</td>
         <td> - </td>
         <td class="text-center info-data-list-op">
-          <button mat-button class="m-r" title="编辑"><i class="material-icons">create</i></button>
-          <button mat-button color="warn" title="删除"><i class="material-icons">delete_forever</i></button>
+          <app-cms-manuscript-list-operation [data]="data" (operationEmitted)="onOperationEmit($event)"></app-cms-manuscript-list-operation>
         </td>
       </tr>
       </tbody>
@@ -62,5 +61,7 @@
   </div>
 
   <app-pagination [appPaginationConfig]="pgCfg" (pageChanged)="onPageChange($event)"></app-pagination>
+
+  <p class="no-data" *ngIf="pgCfg.totalItems === 0">{{noDataTxt}}</p>
 
 </div>

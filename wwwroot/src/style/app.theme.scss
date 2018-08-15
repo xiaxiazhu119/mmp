@@ -47,6 +47,20 @@
 
 }
 
+.op-item {
+
+  &.normal {
+    color: $app-primary-color;
+  }
+
+  &.danger {
+    color: $app-mat-red;
+  }
+
+  &.success {
+    color: $app-success-color;
+  }
+}
 
 .app-tag {
 

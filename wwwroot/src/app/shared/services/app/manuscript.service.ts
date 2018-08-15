@@ -21,16 +21,16 @@ export class ManuscriptService {
 
   }
 
-  list(sc: ManuscriptSearchModel, callback?: any): any {
+  info(id, callback?: any): any {
 
     const opts: CustomerRequestOptions = {
-      api: this.path + this.apiModules.list,
-      data: sc
+      api: this.path + this.apiModules.info.replace('{id}', id),
     };
 
     return this.ajaxService.get(opts, callback);
 
   }
+
 
   edit(info: ManuscriptInfoModel, author: ManuscriptAuthorModel, callback?: any, errCallback?: any): any {
 
@@ -43,6 +43,17 @@ export class ManuscriptService {
     };
 
     return this.ajaxService.post(opts, callback, errCallback);
+
+  }
+
+  list(sc: ManuscriptSearchModel, callback?: any): any {
+
+    const opts: CustomerRequestOptions = {
+      api: this.path + this.apiModules.list,
+      data: sc
+    };
+
+    return this.ajaxService.get(opts, callback);
 
   }
 

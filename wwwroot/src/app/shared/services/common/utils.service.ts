@@ -35,5 +35,13 @@ export class UtilsService {
     return hasDiff;
   }
 
+  cloneObject(data: any, type = {}): any {
+    return Object.assign(type, data);
+  }
+
+  getEnumStr(enums: any, key: number): string {
+    return enums[key].toString().toLocaleLowerCase();
+  }
+
 
 }
