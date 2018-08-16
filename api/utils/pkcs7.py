@@ -69,7 +69,7 @@ class PKCS7Encoder(object):
         # return bytestring + binascii.unhexlify([val] * val)
         # p = bytearray([val] * val)
         # return bytestring + p.decode('utf-8')
-        return bytearray(bytestring, 'utf-8') + bytearray([val] * val)
+        return bytes(bytestring, 'utf-8') + bytes([val] * val)
 
 
 # Tests

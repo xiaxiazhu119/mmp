@@ -1,5 +1,5 @@
 const _domain = '//127.0.0.1:5000/';
-// const _domain = '//xxqps.isherc.com/';
+// const _domain = '//207.246.114.214:8088/';
 const _wordDividerChar = '_';
 
 const _appConfig = {

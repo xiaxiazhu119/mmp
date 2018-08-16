@@ -3,4 +3,4 @@
 from test.src.test import Test
 
 t = Test()
-t.keys()
+t.test_encrypt()

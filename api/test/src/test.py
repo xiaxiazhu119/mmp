@@ -5,7 +5,7 @@ from psycopg2.extras import DictCursor
 from helper.db_helper import DBHelper
 
 from bll.bll import UserBLL
-from models.models import User, UserProfile, News, Area
+from models.models import User, UserProfile, Area
 
 from utils.utils import Utils
 from utils.crypto import Crypto
@@ -28,8 +28,18 @@ class Test(object):
             print('prop:', user.__dict__[prop])
 
     def test_encrypt(self):
+        conf = {
+            'host': 'localhost',
+            'port': '5432',
+            'db': 'mmp',
+            'user': 'postgres',
+            'password': 'sa'
+        }
         crypto = Crypto()
-        t = crypto.encrypt_by_aes('1')
+        print(crypto.get_md5('sa'))
+        # conf = Utils.json_dumps(conf)
+        # print(conf)
+        t = crypto.encrypt_by_aes(conf)
         print(t, type(t))
 
     def test_dump_cls(self):
