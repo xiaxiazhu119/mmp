@@ -38,8 +38,8 @@ const manuscriptRoutes: Route = {
       loadChildren: manuscriptModules.list.module
     },
     {
-      path: manuscriptModules.detail.path,
-      loadChildren: manuscriptModules.detail.module
+      path: manuscriptModules.info.path + manuscriptModules.info.params,
+      loadChildren: manuscriptModules.info.module
     },
     {
       path: manuscriptModules.create.path,
@@ -50,7 +50,7 @@ const manuscriptRoutes: Route = {
       loadChildren: manuscriptModules.edit.module
     },
     {
-      path: manuscriptModules.review.path,
+      path: manuscriptModules.review.path + manuscriptModules.review.params,
       loadChildren: manuscriptModules.review.module
     },
   ]
@@ -67,8 +67,8 @@ const magazineRoutes: Route = {
       loadChildren: magazineModules.list.module
     },
     {
-      path: magazineModules.detail.path,
-      loadChildren: magazineModules.detail.module
+      path: magazineModules.info.path,
+      loadChildren: magazineModules.info.module
     },
   ]
 };
@@ -84,8 +84,8 @@ const candidateRoutes: Route = {
       loadChildren: candidateModules.list.module
     },
     {
-      path: candidateModules.detail.path,
-      loadChildren: candidateModules.detail.module
+      path: candidateModules.info.path,
+      loadChildren: candidateModules.info.module
     },
   ]
 };
@@ -101,8 +101,8 @@ const announcementRoutes: Route = {
       loadChildren: announcementModules.list.module
     },
     {
-      path: announcementModules.detail.path,
-      loadChildren: announcementModules.detail.module
+      path: announcementModules.info.path,
+      loadChildren: announcementModules.info.module
     },
     {
       path: announcementModules.edit.path,

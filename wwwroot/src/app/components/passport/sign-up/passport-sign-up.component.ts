@@ -30,6 +30,7 @@ export class PassportSignUpComponent extends AppPassportBaseComponent implements
   districtList: any[] = [];
 
   private _cmsHomePage = appRouteConfig.modules.cms.link;
+  private _defaultAreaConfig;
 
   constructor(private commonService: CommonService,
     private passportService: PassportService,
@@ -42,6 +43,8 @@ export class PassportSignUpComponent extends AppPassportBaseComponent implements
     private areaService: AreaService,
     private appConfigService: AppConfigService) {
     super();
+
+    this._defaultAreaConfig = appService.getAppDefaultAreaConfig();
 
   }
 
@@ -78,9 +81,10 @@ export class PassportSignUpComponent extends AppPassportBaseComponent implements
 
         const obj = JSON.parse(decryptData);
         const _user = this.modelTransferService.transferUserModel(obj['user']);
-        _user.name = obj['profile']['name'];
-        console.log('_user:', _user, obj);
+        const _userProfile = this.modelTransferService.transferUserProfileModel(obj['profile']);
+        console.log('o & u & p:', obj, _user, _userProfile);
         this.passportService.putUserCookie(_user);
+        this.passportService.putUserProfileCookie(_userProfile);
 
         this.resetSubmitBtn();
         // this.appService.goToAdminDashboard();
@@ -98,27 +102,45 @@ export class PassportSignUpComponent extends AppPassportBaseComponent implements
     this.commonService.routerNavigate('/passport/sign-in');
   }
 
+  //#region area event
+
   onProvinceChange(e: any): void {
     this.cityList = this.districtList = [];
     this.userProfile.city = this.userProfile.district = 0;
-    this.userProfile.provinceName = e.target.selectedOptions[0].text;
 
-    console.log('province change:', e, e.target.value);
-
-    const id = Number(e.target.value);
+    const useDefault = typeof e === 'number';
+    let id = 0, name = '';
+    if (useDefault) {
+      id = e;
+      name = this._defaultAreaConfig.province.name;
+    } else {
+      name = e.target.selectedOptions[0].text;
+      id = Number(e.target.value);
+    }
+    this.userProfile.provinceName = name;
 
     this.getAreaList(id, (data: any) => {
       this.cityList = data;
+      if (useDefault) {
+        this.userProfile.city = this._defaultAreaConfig.city.id;
+        this.onCityChange(this.userProfile.city);
+      }
     });
   }
 
   onCityChange(e: any): void {
     this.districtList = [];
     this.userProfile.district = 0;
-    this.userProfile.cityName = e.target.selectedOptions[0].text;
 
-    // console.log('city change:', e, e.target.value);
-    const id = Number(e.target.value);
+    let id = 0, name = '';
+    if (typeof e === 'number') {
+      id = e;
+      name = this._defaultAreaConfig.city.name;
+    } else {
+      name = e.target.selectedOptions[0].text;
+      id = Number(e.target.value);
+    }
+    this.userProfile.cityName = name;
 
     this.getAreaList(id, (data: any) => {
       this.districtList = data;
@@ -128,6 +150,8 @@ export class PassportSignUpComponent extends AppPassportBaseComponent implements
   onDistrictChange(e: any): void {
     this.userProfile.districtName = e.target.selectedOptions[0].text;
   }
+
+  //#endregion
 
   private resetSubmitBtn() {
     this.signUpBtnTxt = this.defaultSignUpBtnTxt;
@@ -211,8 +235,10 @@ export class PassportSignUpComponent extends AppPassportBaseComponent implements
     const c = (data: any) => {
       // console.log(data, typeof data);
       this.provinceList = data;
+      this.userProfile.province = this._defaultAreaConfig.province.id;
+      this.onProvinceChange(this.userProfile.province);
     };
-    this.getAreaList(86, c);
+    this.getAreaList(this._defaultAreaConfig.countryCode, c);
   }
 
   private getAreaList(pid: number, callback: any): void {

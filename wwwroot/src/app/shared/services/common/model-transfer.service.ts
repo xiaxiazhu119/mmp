@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 import '@app/interfaces';
 
-import { CustomerRequestOptions, User, ManuscriptInfoModel, ManuscriptAuthorModel, ManuscriptListModel } from '@app/models';
+import { CustomerRequestOptions, User, ManuscriptInfoModel, ManuscriptAuthorModel, ManuscriptListModel, UserProfile } from '@app/models';
 
 @Injectable()
 export class ModelTransferService {
@@ -20,6 +20,24 @@ export class ModelTransferService {
       userName: data.user_name,
       tokenId: data.token_id,
       permissionGroup: data.permission_group,
+    };
+  }
+
+  transferUserProfileModel(data: any): UserProfile {
+    return {
+      userId: data['user_id'],
+      name: data['name'],
+      mobile: data['mobile'],
+      email: data['email'],
+      province: data['province'],
+      provinceName: data['province_name'],
+      city: data['city'],
+      cityName: data['city_name'],
+      district: data['district'],
+      districtName: data['district_name'],
+      companyName: data['company_name'],
+      companyAddress: data['company_address'],
+      companyZipCode: data['company_zip_code'],
     };
   }
 

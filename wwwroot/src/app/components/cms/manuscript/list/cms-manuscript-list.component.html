@@ -52,7 +52,7 @@
         <td>{{data.statusName}}</td>
         <td> - </td>
         <td class="text-center info-data-list-op">
-          <app-cms-manuscript-list-operation [data]="data" (operationEmitted)="onOperationEmit($event)"></app-cms-manuscript-list-operation>
+          <app-cms-manuscript-list-operation [data]="data" [permissions]="permissions" (operationEmitted)="onOperationEmit($event)"></app-cms-manuscript-list-operation>
         </td>
       </tr>
       </tbody>

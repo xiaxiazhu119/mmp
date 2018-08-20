@@ -15,7 +15,6 @@ class ManuscriptDAL(object):
         sql = """SELECT * FROM mmp__v_manuscript WHERE id = %s;"""
         rst = self.__base.fetch_all(sql, (str(id),))
         return None if len(rst) == 0 else rst[0]
-        
 
     def create(self, info, author):
 
@@ -29,7 +28,7 @@ class ManuscriptDAL(object):
         sql = """UPDATE mmp_manuscript SET title = %s, keywords = %s, subject = %s, result = %s, category = %s, category_name = %s, file = %s, is_self = %s, is_published = %s, periodical_category = %s, periodical_category_name = %s, periodical_summary = %s, status = %s WHERE id = %s;"""
         sql += """UPDATE mmp_manuscript_author SET province = %s, province_name = %s, city = %s, city_name = %s, district = %s, district_name = %s, name = %s, tel = %s, email = %s, company_name = %s, company_address = %s, company_zip_code = %s WHERE manuscript_id = %s;"""
         rst = self.__base.fetch_rowcount(sql, (info.title, info.keywords, info.subject, info.result, info.category, info.category_name, info.file, info.is_self, info.is_published, info.periodical_category, info.periodical_category_name, info.periodical_summary, info.status, info.id,
-                  author.province, author.province_name, author.city, author.city_name, author.district, author.district_name, author.name, author.tel, author.email, author.company_name, author.company_address, author.company_zip_code, info.id))
+                                               author.province, author.province_name, author.city, author.city_name, author.district, author.district_name, author.name, author.tel, author.email, author.company_name, author.company_address, author.company_zip_code, info.id))
         return rst
 
     def get_list(self, sc):
@@ -51,6 +50,10 @@ class ManuscriptDAL(object):
         if sc.get('status') is not None and sc['status'] != '0':
             condition += """ AND status = %s """
             params.append(sc['status'])
+
+        if sc.get('userId') is not None and sc['userId'] != '0':
+            condition += """ AND user_id = %s """
+            params.append(sc['userId'])
 
         if sc.get('type') == 2:
             condition += """ AND store_id != 0 """
@@ -81,6 +84,16 @@ class ManuscriptDAL(object):
         rst = self.__base.fetch_all(sql, params)
 
         return rst, cnt
+
+    def update_status(self, id, status):
+        sql = """UPDATE mmp_manuscript SET status = %s WHERE id = %s AND del_flag = False;"""
+        rst = self.__base.fetch_rowcount(sql, (str(status), str(id)))
+        return rst
+    
+    def create_manuscript_store_log(self, manuscript_id, user_id):
+        sql = """INSERT INTO mmp_manuscript_store_log (manuscript_id, user_id)VALUES(%s,%s);"""
+        rst = self.__base.fetch_rowcount(sql, (str(manuscript_id), str(user_id)))
+        return rst
 
     def create_manuscript_doc_log(self, manuscript_id, user_id, file):
         sql = """INSERT INTO mmp_manuscript_doc_log (manuscript_id,user_id,file) VALUES (%s,%s) RETURNING id;"""

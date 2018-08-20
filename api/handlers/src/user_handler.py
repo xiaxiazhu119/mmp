@@ -8,16 +8,16 @@ from helper.model_transfer_helper import UserModelTransferHelper, UserProfileMod
 from utils.crypto import Crypto
 from utils.utils import Utils
 
+
 class UserBaseHandler(BaseHandler):
 
     _ctrl = UserController()
-    
+
     def gen_token(self, user):
         plain_text = str(user.id) + ',' + str(user.permission_group) + ',' + Utils.now()
         crypto = Crypto()
         token = crypto.encrypt_by_aes(plain_text)
         return token
-        
 
 
 class UserHandler(UserBaseHandler):
@@ -50,7 +50,7 @@ class UserSignInHandler(UserBaseHandler):
         if user_name is None or pwd is None:
             return self.build_response(['common', 'request-invalid'])
 
-        user = self._ctrl.sign_in(user_name, pwd)
+        user, user_profile = self._ctrl.sign_in(user_name, pwd)
 
         if user is None:
             return self.build_response(['user', 'sign-in', 'failed'])
@@ -58,7 +58,7 @@ class UserSignInHandler(UserBaseHandler):
         user.token_id = self.gen_token(user)
         user.pwd = ''
 
-        return self.build_response(['user', 'sign-in', 'success'], user)
+        return self.build_response(['user', 'sign-in', 'success'], {'user': user, 'profile': user_profile})
 
 
 class UserSignUpHandler(UserBaseHandler):
@@ -80,8 +80,7 @@ class UserSignUpHandler(UserBaseHandler):
         user_model = self._ctrl.sign_up(user_model, profile_model)
 
         if user_model is None:
-          return self.build_response(['user', 'sign-up', 'repeat'])
-            
+            return self.build_response(['user', 'sign-up', 'repeat'])
 
         user_model.pwd = ''
         user_model.token_id = self.gen_token(user_model)

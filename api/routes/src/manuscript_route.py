@@ -1,6 +1,6 @@
 # -*- coding=utf-8 -*-
 
-from handlers.handlers import ManuscriptEditHandler, ManuscriptListHandler
+from handlers.handlers import ManuscriptEditHandler, ManuscriptListHandler, ManuscriptStatusHandler
 
 
 manuscript_routes = [{
@@ -9,4 +9,7 @@ manuscript_routes = [{
 }, {
     'path': r"manuscript/list",
     'handler': ManuscriptListHandler
+}, {
+    'path': r"manuscript/status",
+    'handler': ManuscriptStatusHandler
 }]

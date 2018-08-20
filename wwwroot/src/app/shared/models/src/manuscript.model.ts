@@ -15,6 +15,7 @@ export class ManuscriptSearchModel extends BaseSearch {
   city?: number;
   district?: number;
   type: ManuscriptSearchTypeEnum;
+  userId?: number;
 }
 
 export class ManuscriptListModel {

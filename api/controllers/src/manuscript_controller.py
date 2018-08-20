@@ -21,6 +21,9 @@ class ManuscriptController(BaseController):
     def get_list(self, sc):
         return self.__bll.get_list(sc)
 
+    def update_status(self, id, status):
+        return self.__bll.update_status(id, status)
+
     # def create_manuscript_doc_log(self, manuscript_id, user_id, file):
     #     return self.__bll.create_manuscript_doc_log(manuscript_id, user_id, file)
 

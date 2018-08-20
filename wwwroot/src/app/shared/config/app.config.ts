@@ -30,7 +30,8 @@ const _appConfig = {
       modules: {
         list: '/list',
         info: '/{id}',
-        edit: '/0'
+        edit: '/0',
+        updateStatus: '/status'
       }
     },
     area: {
@@ -44,6 +45,7 @@ const _appConfig = {
     prefix: _domain + _wordDividerChar,
     keys: {
       user: 'user',
+      userProfile: 'user-profile',
       imgCaptcha: 'img-captcha',
       smsCaptcha: 'sms-captcha',
       remember: {

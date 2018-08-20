@@ -69,9 +69,11 @@ export class PassportSignInComponent extends AppPassportBaseComponent implements
           }
 
           const obj = JSON.parse(decryptData);
-          const _user = this.modelTransferService.transferUserModel(obj);
-          // console.log('_user:', _user, obj);
+          const _user = this.modelTransferService.transferUserModel(obj['user']);
+          const _userProfile = this.modelTransferService.transferUserProfileModel(obj['profile']);
+          console.log('o & u & p:', obj, _user, _userProfile);
           this.passportService.putUserCookie(_user);
+          this.passportService.putUserProfileCookie(_userProfile);
 
           this.resetSubmitBtn();
           // this.appService.goToAdminDashboard();

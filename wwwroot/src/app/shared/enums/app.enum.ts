@@ -35,6 +35,9 @@ export enum PeriodicalCategoryEnum {
 export enum PermissionGroupEnum {
   SA = 9999,
   Teacher = 1,
+  Info = 2,
+  Director = 3,
+  Editor = 4
 }
 
 export class EnumClass {

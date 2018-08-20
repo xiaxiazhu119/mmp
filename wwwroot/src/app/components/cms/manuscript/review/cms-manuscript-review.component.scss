@@ -1,0 +1,22 @@
+@import '~style/variables';
+@import '~style/mixins';
+
+#app-manuscript-edit-container {
+
+  > #app-manuscript-edit-info {
+    padding: $spacing-lg;
+    line-height: 1.75;
+
+    > .title {
+      margin-top: 0;
+      font-weight: $font-weight-bold;
+    }
+
+  }
+
+  #manuscript-file-upload-btn-container {
+    position: relative;
+    top: 8px;
+  }
+
+}

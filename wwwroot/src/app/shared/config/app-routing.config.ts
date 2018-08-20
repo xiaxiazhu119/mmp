@@ -108,15 +108,15 @@ export const appRouteConfig = {
               params: '',
               module: './manuscript/list/cms-manuscript-list.module#CmsManuscriptListModule',
             },
-            detail: {
+            info: {
               id: 'app-cms-manuscript',
               documentTitle: '稿件详情',
               pageTitle: '稿件详情',
               title: '稿件详情',
-              link: '/cms/manuscript/detail',
-              path: 'detail',
+              link: '/cms/manuscript/info',
+              path: 'info',
               params: '/:id',
-              module: './manuscript/detail/cms-manuscript-detail.module#CmsManuscriptDetailModule',
+              module: './manuscript/info/cms-manuscript-info.module#CmsManuscriptInfoModule',
             },
             edit: {
               id: 'app-cms-manuscript',
@@ -165,15 +165,15 @@ export const appRouteConfig = {
               params: '',
               module: './magazine/list/cms-magazine-list.module#CmsMagazineListModule',
             },
-            detail: {
+            info: {
               id: 'app-cms-magazine',
               documentTitle: '稿件详情',
               pageTitle: '稿件详情',
               title: '稿件详情',
-              link: '/cms/magazine/detail',
-              path: 'detail',
+              link: '/cms/magazine/info',
+              path: 'info',
               params: '/:id',
-              module: './magazine/detail/cms-magazine-detail.module#CmsMagazineDetailModule',
+              module: './magazine/info/cms-magazine-info.module#CmsMagazineInfoModule',
             },
           }
         },
@@ -192,15 +192,15 @@ export const appRouteConfig = {
               params: '',
               module: './candidate/list/cms-candidate-list.module#CmsCandidateListModule',
             },
-            detail: {
+            info: {
               id: 'app-cms-candidate',
               documentTitle: '候选稿件详情',
               pageTitle: '候选稿件详情',
               title: '候选稿件详情',
-              link: '/cms/candidate/detail',
-              path: 'detail',
+              link: '/cms/candidate/info',
+              path: 'info',
               params: '/:id',
-              module: './candidate/detail/cms-candidate-detail.module#CmsCandidateDetailModule',
+              module: './candidate/info/cms-candidate-info.module#CmsCandidateInfoModule',
             },
           }
         },
@@ -247,15 +247,15 @@ export const appRouteConfig = {
               params: '',
               module: './announcement/list/cms-announcement-list.module#CmsAnnouncementListModule',
             },
-            detail: {
+            info: {
               id: 'app-cms-announcement',
               documentTitle: '信息详情',
               pageTitle: '信息详情',
               title: '信息详情',
-              link: '/cms/announcement/detail',
-              path: 'detail',
+              link: '/cms/announcement/info',
+              path: 'info',
               params: '/:id',
-              module: './announcement/detail/cms-announcement-detail.module#CmsAnnouncementDetailModule',
+              module: './announcement/info/cms-announcement-info.module#CmsAnnouncementInfoModule',
             },
             edit: {
               id: 'app-cms-announcement',

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { AjaxService, CommonService } from '@app/service/common';
 import { AppConfigService } from './app.config.service';
-
+import { ManuscriptStatusEnum } from '@app/enums';
 import { CustomerRequestOptions, ManuscriptSearchModel, ManuscriptInfoModel, ManuscriptAuthorModel } from '@app/models';
 
 @Injectable()
@@ -54,6 +54,20 @@ export class ManuscriptService {
     };
 
     return this.ajaxService.get(opts, callback);
+
+  }
+
+  updateStatus(id: number, status: ManuscriptStatusEnum, callback?: any): any {
+
+    const opts: CustomerRequestOptions = {
+      api: this.path + this.apiModules.updateStatus,
+      data: {
+        id: id,
+        status: status
+      }
+    };
+
+    return this.ajaxService.post(opts, callback);
 
   }
 

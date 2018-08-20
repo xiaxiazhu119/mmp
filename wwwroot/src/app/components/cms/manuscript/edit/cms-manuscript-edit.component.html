@@ -13,180 +13,19 @@
 
   <p>&nbsp;</p>
 
-  <div id="manuscript-edit-form-container">
+  <app-cms-manuscript-edit-form></app-cms-manuscript-edit-form>
 
-    <mat-expansion-panel [expanded]="true">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          稿件信息
-        </mat-panel-title>
-        <mat-panel-description>
-        </mat-panel-description>
-      </mat-expansion-panel-header>
+  <p>&nbsp;</p>
 
-      <div id="manuscript-info-form-container">
+  <p>
+    <mat-checkbox [(ngModel)]="agreement">我已认真阅读投稿要求并承诺文责自负</mat-checkbox>
+  </p>
 
-        <p>
-          <mat-form-field class="mat-form-field-100">
-            <input matInput placeholder="文章标题（20字以内）" class="form-ctrl" [(ngModel)]="info.title" maxlength="20">
-          </mat-form-field>
-        </p>
-        <p>
-          <mat-form-field class="mat-form-field-100">
-            <input matInput placeholder="关键字（3~5个，以空格分隔）" class="form-ctrl" [(ngModel)]="info.keywords" maxlength="100">
-          </mat-form-field>
-        </p>
-        <p>
-          <mat-form-field class="mat-form-field-100">
-            <input matInput placeholder="对应研究课题（如有）" class="form-ctrl" [(ngModel)]="info.subject" maxlength="100">
-          </mat-form-field>
-        </p>
-        <p>
-          <mat-form-field class="mat-form-field-100">
-            <input matInput placeholder="项目名称成果（如有）" class="form-ctrl" [(ngModel)]="info.result" maxlength="100">
-          </mat-form-field>
-        </p>
-        <p>
-          <mat-form-field class="mat-form-field-md m-r-lg">
-            <mat-select class="sc-slt" placeholder="拟投栏目" [(ngModel)]="info.category">
-              <mat-option *ngFor="let c of categoryList" [value]="c.id">{{c.name}}</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </p>
-        <p>
+  <p>
 
-          <span id="manuscript-file-upload-btn-container" class="m-r-lg">
-            <app-file-upload (fileUploaded)="onFileUpload($event)" [btnTxt]="'稿件上传'"></app-file-upload>
-          </span>
-          <mat-form-field class="mat-form-field-50">
-            <input matInput placeholder="稿件文档" class="form-ctrl" [value]="info.file || ''" readonly>
-            <span *ngIf="info.file" matSuffix>
-              <a (click)="delAttachment()" class="close attachment-del" role="button">&times;</a>
-            </span>
-          </mat-form-field>
+    <button mat-raised-button (click)="submit()" class="m-r-lg mat-success-btn" [disabled]="isFormSubmit || !agreement">提交</button>
+    <button mat-raised-button (click)="goBack()" [disabled]="isFormSubmit">返回</button>
 
-          <a class="btn btn-link" *ngIf="info.file" [attr.href]="info.file" target="_blank" role="button">查看稿件</a>
-        </p>
-
-        <p>&nbsp;</p>
-        <p>
-          是否已公开发表：
-          <mat-radio-group [(ngModel)]="info.isPublished">
-            <mat-radio-button [value]="true">是</mat-radio-button>
-            <mat-radio-button [value]="false">否</mat-radio-button>
-          </mat-radio-group>
-        </p>
-
-        <p *ngIf="info.isPublished">
-          <mat-form-field class="mat-form-field-lg m-r-lg">
-            <mat-select class="sc-slt" placeholder="请选择期刊类型" [(ngModel)]="info.periodicalCategory">
-              <mat-option *ngFor="let c of periodicalCategoryList" [value]="c.id">{{c.name}}</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </p>
-
-        <p *ngIf="info.isPublished">
-          <mat-form-field class="mat-form-field-100">
-            <textarea matInput placeholder="请填写期刊名、刊号等情况说明" rows="5" [(ngModel)]="info.periodicalSummary" [disabled]="isFormSubmit || isSubmitted"></textarea>
-          </mat-form-field>
-        </p>
-
-      </div>
-
-    </mat-expansion-panel>
-
-
-    <p>&nbsp;</p>
-
-
-    <mat-expansion-panel [expanded]="true">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          作者信息
-        </mat-panel-title>
-        <mat-panel-description>
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-
-      <div id="manuscript-author-form-container">
-
-        <p>
-          是否作者本人：
-          <mat-radio-group [(ngModel)]="info.isSelf" (change)="onAuthorTypeChange($event)">
-            <mat-radio-button [value]="true">是</mat-radio-button>
-            <mat-radio-button [value]="false">否</mat-radio-button>
-          </mat-radio-group>
-        </p>
-
-        <p>
-          <mat-form-field class="mat-form-field-lg m-r-lg">
-            <mat-select class="sc-slt" placeholder="省/直辖市" [(ngModel)]="author.province" (change)="onProvinceChange($event)" [disabled]="info.isSelf">
-              <mat-option (click)="author.province = 0">全部</mat-option>
-              <mat-option *ngFor="let province of provinceList" [value]="province.id">{{province.name}}</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field class="mat-form-field-lg m-r-lg">
-            <mat-select class="sc-slt" placeholder="市" [(ngModel)]="author.city" (change)="onCityChange($event)" [disabled]="info.isSelf">
-              <mat-option (click)="author.city = 0">全部</mat-option>
-              <mat-option *ngFor="let city of cityList" [value]="city.id">{{city.name}}</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field class="mat-form-field-lg m-r-lg">
-            <mat-select class="sc-slt" placeholder="区" [(ngModel)]="author.district" [disabled]="info.isSelf">
-              <mat-option (click)="author.district = 0">全部</mat-option>
-              <mat-option *ngFor="let district of districtList" [value]="district.id">{{district.name}}</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </p>
-        <p>
-          <mat-form-field class="mat-form-field-100">
-            <input matInput placeholder="作者姓名" class="form-ctrl" [(ngModel)]="author.name" maxlength="20" [disabled]="info.isSelf">
-          </mat-form-field>
-        </p>
-        <p>
-          <mat-form-field class="mat-form-field-100">
-            <input matInput placeholder="作者电话" class="form-ctrl" [(ngModel)]="author.tel" maxlength="20" [disabled]="info.isSelf">
-          </mat-form-field>
-        </p>
-        <p>
-          <mat-form-field class="mat-form-field-100">
-            <input matInput placeholder="作者邮箱" class="form-ctrl" [(ngModel)]="author.email" maxlength="200" [disabled]="info.isSelf">
-          </mat-form-field>
-        </p>
-        <p>
-          <mat-form-field class="mat-form-field-100">
-            <input matInput placeholder="作者单位" class="form-ctrl" [(ngModel)]="author.companyName" maxlength="100" [disabled]="info.isSelf">
-          </mat-form-field>
-        </p>
-        <p>
-          <mat-form-field class="mat-form-field-100">
-            <input matInput placeholder="作者单位地址" class="form-ctrl" [(ngModel)]="author.companyAddress" maxlength="200" [disabled]="info.isSelf">
-          </mat-form-field>
-        </p>
-        <p>
-          <mat-form-field class="mat-form-field-100">
-            <input matInput placeholder="作者单位邮编" class="form-ctrl" [(ngModel)]="author.companyZipCode" maxlength="10" [disabled]="info.isSelf">
-          </mat-form-field>
-        </p>
-
-      </div>
-
-    </mat-expansion-panel>
-
-    <p>&nbsp;</p>
-
-    <p>
-      <mat-checkbox [(ngModel)]="agreement">我已认真阅读投稿要求并承诺文责自负</mat-checkbox>
-    </p>
-
-    <p>
-
-      <button mat-raised-button (click)="submit()" class="m-r-lg mat-success-btn" [disabled]="isFormSubmit || !agreement">提交</button>
-      <button mat-raised-button (click)="goBack()" [disabled]="isFormSubmit">返回</button>
-
-    </p>
-
-
-  </div>
+  </p>
 
 </div>

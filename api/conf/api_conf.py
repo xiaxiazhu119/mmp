@@ -101,6 +101,12 @@ API_CONF = {
                     'msg': 'manuscript get info success'
                 },
             },
+            'status': {
+                'success': {
+                    'code': 20000003,
+                    'msg': 'manuscript update status success'
+                },
+            },
         }
     }
 }

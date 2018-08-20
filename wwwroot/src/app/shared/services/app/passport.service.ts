@@ -6,12 +6,13 @@ import { of } from 'rxjs/observable/of';
 import { Subject } from 'rxjs/Subject';
 import { AppConfigService } from './app.config.service';
 
-import { User } from '@app/models';
+import { User, UserProfile } from '@app/models';
 
 @Injectable()
 export class PassportService {
 
   private userCookieKey: string;
+  private userProfileCookieKey: string;
   private appConfig: any;
 
   readonly extAuthorityItemSeparator = '-';
@@ -20,6 +21,7 @@ export class PassportService {
   private readonly extAuthorityKey = 'ext_a_';
 
   private _user = new Subject<User>();
+  private _userProfile = new Subject<UserProfile>();
 
   constructor(private appCookieService: AppCookieService,
     private appConfigService: AppConfigService,
@@ -28,6 +30,7 @@ export class PassportService {
 
     this.appConfig = this.appConfigService.getConfig();
     this.userCookieKey = this.appConfig.cookies.keys.user;
+    this.userProfileCookieKey = this.appConfig.cookies.keys.userProfileCookieKey;
 
   }
 
@@ -42,9 +45,18 @@ export class PassportService {
     return this.appCookieService.getObject(this.userCookieKey) as User || new User();
   }
 
+  getUserProfileCookie(): UserProfile {
+    return this.appCookieService.getObject(this.userProfileCookieKey) as UserProfile || new UserProfile();
+  }
+
   putUserCookie(user: User): void {
     this.appCookieService.putObject(this.userCookieKey, user);
     this._user.next(user);
+  }
+
+  putUserProfileCookie(userProfile: UserProfile): void {
+    this.appCookieService.putObject(this.userProfileCookieKey, userProfile);
+    this._userProfile.next(userProfile);
   }
 
   removeUserCookie(): void {
@@ -68,6 +80,10 @@ export class PassportService {
 
   onUserCookieChange(): Subject<User> {
     return this._user;
+  }
+
+  onUserProfileCookieChange(): Subject<UserProfile> {
+    return this._userProfile;
   }
 
 }

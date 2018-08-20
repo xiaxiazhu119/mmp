@@ -65,3 +65,12 @@ class ManuscriptListHandler(ManuscriptBaseHandler):
             'list': data,
             'total': cnt
         })
+
+class ManuscriptStatusHandler(ManuscriptBaseHandler):
+
+    def post(self):
+        id = self.get_request_json_data('id')
+        status = self.get_request_json_data('status')
+        rc = self._ctrl.update_status(id, status)
+        return self.build_response(['manuscript', 'status', 'success'], str(rc))
+

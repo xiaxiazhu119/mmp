@@ -13,7 +13,6 @@ from conf.api_conf import ApiConf
 class BaseHandler(Resource):
 
     __custom_header_auth_key = 'X-Custom-Header-Tokenid'
-    __request_json_data = None
 
     user_id = None
     token_id_valid = False
@@ -67,19 +66,21 @@ class BaseHandler(Resource):
 
     def get_request_json_data(self, key):
 
+        request_json_data = None
+
         if self.base_request is not None and self.base_request.mimetype != 'multipart/form-data':
             request_data = self.base_request.get_data().decode('utf8')
             if request_data != '':
-                __json_data = self.base_request.get_json()
-                if __json_data is not None and __json_data.get('data') is not None:
-                    __json_data = __json_data['data']
-                    self.__request_json_data = self.crypto.decrypt_by_aes(__json_data)
-                    self.__request_json_data = None if self.__request_json_data == '' else Utils.json_2_obj(self.__request_json_data)
+                request_json_data = self.base_request.get_json()
+                if request_json_data is not None and request_json_data.get('data') is not None:
+                    request_json_data = request_json_data['data']
+                    request_json_data = self.crypto.decrypt_by_aes(request_json_data)
+                    request_json_data = None if request_json_data == '' else Utils.json_2_obj(request_json_data)
 
-        if self.__request_json_data is None:
+        if request_json_data is None:
             return None
 
-        return self.__request_json_data[key]
+        return request_json_data[key]
 
     def get_request_args(self, key):
         if self.base_request is not None and len(self.base_request.args) > 0:

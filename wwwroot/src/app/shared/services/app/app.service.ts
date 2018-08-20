@@ -11,6 +11,19 @@ export class AppService {
   constructor(private commonService: CommonService) {
   }
 
+  getAppDefaultAreaConfig(): any {
+    return {
+      countryCode: 86,
+      province: {
+        id: 310000,
+        name: '上海市'
+      },
+      city: {
+        id: 310100,
+        name: '上海市'
+      }
+    };
+  }
 
   getEnumStr(enums: any, key: number): string {
     return enums[key].toString().toLocaleLowerCase();

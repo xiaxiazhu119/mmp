@@ -13,33 +13,35 @@ class UserDAL(object):
         pass
 
     def sign_in(self, user_name, pwd):
-        sql = """SELECT id, user_name,permission_group FROM mmp_users WHERE user_name = %s AND pwd = %s AND del_flag = False;"""
+        sql = """SELECT * FROM mmp__v_users WHERE user_name = %s AND pwd = %s;"""
         r = self.__base.fetch_all(sql, (user_name, pwd))
         if len(r) == 0:
             return None
 
         r = r[0]
         user = User(**r)
+        user_profile = UserProfile(**r)
         # user.id = r['id']
         # user.user_name = r['']
         # user.permission_group = r[2]
 
-        return user
+        return user, user_profile
 
     def sign_up(self, user, user_profile):
         sql = """SELECT id FROM mmp_users WHERE user_name = %s;"""
-        rst = self.__base.fetch_all(sql, (user.user_name,));
+        rst = self.__base.fetch_all(sql, (user.user_name,))
         if len(rst) > 0:
             return None
 
         sql = """INSERT INTO mmp_users (user_name,pwd) VALUES (%s,%s) RETURNING id,permission_group;"""
         # id = 20
-        rst = self.__base.fetch_all(sql, (user.user_name, user.pwd))[0];
+        rst = self.__base.fetch_all(sql, (user.user_name, user.pwd))[0]
+        # print(rst)
 
         nu = User(**rst)
         nu.user_name = user.user_name
 
-        user_profile.user_id = user.id
+        user_profile.user_id = nu.id
         fields, values = Utils.get_cls_fields_values(user_profile)
         fields = ','.join(fields)
         sql = """INSERT INTO mmp_user_profiles ("""+fields+""") VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);"""

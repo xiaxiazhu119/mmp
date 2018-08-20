@@ -7,7 +7,7 @@ import { AppService, AppConfigService, AppRoutingService, PassportService } from
 import { DialogService } from '@app/service/ui';
 import { PermissionGroupEnum } from '@app/enums';
 
-import { User } from '@app/models';
+import { User, UserProfile } from '@app/models';
 
 @Component({
   selector: 'app-cms-layout',
@@ -25,6 +25,7 @@ export class CmsLayoutComponent extends AppCmsBaseComponent implements OnInit, A
 
   routeModuleId: string;
 
+  userProfile: UserProfile;
   private rsp: any;
   private routerEventSubscription: any;
 
@@ -48,6 +49,8 @@ export class CmsLayoutComponent extends AppCmsBaseComponent implements OnInit, A
     // this.passportService.putUserCookie(_u);
 
     this.user = this.passportService.getUserCookie();
+    this.userProfile = this.passportService.getUserProfileCookie();
+    this.user.name = this.userProfile.name;
     this.checkSigned();
 
     this.rsp = appConfigService.getConfig().response;
@@ -55,6 +58,15 @@ export class CmsLayoutComponent extends AppCmsBaseComponent implements OnInit, A
     this.passportService.onUserCookieChange().subscribe(
       u => {
         this.user = u;
+        this.user.name = this.userProfile.name;
+        // console.log('uuuuuu:',u)
+      }
+    );
+
+    this.passportService.onUserProfileCookieChange().subscribe(
+      u => {
+        this.userProfile = u;
+        this.user.name = this.userProfile.name;
         // console.log('uuuuuu:',u)
       }
     );
