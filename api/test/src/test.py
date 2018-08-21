@@ -1,5 +1,6 @@
 # -*- coding=utf-8 -*-
 
+import os
 import psycopg2
 from psycopg2.extras import DictCursor
 from helper.db_helper import DBHelper
@@ -73,7 +74,6 @@ class Test(object):
 
         print(model, type(model), model.__dict__)
 
-
         # for a in up.__dict__:
         #     print(a)
         # print(user, '\r', profile)
@@ -86,12 +86,12 @@ class Test(object):
         # print(area_obj)
         data_list = []
 
-        i = 0;
+        i = 0
         for k in area_obj:
             # print(k)
             for k2 in area_obj[k]:
                 data_list.append((k2, k, area_obj[k][k2]))
-                
+
             # i += 1
 
             # if i > 2:
@@ -99,16 +99,13 @@ class Test(object):
 
         print(len(data_list))
 
-        sql = """INSERT INTO mmp_areas (id,pid,name) VALUES %s;"""   
+        sql = """INSERT INTO mmp_areas (id,pid,name) VALUES %s;"""
 
-        
         db_helper = DBHelper()
         conn = db_helper.connect()
 
         if conn == None:
             return None
-
-        
 
         cur = conn.cursor()
         rst = None
@@ -120,8 +117,19 @@ class Test(object):
 
         conn.commit()
         conn.close()
-    
 
     def keys(self):
         area = Area()
         print(area.__dict__, Area.__dict__)
+
+    def getcwd(self):
+        # print(os.getcwd())
+        # cwd = os.getcwd()
+        # server_file = 'server.py'
+        # p = os.path.join(cwd, server_file)
+        # is_api_root = os.path.exists(p)
+        # if not is_api_root:
+        #     p = os.path.join(cwd, 'api', server_file)
+
+        # print(p, os.path.exists(p))
+        return Utils.get_proj_root_path()

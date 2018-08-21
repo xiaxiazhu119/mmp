@@ -47,23 +47,35 @@ export class ManuscriptInfoModel {
   category: number;
   categoryName?: string;
   file: string;
+  fileName?: string;
+  fileFullPath?: string;
   isSelf: boolean;
   isPublished: boolean;
   periodicalCategory: number;
   periodicalCategoryName?: string;
   periodicalSummary: string;
-  status: number;
-  statusName?: string;
   userId: number;
   userName?: string;
+  editUserId: number;
+  editUserName?: string;
   createTime: string;
 
   constructor() {
     this.isSelf = true;
     this.title = this.keywords = this.subject = this.result = this.periodicalSummary = '';
-    this.status = ManuscriptStatusEnum.Pending;
   }
 
+}
+
+
+export class ManuscriptReviewModel {
+  id: number;
+  manuscriptId: number;
+  status: ManuscriptStatusEnum;
+  file?: string;
+  expire?: string;
+  userId: number;
+  createTime: string;
 }
 
 export class ManuscriptAuthorModel {

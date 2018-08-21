@@ -43,5 +43,10 @@ export class UtilsService {
     return enums[key].toString().toLocaleLowerCase();
   }
 
+  getFileNameByPath(path: string): string {
+    const s = path.split('/');
+    return s[s.length - 1];
+  }
+
 
 }

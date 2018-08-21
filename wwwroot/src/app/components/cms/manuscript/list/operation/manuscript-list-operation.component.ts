@@ -89,7 +89,7 @@ export class ManuscriptListOperationComponent implements OnInit, OnChanges {
     this.canEdit = this.permissions.canEdit && (this.data.status === ManuscriptStatusEnum.Pending || this.data.status === ManuscriptStatusEnum.Return);
     this.canCancel = this.permissions.canCancel && (this.data.status === ManuscriptStatusEnum.Pending);
     this.canConfirm = this.permissions.canConfirm && (this.data.status === ManuscriptStatusEnum.Stored && !this.data.isStored);
-    this.canReview = this.permissions.canReview && (this.data.status === ManuscriptStatusEnum.Pending);
+    this.canReview = this.permissions.canReview && (this.data.status === ManuscriptStatusEnum.Pending || this.data.status === ManuscriptStatusEnum.Edited);
   }
 
 

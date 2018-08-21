@@ -2,13 +2,18 @@ import { Injectable } from '@angular/core';
 import { KeyValuePair } from '@app/models';
 
 
-import { CommonService } from '@app/service/common';
+import { CommonService, } from '@app/service/common';
 import { Subject } from 'rxjs/Subject';
+import { AppConfigService } from './app.config.service';
 
 @Injectable()
 export class AppService {
 
-  constructor(private commonService: CommonService) {
+  private _appConfig: any;
+
+  constructor(private commonService: CommonService,
+    private appConfigService: AppConfigService) {
+    this._appConfig = appConfigService.getConfig();
   }
 
   getAppDefaultAreaConfig(): any {
@@ -39,6 +44,11 @@ export class AppService {
         }
       }
     }, 500);
+  }
+
+  getFileFullPath(filePath: string): string {
+    const apiDomain: string = this._appConfig.domain;
+    return apiDomain.substr(0, apiDomain.length - 1) + filePath;
   }
 
 }

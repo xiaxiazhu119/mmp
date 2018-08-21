@@ -4,6 +4,7 @@ import json
 import time
 import re
 import datetime
+import os
 
 from utils.typed import JSONObject
 
@@ -72,3 +73,18 @@ class Utils(object):
             values.append(getattr(cls, prop))
 
         return fields, values
+
+    @staticmethod
+    def get_proj_root_path():
+        cwd = os.getcwd()
+        server_file = 'server.py'
+        dirs = ['', 'api']
+        root_path = cwd
+        for d in dirs:
+            root_path = os.path.join(root_path, d)
+            p = os.path.join(root_path, server_file)
+            if os.path.exists(p):
+                break
+
+        print(root_path)
+        return root_path

@@ -7,7 +7,7 @@ import { MatInputModule, MatSelectModule, MatButtonModule, MatIconModule, MatSna
 import { CmsManuscriptEditRoutingModule } from './cms-manuscript-edit-routing.module';
 import { CmsManuscriptEditComponent } from './cms-manuscript-edit.component';
 
-import { ManuscriptEditFormModule } from '../../_manuscript/edit-form/manuscript-edit-form.module';
+import { ManuscriptEditFormModule } from '../../_manuscript/edit/manuscript-edit-form.module';
 
 @NgModule({
   imports: [
@@ -20,7 +20,7 @@ import { ManuscriptEditFormModule } from '../../_manuscript/edit-form/manuscript
   declarations: [CmsManuscriptEditComponent],
   exports: [CmsManuscriptEditComponent],
   entryComponents: [],
-  schemas: []
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class CmsManuscriptEditModule {
 }

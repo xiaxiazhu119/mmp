@@ -104,6 +104,7 @@ export class CmsManuscriptListComponent extends AppCmsBaseComponent implements O
       case 'confirm':
         break;
       case 'review':
+      this.commonService.routerNavigate([this.manuscriptRouteConfig.modules.review.link, id]);
         break;
       default:
         break;

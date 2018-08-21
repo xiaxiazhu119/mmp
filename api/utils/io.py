@@ -5,6 +5,7 @@ import time
 import random
 import math
 from werkzeug.utils import secure_filename
+from utils.utils import Utils
 
 
 class IO(object):
@@ -13,8 +14,9 @@ class IO(object):
 
     @staticmethod
     def save_file(file, path, use_ts=True):
+        root_path = Utils.get_proj_root_path()
         dir = 'upload'
-        p = os.path.join(dir, path)
+        p = os.path.join(root_path, dir, path)
         if not os.path.exists(p):
             os.makedirs(p)
 
@@ -27,7 +29,8 @@ class IO(object):
 
         file_path = os.path.join(p, file_name)
         file.save(file_path)
-        return file_path.replace('\\', '/')
+        # return file_path.replace('\\', '/')
+        return '/upload/' + path + '/' + file_name 
 
     @staticmethod
     def save_to_file(file_path, text, use_ts=True, encoding='utf-8'):

@@ -1,0 +1,57 @@
+
+
+<div id="manuscript-review-container">
+
+  <mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        评审信息
+      </mat-panel-title>
+      <mat-panel-description>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <div id="manuscript-review-form-container">
+
+      <p>
+        <mat-form-field class="mat-form-field-lg m-r-lg">
+          <mat-select class="sc-slt" placeholder="评审结论" [(ngModel)]="review.status" (change)="onStatusChange($event)">
+            <mat-option *ngFor="let status of statusList" [value]="status.id">{{status.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </p>
+
+      <p *ngIf="review.status && (isPassed || isReturn)">
+
+        <span class="manuscript-file-upload-btn-container m-r-lg">
+          <app-file-upload (fileUploaded)="onReviewFileUpload($event)" [btnTxt]="fu.btn"></app-file-upload>
+        </span>
+        <mat-form-field class="mat-form-field-50">
+          <input matInput placeholder="{{fu.btn.ph}}" class="form-ctrl" [value]="review.file || ''" readonly>
+          <span *ngIf="review.file" matSuffix>
+            <a (click)="delReviewFile()" class="close attachment-del" role="button">&times;</a>
+          </span>
+        </mat-form-field>
+
+        <a class="btn btn-link" *ngIf="review.file" [attr.href]="review.file" target="_blank" role="button">{{fu.a}}</a>
+
+      </p>
+
+      <p *ngIf="isReturn">
+
+        限作者&nbsp;
+        <mat-form-field>
+          <input matInput [matDatepicker]="datepicker" placeholder="选择日期" [(ngModel)]="abc">
+          <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+          <mat-datepicker #datepicker></mat-datepicker>
+        </mat-form-field>
+        &nbsp;前完成修改
+      </p>
+
+    </div>
+
+  </mat-expansion-panel>
+
+  <p>&nbsp;</p>
+
+</div>

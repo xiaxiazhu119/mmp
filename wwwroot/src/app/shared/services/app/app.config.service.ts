@@ -12,4 +12,8 @@ export class AppConfigService {
     return appConfig;
   }
 
+  getApiDomain(): string {
+    return this.getConfig().domain;
+  }
+
 }

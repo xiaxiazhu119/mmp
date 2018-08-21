@@ -11,7 +11,8 @@ class ModelTransferHelper(object):
         # model = dict(map(lambda x: (x[1], '' if data.get(x[0]) is None else data[x[0]]), self.keys_relation))
         for key in self.keys_relation:
             ts_attr = key[0]
-            setattr(self.obj, key[1], '' if data.get(ts_attr) is None else data[ts_attr])
+            d = data.get(ts_attr)
+            setattr(self.obj, key[1], d)
 
         return self.obj
 
@@ -40,7 +41,7 @@ class ManuscriptInfoModelTransferHelper(ModelTransferHelper):
                               ('result', 'result'), ('category', 'category'), ('categoryName', 'category_name'), ('file', 'file'),
                               ('isSelf', 'is_self'), ('isPublished', 'is_published'),
                               ('periodicalCategory', 'periodical_category'), ('periodicalCategoryName', 'periodical_category_name'), ('periodicalSummary', 'periodical_summary'),
-                              ('status', 'status'), ('userId', 'user_id')]
+                              ('userId', 'user_id'), ('editUserId', 'edit_user_id')]
         self.obj = ManuscriptInfo()
 
 

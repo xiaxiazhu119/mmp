@@ -21,6 +21,62 @@ export class ManuscriptService {
 
   }
 
+  verifyManuscriptForm(info: ManuscriptInfoModel, author: ManuscriptAuthorModel): string {
+    if (info.title === '') {
+      return '请填写文章标题';
+    }
+    if (info.keywords === '') {
+      return '请填写关键字';
+    }
+    if (typeof (info.category) === 'undefined') {
+      return '请选择拟投栏目';
+    }
+    if (info.file === '') {
+      return '请上传稿件文档';
+    }
+    if (typeof (info.isPublished) === 'undefined') {
+      return '请选择是否已公开发表';
+    }
+    if (info.isPublished) {
+      if (typeof (info.periodicalCategory) === 'undefined') {
+        return '请选择期刊栏目';
+      }
+      if (info.periodicalSummary === '') {
+        return '请填写期刊名、刊号等情况说明';
+      }
+    }
+    if (!info.isSelf) {
+      if (typeof (author.province) === 'undefined' || typeof (author.province) === 'undefined' || typeof (author.province) === 'undefined') {
+        return '请选择地区';
+      }
+      if (author.name === '') {
+        return '请填写作者姓名';
+
+      }
+      if (author.tel === '') {
+        return '请填写作者电话';
+
+      }
+      if (author.email === '') {
+        return '请填写作者邮箱';
+
+      }
+      if (author.companyName === '') {
+        return '请填写作者单位';
+
+      }
+      if (author.companyAddress === '') {
+        return '请填写作者单位地址';
+
+      }
+      if (author.companyZipCode === '') {
+        return '请填写作者单位邮编';
+
+      }
+    }
+    return '';
+  }
+
   info(id, callback?: any): any {
 
     const opts: CustomerRequestOptions = {

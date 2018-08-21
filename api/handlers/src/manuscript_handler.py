@@ -37,7 +37,7 @@ class ManuscriptEditHandler(ManuscriptBaseHandler):
         ma_th = ManuscriptAuthorModelTransferHelper()
         author_model = ma_th.transfer_to_py(author)
 
-        info_model.user_id = self.user_id
+        # info_model.user_id = self.user_id
         
         func = None
         key = ''

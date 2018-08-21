@@ -7,14 +7,15 @@ import { MatInputModule, MatSelectModule, MatButtonModule, MatIconModule, MatSna
 import { CmsManuscriptReviewRoutingModule } from './cms-manuscript-review-routing.module';
 import { CmsManuscriptReviewComponent } from './cms-manuscript-review.component';
 
-import { SharedAppFileUploadModule } from '@app/fileUpload';
+import { ManuscriptEditFormModule } from '../../_manuscript/edit/manuscript-edit-form.module';
+import { ManuscriptReviewFormModule } from '../../_manuscript/review/manuscript-review-form.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule, ReactiveFormsModule,
     MatInputModule, MatSelectModule, MatButtonModule, MatSnackBarModule, MatCheckboxModule, MatTooltipModule, MatExpansionModule, MatRadioModule,
-    SharedAppFileUploadModule,
+    ManuscriptEditFormModule, ManuscriptReviewFormModule,
     CmsManuscriptReviewRoutingModule
   ],
   declarations: [CmsManuscriptReviewComponent],
