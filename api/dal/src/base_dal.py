@@ -14,6 +14,9 @@ class BaseDAL(object):
         self.db_helper = DBHelper()
         pass
 
+    def get_returning_id(self, rst):
+        return None if len(rst) == 0 else rst[0]['id']
+
     def fetch_rowcount(self, sql, *params, **kw):
         def callback(cur):
             # print('cur:',cur)

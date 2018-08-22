@@ -27,13 +27,13 @@
           <app-file-upload (fileUploaded)="onReviewFileUpload($event)" [btnTxt]="fu.btn"></app-file-upload>
         </span>
         <mat-form-field class="mat-form-field-50">
-          <input matInput placeholder="{{fu.btn.ph}}" class="form-ctrl" [value]="review.file || ''" readonly>
+          <input matInput placeholder="{{fu.btn.ph}}" class="form-ctrl" [value]="review.fileName || ''" readonly>
           <span *ngIf="review.file" matSuffix>
             <a (click)="delReviewFile()" class="close attachment-del" role="button">&times;</a>
           </span>
         </mat-form-field>
 
-        <a class="btn btn-link" *ngIf="review.file" [attr.href]="review.file" target="_blank" role="button">{{fu.a}}</a>
+        <a class="btn btn-link" *ngIf="review.file" [attr.href]="review.fileFullPath" target="_blank" role="button">{{fu.a}}</a>
 
       </p>
 
@@ -41,9 +41,9 @@
 
         限作者&nbsp;
         <mat-form-field>
-          <input matInput [matDatepicker]="datepicker" placeholder="选择日期" [(ngModel)]="abc">
+          <input matInput [matDatepicker]="datepicker" placeholder="选择日期" [(ngModel)]="review.expire" (click)="datepicker.open()">
           <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
-          <mat-datepicker #datepicker></mat-datepicker>
+          <mat-datepicker #datepicker disabled="false"></mat-datepicker>
         </mat-form-field>
         &nbsp;前完成修改
       </p>

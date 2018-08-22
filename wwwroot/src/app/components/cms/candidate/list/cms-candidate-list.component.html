@@ -32,34 +32,33 @@
 
     <table class="table table-striped">
       <thead>
-      <tr>
-        <!-- <th></th> -->
-        <th>标题</th>
-        <th>投稿人</th>
-        <th>作者</th>
-        <th>拟投栏目</th>
-        <th>投稿日期</th>
-        <th>所属地区</th>
-        <th>稿件状态</th>
-        <th>评审意见</th>
-        <th class="text-center">操作</th>
-      </tr>
+        <tr>
+          <!-- <th></th> -->
+          <th>标题</th>
+          <th>投稿人</th>
+          <th>作者</th>
+          <th>拟投栏目</th>
+          <th>投稿日期</th>
+          <th>所属地区</th>
+          <th>入库日期</th>
+          <th>是否确认</th>
+          <th class="text-center">操作</th>
+        </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let data of dataList;let i = index">
-        <td>{{data.title}}</td>
-        <td>{{data.userName}}</td>
-        <td>{{data.authorName}}</td>
-        <td>{{data.categoryName}}</td>
-        <td>{{data.createTimeFmt}}</td>
-        <td>{{data.provinceName}} - {{data.cityName}} - {{data.districtName}}</td>
-        <td>{{data.statusName}}</td>
-        <td> - </td>
-        <td class="text-center info-data-list-op">
-          <button mat-button class="m-r" title="编辑"><i class="material-icons">create</i></button>
-          <button mat-button color="warn" title="删除"><i class="material-icons">delete_forever</i></button>
-        </td>
-      </tr>
+        <tr *ngFor="let data of dataList;let i = index">
+          <td>{{data.title}}</td>
+          <td>{{data.userName}}</td>
+          <td>{{data.authorName}}</td>
+          <td>{{data.categoryName}}</td>
+          <td>{{data.createTimeFmt}}</td>
+          <td>{{data.provinceName}} - {{data.cityName}} - {{data.districtName}}</td>
+          <td>{{data.storeTime}}</td>
+          <td [innerHTML]="getConfirmLabelStyle(data.isConfirm)"></td>
+          <td class="text-center info-data-list-op">
+            <a class="op-item success" *ngIf="data.isConfirm" (click)="publish(data)">刊登</a>
+          </td>
+        </tr>
       </tbody>
     </table>
 

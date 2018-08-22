@@ -52,3 +52,25 @@ class ManuscriptAuthor(BaseModel):
         self.company_zip_code = kw.get('company_zip_code')
 
 
+class ManuscriptReview(BaseModel):
+
+    def __init__(self, **kw):
+        self.id = kw.get('id')
+        self.manuscript_id = kw.get('manuscript_id')
+        self.status = kw.get('status')
+        self.file = kw.get('file')
+        self.expire = kw.get('expire')
+        self.user_id = kw.get('user_id')
+        self.create_time = kw.get('create_time')
+        self.del_flag = kw.get('del_flag')
+
+
+class ManuscriptPublish:
+
+    def __init__(self, **kw):
+        self.manuscript_id = kw.get('manuscript_id')
+        self.year = kw.get('year')
+        self.term = kw.get('term')
+        self.user_id = kw.get('user_id')
+        self.create_time = kw.get('create_time')
+        self.del_flag = kw.get('del_flag')

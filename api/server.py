@@ -8,12 +8,16 @@ from routes.routes import route_list
 
 __api_path = '/api/'
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='')
 CORS(app, supports_credentials=True, resources={r"/api/*": {"origins": "*"}})
 # app.register_blueprint(wwwroot_route, url_prefix='/')
 
 api = Api(app)
 
+
+@app.route('/upload/<path:path>')
+def send_file(path):
+    return send_from_directory('upload', path)
 
 parser = reqparse.RequestParser()
 

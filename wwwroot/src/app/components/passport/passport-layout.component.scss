@@ -3,6 +3,7 @@
 
 #app-passport-container {
   @include position(fixed, 1);
+  overflow: scroll;
 
   > #app-passport-footer {
     @include position-absolute(2);

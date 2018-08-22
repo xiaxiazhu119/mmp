@@ -152,7 +152,7 @@ export class CmsLayoutComponent extends AppCmsBaseComponent implements OnInit, A
       if (hasComma) {
         let _i = 0;
         if (url.indexOf('edit') === -1) {
-          _i = this.user.permissionGroup === PermissionGroupEnum.SA ? 1 : 0;
+          _i = this.user.permissionGroup === PermissionGroupEnum.Teacher ? 0 : 1;
         }
         dt = dt.split(',')[_i];
         pt = pt.split(',')[_i];

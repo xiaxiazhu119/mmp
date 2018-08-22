@@ -111,8 +111,10 @@ export class CommonService {
     this.router.navigate(commands, { queryParams: { refer: refer } });
   }
 
-  goBack(): void {
-    this.location.back();
+  goBack(interval = 0): void {
+    setTimeout(() => {
+      this.location.back();
+    }, interval);
   }
 
   getAttachmentPath(attachment: string): string {

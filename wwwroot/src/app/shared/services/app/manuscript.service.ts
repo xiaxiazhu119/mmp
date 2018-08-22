@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { AjaxService, CommonService } from '@app/service/common';
 import { AppConfigService } from './app.config.service';
 import { ManuscriptStatusEnum } from '@app/enums';
-import { CustomerRequestOptions, ManuscriptSearchModel, ManuscriptInfoModel, ManuscriptAuthorModel } from '@app/models';
+import { CustomerRequestOptions, ManuscriptSearchModel, ManuscriptInfoModel, ManuscriptAuthorModel, ManuscriptReviewModel, ManuscriptPublishModel } from '@app/models';
 
 @Injectable()
 export class ManuscriptService {
@@ -113,13 +113,60 @@ export class ManuscriptService {
 
   }
 
-  updateStatus(id: number, status: ManuscriptStatusEnum, callback?: any): any {
+  review(review: ManuscriptReviewModel, callback?: any): any {
 
     const opts: CustomerRequestOptions = {
-      api: this.path + this.apiModules.updateStatus,
+      api: this.path + this.apiModules.review,
       data: {
-        id: id,
-        status: status
+        review: review
+      }
+    };
+
+    return this.ajaxService.post(opts, callback);
+
+  }
+
+  latestReview(manuscriptId: number, callback?: any): any {
+
+    const opts: CustomerRequestOptions = {
+      api: this.path + this.apiModules.latestReview.replace('{id}', manuscriptId)
+    };
+
+    return this.ajaxService.get(opts, callback);
+  }
+
+  store(manuscriptId: number, callback?: any): any {
+
+    const opts: CustomerRequestOptions = {
+      api: this.path + this.apiModules.store,
+      data: {
+        id: manuscriptId
+      }
+    };
+
+    return this.ajaxService.post(opts, callback);
+
+  }
+
+  confirm(manuscriptId: number, callback?: any): any {
+
+    const opts: CustomerRequestOptions = {
+      api: this.path + this.apiModules.confirm,
+      data: {
+        id: manuscriptId
+      }
+    };
+
+    return this.ajaxService.post(opts, callback);
+
+  }
+
+  publish(pub: ManuscriptPublishModel, callback?: any): any {
+
+    const opts: CustomerRequestOptions = {
+      api: this.path + this.apiModules.publish,
+      data: {
+        pub: pub
       }
     };
 

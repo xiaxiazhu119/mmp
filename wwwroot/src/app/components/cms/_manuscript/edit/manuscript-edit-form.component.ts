@@ -114,8 +114,15 @@ export class ManuscriptEditFormComponent implements OnInit {
   onAuthorTypeChange(e: any): void {
     // console.log(e);
     if (e.value) {
-      this.initSelfAuthorInfo();
-      this.initSelfAuthorAreaInfo();
+      if (!this.isReview) {
+        this.initSelfAuthorInfo();
+        this.initSelfAuthorAreaInfo();
+      } else {
+        this.userService
+          .info(this.info.userId, (rsp: any) => {
+            console.log(rsp);
+          });
+      }
     } else {
       this.initOtherAuthor();
     }
@@ -194,6 +201,15 @@ export class ManuscriptEditFormComponent implements OnInit {
   private initOtherAuthor(): void {
     this.author.name = this.author.tel = this.author.email = this.author.companyName = this.author.companyAddress = this.author.companyZipCode = '';
     this.author.province = this.author.city = this.author.district = 0;
+    // console.log(this.authorOri)
+    // if (this.info.id === 0) {
+    //   this.author.name = this.author.tel = this.author.email = this.author.companyName = this.author.companyAddress = this.author.companyZipCode = '';
+    //   this.author.province = this.author.city = this.author.district = 0;
+    // } else {
+    //   this.author = this.utilsService.cloneObject(this.modelTransferService.transferManuscriptAuthorModel(this.authorOri), this.author);
+    //   this.onProvinceChange(this.author.province, this.author.city, this.author.district);
+    //   console.log(this.authorOri, this.author)
+    // }
   }
 
   //#endregion
@@ -202,15 +218,15 @@ export class ManuscriptEditFormComponent implements OnInit {
     this.info.userId = this.info.editUserId = this._user.id;
     if (this.info.id > 0) {
       this.manuscriptService
-        .info(this.info.id, (data: any) => {
+        .info(this.info.id, (rsp: any) => {
           // console.log(data);
-          if (data.data) {
-            const d = JSON.parse(data.data);
+          if (rsp.data) {
+            const d = JSON.parse(rsp.data);
             // this.info = Object.assign(this.info, this.modelTransferService.transferManuscriptInfoModel(d.info));
             // this.author = Object.assign(this.author, this.modelTransferService.transferManuscriptAuthorModel(d.author));
             this.info = this.utilsService.cloneObject(this.modelTransferService.transferManuscriptInfoModel(d.info), this.info);
             this.author = this.utilsService.cloneObject(this.modelTransferService.transferManuscriptAuthorModel(d.author), this.author);
-            console.log(this.info, this.author);
+            // console.log(this.info, this.author);
 
             if (this.info.file) {
               this.info.fileName = this.utilsService.getFileNameByPath(this.info.file);
@@ -243,9 +259,9 @@ export class ManuscriptEditFormComponent implements OnInit {
 
   private getAreaList(pid: number, callback: any): void {
     this.areaService
-      .list(pid, (data: any) => {
-        if (data.data) {
-          const d = this.utilsService.decryptByAES(data.data);
+      .list(pid, (rsp: any) => {
+        if (rsp.data) {
+          const d = this.utilsService.decryptByAES(rsp.data);
           if (d !== '') {
             const o = JSON.parse(d);
             callback(o);

@@ -4,7 +4,7 @@ from handlers.handlers import UserHandler, UserSignInHandler, UserSignUpHandler,
 
 
 user_routes = [{
-    'path': r"user",
+    'path': r"user/<int:id>",
     'handler': UserHandler
 }, {
     'path': r"user/sign-in",

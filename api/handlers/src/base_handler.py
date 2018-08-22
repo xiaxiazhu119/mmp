@@ -103,7 +103,8 @@ class BaseHandler(Resource):
         # return rsp
 
     def build_response_base(self, code=1, msg='ok', data=None, use_encrypt=True):
-        data = data if type(data) is str else Utils.json_dumps_dict(data)
+        if data is not None:
+            data = data if type(data) is str else Utils.json_dumps_dict(data)
         rsp = {
             'code': code,
             'msg': msg,

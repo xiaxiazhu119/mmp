@@ -31,7 +31,11 @@ const _appConfig = {
         list: '/list',
         info: '/{id}',
         edit: '/0',
-        updateStatus: '/status'
+        review: '/review',
+        latestReview: '/review/latest/{id}',
+        store: '/store',
+        confirm: '/confirm',
+        publish: '/publish',
       }
     },
     area: {

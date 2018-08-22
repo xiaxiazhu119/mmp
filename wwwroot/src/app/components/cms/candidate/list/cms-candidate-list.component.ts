@@ -65,6 +65,19 @@ export class CmsCandidateListComponent extends AppCmsBaseComponent implements On
     this.search(Number(e));
   }
 
+  getConfirmLabelStyle(isConfirm: boolean): string {
+    let txt = '未确认', cls = 'return';
+    if (isConfirm) {
+      txt = '已确认';
+      cls = 'confirmed';
+    }
+    return `<span class="app-label ${cls}">${txt}</span>`;
+    // return '';
+  }
+
+  publish(data: any): void {
+
+  }
   //#endregion
 
   private initCategoryList(): void {
@@ -73,11 +86,11 @@ export class CmsCandidateListComponent extends AppCmsBaseComponent implements On
 
   private getList(): void {
     this.manuscriptService
-      .list(this.sc, (data: any) => {
+      .list(this.sc, (rsp: any) => {
         // console.log(data);
-        if (data.data) {
-          const d = JSON.parse(this.utilsService.decryptByAES(data.data));
-          // console.log(d);
+        if (rsp.data) {
+          const d = JSON.parse(this.utilsService.decryptByAES(rsp.data));
+          console.log(d);
           // console.log(d.list);
           this.dataList = this.modelTransferService.transferManuscriptListModel(d.list);
           this.pgCfg.totalItems = d.total;

@@ -99,28 +99,29 @@ $app-data-list-base-z-index: 1;
   padding: 4px 8px;
   border-radius: 4px;
   vertical-align: middle;
-  &.draft {}
-  &.saved {}
-  &.submited {}
-  &.denied {}
-  &.passed {}
+
   >.attention {
+
     position: absolute;
     top: -40%;
     right: -17%;
     width: 22px;
     height: 22px;
     border-radius: 50%;
+
     >.icon {
       position: relative;
       top: -1px;
       left: -1px;
     }
+
   }
+
 }
 
 .app-label {
-  min-width: 70px;
+  min-width: 72px;
+  text-align: center;
 }
 
 .app-mat-dialog-container {

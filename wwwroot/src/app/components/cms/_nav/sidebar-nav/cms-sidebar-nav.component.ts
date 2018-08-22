@@ -83,7 +83,7 @@ export class CmsSidebarNavComponent implements OnInit, OnChanges {
     const manuscriptModule = modules.manuscript.modules.list;
     const _mddts = manuscriptModule.documentTitle.split(',');
     const _mdtts = manuscriptModule.toolTipTitle.split(',');
-    const _i = this.user.permissionGroup === PermissionGroupEnum.SA ? 1 : 0;
+    const _i = this.user.permissionGroup === PermissionGroupEnum.Teacher ? 0 : 1;
 
     const manuscriptNav: AppNavItem = {
       id: manuscriptModule.id,

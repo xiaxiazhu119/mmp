@@ -1,9 +1,10 @@
 # -*- coding=utf-8 -*-
 
-from models.models import ManuscriptInfo, ManuscriptAuthor
+from models.models import ManuscriptInfo, ManuscriptAuthor, ManuscriptReview, ManuscriptPublish
 from handlers.src.base_handler import BaseHandler
 from controllers.controllers import ManuscriptController
-from helper.model_transfer_helper import ManuscriptInfoModelTransferHelper, ManuscriptAuthorModelTransferHelper
+from helper.model_transfer_helper import ManuscriptInfoModelTransferHelper, ManuscriptAuthorModelTransferHelper, ManuscriptReviewModelTransferHelper, ManuscriptPublishModelTransferHelper
+from enums.enums import ManuscriptStatusEnum
 
 
 class ManuscriptBaseHandler(BaseHandler):
@@ -38,7 +39,7 @@ class ManuscriptEditHandler(ManuscriptBaseHandler):
         author_model = ma_th.transfer_to_py(author)
 
         # info_model.user_id = self.user_id
-        
+
         func = None
         key = ''
         if info_model.id == 0:
@@ -66,11 +67,76 @@ class ManuscriptListHandler(ManuscriptBaseHandler):
             'total': cnt
         })
 
+
 class ManuscriptStatusHandler(ManuscriptBaseHandler):
+
+    # def post(self):
+    #     id = self.get_request_json_data('id')
+    #     status = self.get_request_json_data('status')
+    #     rc = self._ctrl.update_status(id, status)
+    #     return self.build_response(['manuscript', 'status', 'success'], str(rc))
+
+    def post(self):
+        rv = self.get_request_json_data('review')
+        rv_th = ManuscriptInfoModelTransferHelper()
+        review = rv_th.transfer_to_py(rv)
+
+        data, cnt = self._ctrl.get_list(sc)
+        # ml = ManuscriptList(*data)
+        return self.build_response(['manuscript', 'list', 'success'], {
+            'list': data,
+            'total': cnt
+        })
+
+
+class ManuscriptReviewHandler(ManuscriptBaseHandler):
+
+    def post(self):
+        rv = self.get_request_json_data('review')
+        rv_th = ManuscriptReviewModelTransferHelper()
+        review = rv_th.transfer_to_py(rv)
+
+        id = self._ctrl.review(review)
+        if id > 0:
+            if review.status == ManuscriptStatusEnum.Stored.value:
+                self._ctrl.store(review.manuscript_id, self.user_id)
+            elif review.status == ManuscriptStatusEnum.Confirmed.value:
+                self._ctrl.confirm(review.manuscript_id, self.user_id)
+
+        return self.build_response(['manuscript', 'review', 'success' if id > 0 else 'failed'], id)
+
+
+class ManuscriptLatestReviewHandler(ManuscriptBaseHandler):
+
+    def get(self, manuscript_id):
+        review = self._ctrl.get_latest_review(manuscript_id)
+        if review is not None:
+            review = ManuscriptReview(**review)
+        return self.build_response(['manuscript', 'latest-review', 'success'], review)
+
+
+class ManuscriptStoreHandler(ManuscriptBaseHandler):
 
     def post(self):
         id = self.get_request_json_data('id')
-        status = self.get_request_json_data('status')
-        rc = self._ctrl.update_status(id, status)
-        return self.build_response(['manuscript', 'status', 'success'], str(rc))
+        rst = self._ctrl.store(id, self.user_id)
+        return self.build_response(['manuscript', 'store', 'success' if rst > 0 else 'failed'], rst)
 
+
+class ManuscriptConfirmHandler(ManuscriptBaseHandler):
+
+    def post(self):
+        id = self.get_request_json_data('id')
+        rst = self._ctrl.confirm(id, self.user_id)
+        return self.build_response(['manuscript', 'confirm', 'success' if rst > 0 else 'failed'], rst)
+
+
+class ManuscriptPublishHandler(ManuscriptBaseHandler):
+
+    def post(self):
+        p = self.get_request_json_data('pub')
+        pub_th = ManuscriptPublishModelTransferHelper()
+        pub = pub_th.transfer_to_py(p)
+
+        id = self._ctrl.publish(pub)
+        return self.build_response(['manuscript', 'publish', 'success' if id > 0 else 'failed'], id)

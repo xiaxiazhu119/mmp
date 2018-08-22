@@ -1,11 +1,11 @@
 export enum ManuscriptStatusEnum {
   Pending = 1,
   Canceled,
-  Passed,
   Return,
   Edited,
   Refused,
   Stored,
+  Confirmed,
   Published
 }
 
@@ -50,8 +50,6 @@ export class EnumClass {
         return '待评审';
       case ManuscriptStatusEnum.Canceled:
         return '已取消';
-      case ManuscriptStatusEnum.Passed:
-        return '通过';
       case ManuscriptStatusEnum.Return:
         return '退回修改';
       case ManuscriptStatusEnum.Edited:
@@ -60,6 +58,8 @@ export class EnumClass {
         return '不予采用';
       case ManuscriptStatusEnum.Stored:
         return '已入库';
+      case ManuscriptStatusEnum.Confirmed:
+        return '已确认';
       case ManuscriptStatusEnum.Published:
         return '已刊登';
       default:

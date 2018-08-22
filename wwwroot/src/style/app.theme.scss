@@ -76,7 +76,7 @@
     color: $app-mat-amber;
   }
 
-  &.draft {
+  &.return {
     color: $app-mat-deep-orange;
   }
 
@@ -84,7 +84,7 @@
     color: $app-mat-green;
   }
 
-  &.denied {
+  &.refused {
     color: $app-mat-red;
   }
 
@@ -101,28 +101,33 @@
     background-color: $app-mat-grey;
   }
 
-  &.pending-review {
+  &.canceled {
     background-color: $app-mat-grey;
+    color: $gray-lightest;
   }
 
-  &.pending-approval {
-    background-color: $app-mat-amber;
-  }
-
-  &.draft {
+  &.return {
     background-color: $app-mat-deep-orange;
   }
 
-  &.submited {
-    background-color: $app-mat-green;
+  &.edited {
+    background-color: $app-mat-amber;
   }
 
-  &.denied {
+  &.refused {
     background-color: $app-mat-red;
   }
 
-  &.passed {
+  &.stored {
+    background-color: $app-mat-indigo;
+  }
+
+  &.confirmed {
     background-color: $app-mat-green;
+  }
+
+  &.published {
+    background-color: $app-mat-red;
   }
 
   > .attention {

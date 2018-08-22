@@ -7,6 +7,9 @@ from models.src.user_model import User
 class UserBLL(object):
     __dal = UserDAL()
 
+    def get_info(self, id):
+        return self.__dal.get_info(id)
+
     def sign_in(self, user_name, pwd):
         return self.__dal.sign_in(user_name, pwd)
 

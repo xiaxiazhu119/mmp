@@ -55,6 +55,15 @@ export class UserService {
 
     return this.ajaxService.post(opts, callback, errCallback);
 
+  }
+
+  info(id: number, callback?: any): any {
+
+    const opts: CustomerRequestOptions = {
+      api: this.path + this.apiModules.info.replace('{id}', id)
+    };
+
+    return this.ajaxService.get(opts, callback);
 
   }
 

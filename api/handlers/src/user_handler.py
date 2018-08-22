@@ -21,19 +21,11 @@ class UserBaseHandler(BaseHandler):
 
 
 class UserHandler(UserBaseHandler):
-    def get(self, user_id):
-        pass
+    def get(self, id):
+        user, user_profile = self._ctrl.get_info(id)
+        return self.build_response(['user', 'info', 'success'], {'user': user, 'profile': user_profile})
 
-    def post(self, user):
-        pass
-
-    def head(self):
-        pass
-
-    def put(self):
-        pass
-
-    def delete(self):
+    def post(self):
         pass
 
 

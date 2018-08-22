@@ -27,6 +27,8 @@ export class CmsManuscriptEditComponent extends AppCmsBaseComponent implements O
   agreement: boolean;
 
   private _user: User;
+  private _review: ManuscriptReviewModel;
+  private _id: number;
 
   constructor(private commonService: CommonService,
     private utilsService: UtilsService,
@@ -42,12 +44,15 @@ export class CmsManuscriptEditComponent extends AppCmsBaseComponent implements O
   }
 
   ngOnInit(): void {
-
+    this._id = Number(this.commonService.getParam('id') || 0);
+    if (this._id > 0) {
+      this.initReviewInfo();
+    }
   }
 
   submit(): void {
-    console.log(this.info);
-    console.log(this.author);
+    // console.log(this.info);
+    // console.log(this.author);
 
     if (this.isFormSubmit) {
       return;
@@ -88,16 +93,26 @@ export class CmsManuscriptEditComponent extends AppCmsBaseComponent implements O
     // this.info.status = this._user.permissionGroup === PermissionGroupEnum.Director ? ManuscriptStatusEnum.Stored : ManuscriptStatusEnum.Pending;
 
     this.manuscriptService
-      .edit(this.info, this.author, (data: any) => {
+      .edit(this.info, this.author, (rsp: any) => {
         this.isFormSubmit = false;
-        const id = Number(this.utilsService.decryptByAES(data.data));
+        const id = Number(this.utilsService.decryptByAES(rsp.data));
 
         let msg = '';
         if (id > 0) {
           msg = this.info.id > 0 ? '投稿编辑成功' : '投稿成功，请等待评审结果';
-          setTimeout(() => {
-            this.goBack();
-          }, 2000);
+
+          if (this._review && this._review.status === ManuscriptStatusEnum.Return) {
+            const rv = new ManuscriptReviewModel();
+            rv.manuscriptId = this.info.id;
+            rv.status = ManuscriptStatusEnum.Edited;
+            rv.userId = this._user.id;
+            this.manuscriptService
+              .review(rv, (rsp2: any) => {
+                this.goBack(1000);
+              });
+          } else {
+            this.goBack(1000);
+          }
         } else {
           msg = this.info.id > 0 ? '编辑失败' : '投稿失败';
         }
@@ -118,8 +133,8 @@ export class CmsManuscriptEditComponent extends AppCmsBaseComponent implements O
 
   }
 
-  goBack(): void {
-    this.commonService.goBack();
+  goBack(interval = 0): void {
+    this.commonService.goBack(interval);
   }
 
   private verifyForm(): boolean {
@@ -133,6 +148,20 @@ export class CmsManuscriptEditComponent extends AppCmsBaseComponent implements O
 
   private showSnackBarMsg(msg: string): void {
     this.snackBarService.open(msg);
+  }
+
+  private initReviewInfo(): void {
+    this.manuscriptService
+      .latestReview(this._id, (rsp: any) => {
+        if (rsp.data) {
+          const review = this.utilsService.decryptByAES(rsp.data);
+          if (review) {
+            const d = JSON.parse(review);
+            this._review = this.modelTransferService.transferManuscriptReviewModel(d);
+            // console.log(this._review)
+          }
+        }
+      });
   }
 
 }

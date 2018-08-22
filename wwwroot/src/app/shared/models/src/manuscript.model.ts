@@ -36,6 +36,7 @@ export class ManuscriptListModel {
   isPublish?: boolean;
   isConfirm?: boolean;
   isStored?: boolean;
+  storeTime?: string;
 }
 
 export class ManuscriptInfoModel {
@@ -73,6 +74,8 @@ export class ManuscriptReviewModel {
   manuscriptId: number;
   status: ManuscriptStatusEnum;
   file?: string;
+  fileName?: string;
+  fileFullPath?: string;
   expire?: string;
   userId: number;
   createTime: string;
@@ -96,4 +99,13 @@ export class ManuscriptAuthorModel {
   constructor() {
     this.name = this.tel = this.email = this.companyName = this.companyAddress = this.companyZipCode = '';
   }
+}
+
+
+export class ManuscriptPublishModel {
+  manuscriptId: number;
+  year: number;
+  term: number;
+  userId: number;
+  createTime: string;
 }

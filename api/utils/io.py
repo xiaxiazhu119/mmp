@@ -9,8 +9,16 @@ from utils.utils import Utils
 
 
 class IO(object):
+
+    ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'doc', 'docx', 'xls', 'xlsx'])
+
     def __init__(self):
         pass
+
+    @staticmethod
+    def allowed_file(filename):
+        return '.' in filename and \
+            filename.rsplit('.', 1)[1] in IO.ALLOWED_EXTENSIONS
 
     @staticmethod
     def save_file(file, path, use_ts=True):
@@ -20,7 +28,8 @@ class IO(object):
         if not os.path.exists(p):
             os.makedirs(p)
 
-        file_name = secure_filename(file.filename)
+        file_name = file.filename
+        # file_name = secure_filename(file.filename)
 
         if use_ts:
             file_name, file_extension = os.path.splitext(file_name)
@@ -30,7 +39,7 @@ class IO(object):
         file_path = os.path.join(p, file_name)
         file.save(file_path)
         # return file_path.replace('\\', '/')
-        return '/upload/' + path + '/' + file_name 
+        return '/upload/' + path + '/' + file_name
 
     @staticmethod
     def save_to_file(file_path, text, use_ts=True, encoding='utf-8'):

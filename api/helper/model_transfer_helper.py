@@ -54,3 +54,19 @@ class ManuscriptAuthorModelTransferHelper(ModelTransferHelper):
                               ('name', 'name'), ('tel', 'tel'), ('email', 'email'),
                               ('companyName', 'company_name'), ('companyAddress', 'company_address'), ('companyZipCode', 'company_zip_code')]
         self.obj = ManuscriptAuthor()
+
+
+class ManuscriptReviewModelTransferHelper(ModelTransferHelper):
+
+    def __init__(self):
+        self.keys_relation = [('id', 'id'), ('manuscriptId', 'manuscript_id'),
+                              ('status', 'status'), ('file', 'file'), ('expire', 'expire'),
+                              ('userId', 'user_id')]
+        self.obj = ManuscriptAuthor()
+
+
+class ManuscriptPublishModelTransferHelper(ModelTransferHelper):
+
+    def __init__(self):
+        self.keys_relation = [('manuscriptId', 'manuscript_id'), ('year', 'year'), ('term', 'term'), ('userId', 'user_id')]
+        self.obj = ManuscriptAuthor()

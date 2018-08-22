@@ -62,6 +62,12 @@ API_CONF = {
                     'code': -10000001,
                     'msg': 'update pwd failed'
                 }
+            },
+            'info': {
+                'success': {
+                    'code': 10000004,
+                    'msg': 'get user info success'
+                },
             }
         },
         'manuscript': {
@@ -106,6 +112,52 @@ API_CONF = {
                     'code': 20000003,
                     'msg': 'manuscript update status success'
                 },
+            },
+            'review': {
+                'success': {
+                    'code': 20000004,
+                    'msg': 'manuscript review success'
+                },
+                'failed': {
+                    'code': -20000004,
+                    'msg': 'manuscript review failed'
+                }
+            },
+            'latest-review': {
+                'success': {
+                    'code': 20000005,
+                    'msg': 'manuscript latest review success'
+                },
+            },
+            'store': {
+                'success': {
+                    'code': 20000006,
+                    'msg': 'manuscript store success'
+                },
+                'failed': {
+                    'code': -20000006,
+                    'msg': 'manuscript store failed'
+                }
+            },
+            'confirm': {
+                'success': {
+                    'code': 20000007,
+                    'msg': 'manuscript confirm success'
+                },
+                'failed': {
+                    'code': -20000007,
+                    'msg': 'manuscript confirm failed'
+                }
+            },
+            'publish': {
+                'success': {
+                    'code': 20000008,
+                    'msg': 'manuscript publish success'
+                },
+                'failed': {
+                    'code': -20000008,
+                    'msg': 'manuscript publish failed'
+                }
             },
         }
     }

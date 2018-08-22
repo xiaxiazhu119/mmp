@@ -1,8 +1,8 @@
 # -*- coding=utf-8 -*-
 
 from dal.src.base_dal import BaseDAL
-
 from utils.utils import Utils
+from enums.enums import ManuscriptStatusEnum
 
 
 class ManuscriptDAL(object):
@@ -42,10 +42,15 @@ class ManuscriptDAL(object):
     def get_list(self, sc):
         params = []
         condition = """ WHERE 1=1 """
+        status_condition = ''
 
         if sc.get('keyword') is not None:
             condition += """ AND title LIKE %s """
             params.append("""%""" + sc['keyword'] + """%""")
+
+        if sc.get('category') is not None:
+            condition += """ AND category = %s """
+            params.append(sc['category'])
 
         if sc.get('authorName') is not None:
             condition += """ AND author_name LIKE %s """
@@ -56,29 +61,38 @@ class ManuscriptDAL(object):
             params.append("""%""" + sc['companyName'] + """%""")
 
         if sc.get('status') is not None and sc['status'] != '0':
-            condition += """ AND status = %s """
-            params.append(sc['status'])
+            status_condition = """ AND status = """ + str(sc['status'])
+            # condition += """ AND status = %s """
+            # params.append(sc['status'])
 
         if sc.get('userId') is not None and sc['userId'] != '0':
             condition += """ AND user_id = %s """
             params.append(sc['userId'])
 
         if sc.get('type') == 2:
-            condition += """ AND store_id != 0 """
+            condition += """  """
+            status_condition = """ AND status IN ("""+ str(ManuscriptStatusEnum.Stored.value)+""","""+str(ManuscriptStatusEnum.Confirmed.value)+""")"""
+
+            if sc.get('isConfirm') is not None:
+                v = ManuscriptStatusEnum.Stored.value if sc.get('isConfirm') == 0 else ManuscriptStatusEnum.Confirmed.value
+                status_condition = """ AND status = """ + str(v)
+
+            # if sc.get('isConfirm') is not None:
+            #     operator = '=' if sc.get('isConfirm') == 0 else '>'
+            #     condition += """ AND confirm_id """+operator+""" 0 """
+
         elif sc.get('type') == 3:
             condition += """ AND publish_id != 0 """
         else:
             print('normal')
 
-        if sc.get('isConfirm') is not None:
-            operator = '=' if sc.get('isConfirm') == 0 else '>'
-            condition += """ AND confirm_id """+operator+""" 0 """
+        condition += status_condition
 
         cnt_sql = """SELECT COUNT(1) AS cnt FROM mmp__v_manuscript """ + condition + """;"""
         rst = self.__base.fetch_one(cnt_sql, params)
         cnt = rst['cnt']
 
-        sql = """SELECT id,title,category_name,status,user_id,user_name,create_time,province_name,city_name,district_name,author_name,company_name,confirm_id,publish_id,store_id FROM mmp__v_manuscript """
+        sql = """SELECT id,title,category_name,status,user_id,user_name,create_time,province_name,city_name,district_name,author_name,company_name,confirm_id,publish_id,store_id,store_time FROM mmp__v_manuscript """
         sql += condition
         sql += """ ORDER BY id DESC """
         sql += """ LIMIT %s OFFSET %s ; """
@@ -98,16 +112,25 @@ class ManuscriptDAL(object):
         rst = self.__base.fetch_rowcount(sql, (str(status), str(id)))
         return rst
 
-    def create_manuscript_store_log(self, manuscript_id, user_id):
-        sql = """INSERT INTO mmp_manuscript_store_log (manuscript_id, user_id)VALUES(%s,%s);"""
-        rst = self.__base.fetch_rowcount(sql, (str(manuscript_id), str(user_id)))
-        return rst
+    def review(self, review):
+        sql = """INSERT INTO mmp_manuscript_review_log(manuscript_id,status,file,expire,user_id)VALUES(%s,%s,%s,%s,%s) RETURNING id;"""
+        rst = self.__base.fetch_all(sql, (review.manuscript_id, review.status, review.file, review.expire, review.user_id))
+        id = self.__base.get_returning_id(rst)
+        return id
 
-    def create_manuscript_doc_log(self, manuscript_id, user_id, file):
-        sql = """INSERT INTO mmp_manuscript_doc_log (manuscript_id,user_id,file) VALUES (%s,%s) RETURNING id;"""
-        rst = self.__base.fetch_all(sql, (manuscript_id, user_id, file))[0]
-        return rst[0]['id'] if len(rst) > 0 else 0
+    def get_latest_review(self, manuscript_id):
+        sql = """SELECT id, manuscript_id,status,file,expire,user_id FROM mmp_manuscript_review_log WHERE del_flag = False AND manuscript_id = %s ORDER BY id DESC LIMIT 1;"""
+        rst = self.__base.fetch_all(sql, (str(manuscript_id),))
+        return None if len(rst) == 0 else rst[0]
 
-    def update_manuscript_doc_log_mid(self, id, manuscript_id):
-        sql = """UPDATE mmp_manuscript_doc_log SET manuscript_id = %s WHERE id = %s;"""
-        return self.__base.fetch_rowcount(sql, (manuscript_id, id))
+    def store(self, manuscript_id, user_id):
+        sql = """INSERT INTO mmp_manuscript_store_log(manuscript_id,user_id)VALUES(%s,%s);"""
+        return self.__base.fetch_rowcount(sql, (manuscript_id, user_id))
+
+    def confirm(self, manuscript_id, user_id):
+        sql = """INSERT INTO mmp_manuscript_confirm_log(manuscript_id,user_id)VALUES(%s,%s);"""
+        return self.__base.fetch_rowcount(sql, (manuscript_id, user_id))
+
+    def publish(self, pub):
+        sql = """INSERT INTO mmp_manuscript_publish_log(manuscript_id,year,term,user_id)VALUES(%s,%s,%s,%s);"""
+        return self.__base.fetch_rowcount(sql, (pub.manuscript_id, pub.year, pub.term, pub.user_id))

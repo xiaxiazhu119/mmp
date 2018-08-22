@@ -6,12 +6,16 @@ from utils.io import IO
 
 
 class FileUploadHandler(BaseHandler):
+
     def __init__(self):
         self.need_auth = True
         super().__init__()
 
     def post(self):
         file = self.base_request.files['file']
-        file_path = IO.save_file(file, str(self.user_id))
-        # print('file_path:', file_path)
-        return self.build_response(['common', 'file-upload-success'], file_path)
+
+        if file and IO.allowed_file(file.filename):
+            file_path = IO.save_file(file, str(self.user_id))
+            return self.build_response(['common', 'file-upload-success'], file_path)
+
+        return self.build_response(['common', 'file-upload-failed'])

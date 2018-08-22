@@ -3,7 +3,7 @@ import { Component, OnChanges, OnInit, SimpleChange, Input } from '@angular/core
 import { AppService, PassportService, UserService, AppRoutingService, ManuscriptService } from '@app/service/app';
 import { DialogService, SnackBarService, DialogBaseService } from '@app/service/ui';
 import { CommonService, UtilsService, ModelTransferService } from '@app/service/common';
-import { ManuscriptSearchModel, ManuscriptListModel, User } from '@app/models';
+import { ManuscriptSearchModel, ManuscriptListModel, User, ManuscriptReviewModel } from '@app/models';
 import { DialogConfig, AppPaginationConfig } from '@app/models/ui';
 import { EnumClass, ManuscriptSearchTypeEnum, ManuscriptStatusEnum, PermissionGroupEnum } from '@app/enums';
 import { AppCmsBaseComponent } from '@app/cmsBaseComponent';
@@ -28,9 +28,9 @@ export class CmsManuscriptListComponent extends AppCmsBaseComponent implements O
     canReview: false,
     canConfirm: false
   };
+  user: User;
 
   private manuscriptRouteConfig: any;
-  private user: User;
 
   constructor(private commonService: CommonService,
     private utilsService: UtilsService,
@@ -76,7 +76,7 @@ export class CmsManuscriptListComponent extends AppCmsBaseComponent implements O
   }
 
   onOperationEmit(e: any): void {
-    console.log(e);
+    // console.log(e);
     const id = e.data.id;
     switch (e.key) {
       case 'view':
@@ -87,28 +87,41 @@ export class CmsManuscriptListComponent extends AppCmsBaseComponent implements O
         break;
       case 'cancel':
         this.dialogService.openConfirmDialog('是否确认要取消投稿', (dialogRef: any, data?: any) => {
-          this.manuscriptService
-            .updateStatus(id, ManuscriptStatusEnum.Canceled, (d: any) => {
-              dialogRef.close();
-              const rc = Number(this.utilsService.decryptByAES(d.data));
-              const msg = rc > 0 ? '取消成功' : '取消失败，请稍后再试';
-              this.snackBarService.open(msg);
-              if (rc > 0) {
-                this.getList();
-              }
-            });
+          this.updateReview(id, ManuscriptStatusEnum.Confirmed, '取消', () => {
+            dialogRef.close();
+          });
+
+          // const rv1 = new ManuscriptReviewModel();
+          // rv1.manuscriptId = id;
+          // rv1.status = ManuscriptStatusEnum.Canceled;
+          // rv1.userId = this.user.id;
+          // this.manuscriptService
+          //   .review(rv1, (rsp: any) => {
+          //     dialogRef.close();
+          //     const rc = Number(this.utilsService.decryptByAES(rsp.data));
+          //     const msg = rc > 0 ? '取消成功' : '取消失败，请稍后再试';
+          //     this.snackBarService.open(msg);
+          //     if (rc > 0) {
+          //       this.getList();
+          //     }
+          //   });
         });
         break;
       case 'upload':
         break;
       case 'confirm':
+        this.updateReview(id, ManuscriptStatusEnum.Confirmed, '确认');
         break;
       case 'review':
-      this.commonService.routerNavigate([this.manuscriptRouteConfig.modules.review.link, id]);
+        this.commonService.routerNavigate([this.manuscriptRouteConfig.modules.review.link, id]);
         break;
       default:
         break;
     }
+  }
+
+  getStatusLabelStyle(s: ManuscriptStatusEnum): string {
+    return this.utilsService.getEnumStr(ManuscriptStatusEnum, s);
   }
 
   //#endregion
@@ -119,10 +132,10 @@ export class CmsManuscriptListComponent extends AppCmsBaseComponent implements O
 
   private getList(): void {
     this.manuscriptService
-      .list(this.sc, (data: any) => {
+      .list(this.sc, (rsp: any) => {
         // console.log(data);
-        if (data.data) {
-          const d = JSON.parse(this.utilsService.decryptByAES(data.data));
+        if (rsp.data) {
+          const d = JSON.parse(this.utilsService.decryptByAES(rsp.data));
           // console.log(d);
           // console.log(d.list);
           this.dataList = this.modelTransferService.transferManuscriptListModel(d.list);
@@ -158,5 +171,24 @@ export class CmsManuscriptListComponent extends AppCmsBaseComponent implements O
 
 
   //#endregion
+
+  private updateReview(id: number, status: ManuscriptStatusEnum, operSummary: string, callback?: any): any {
+    const review = new ManuscriptReviewModel();
+    review.manuscriptId = id;
+    review.status = status;
+    review.userId = this.user.id;
+    this.manuscriptService
+      .review(review, (rsp: any) => {
+        const rc = Number(this.utilsService.decryptByAES(rsp.data));
+        const msg = operSummary + (rc > 0 ? '成功' : '失败，请稍后再试');
+        this.snackBarService.open(msg);
+        if (rc > 0) {
+          this.getList();
+        }
+        if (callback) {
+          callback();
+        }
+      });
+  }
 
 }

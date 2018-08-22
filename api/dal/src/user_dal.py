@@ -12,6 +12,18 @@ class UserDAL(object):
     def __init__(self, *args):
         pass
 
+    def get_info(self, id):
+        sql = """SELECT * FROM mmp__v_users WHERE id = %s;"""
+        r = self.__base.fetch_all(sql, (str(id),))
+        if len(r) == 0:
+            return None
+
+        r = r[0]
+        user = User(**r)
+        user_profile = UserProfile(**r)
+
+        return user, user_profile
+
     def sign_in(self, user_name, pwd):
         sql = """SELECT * FROM mmp__v_users WHERE user_name = %s AND pwd = %s;"""
         r = self.__base.fetch_all(sql, (user_name, pwd))

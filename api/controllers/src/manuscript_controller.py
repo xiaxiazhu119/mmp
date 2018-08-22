@@ -24,8 +24,17 @@ class ManuscriptController(BaseController):
     def update_status(self, id, status):
         return self.__bll.update_status(id, status)
 
-    # def create_manuscript_doc_log(self, manuscript_id, user_id, file):
-    #     return self.__bll.create_manuscript_doc_log(manuscript_id, user_id, file)
+    def review(self, review):
+        return self.__bll.review(review)
 
-    # def update_manuscript_doc_log_mid(self, id, manuscript_id):
-    #     return self.__bll.update_manuscript_doc_log_mid(id, manuscript_id)
+    def store(self, manuscript_id, user_id):
+        return self.__bll.store(manuscript_id, user_id)
+
+    def confirm(self, manuscript_id, user_id):
+        return self.__bll.confirm(manuscript_id, user_id)
+
+    def publish(self, pub):
+        return self.__bll.publish(pub)
+
+    def get_latest_review(self, manuscript_id):
+        return self.__bll.get_latest_review(manuscript_id)

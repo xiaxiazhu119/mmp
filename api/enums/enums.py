@@ -13,11 +13,11 @@ class MethodEnum(Enum):
 class ManuscriptStatusEnum(Enum):
     Pending = 1
     Canceled = 2
-    Passed = 3
-    Return = 4
-    Edited = 5
-    Refused = 6
-    Stored = 7
+    Return = 3
+    Edited = 4
+    Refused = 5
+    Stored = 6
+    Confirmed = 7
     Published = 8
 
 

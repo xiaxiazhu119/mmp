@@ -24,8 +24,18 @@ class ManuscriptBLL(object):
     def update_status(self, id, status):
         return self.__dal.update_status(id, status)
 
-    def create_manuscript_doc_log(self, manuscript_id, user_id, file):
-        return self.__dal.create_manuscript_doc_log(manuscript_id, user_id, file)
+    def review(self, review):
+        return self.__dal.review(review)
 
-    def update_manuscript_doc_log_mid(self, id, manuscript_id):
-        return self.__dal.update_manuscript_doc_log_mid(id, manuscript_id)
+    def store(self, manuscript_id, user_id):
+        return self.__dal.store(manuscript_id, user_id)
+
+    def confirm(self, manuscript_id, user_id):
+        return self.__dal.confirm(manuscript_id, user_id)
+
+    def publish(self, pub):
+        return self.__dal.publish(pub)
+
+    def get_latest_review(self, manuscript_id):
+        return self.__dal.get_latest_review(manuscript_id)
+

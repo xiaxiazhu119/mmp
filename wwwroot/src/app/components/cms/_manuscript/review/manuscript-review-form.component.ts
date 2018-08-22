@@ -65,9 +65,9 @@ export class ManuscriptReviewFormComponent implements OnInit {
 
     // this.info.file = '/upload/1/ecology_201808101439094518.sql';
 
-    this.review.id = Number(this.commonService.getParam('id')) || 0;
+    this.review.manuscriptId = Number(this.commonService.getParam('id')) || 0;
 
-    if (this.review.id === 0) {
+    if (this.review.manuscriptId === 0) {
       this.commonService.routerNavigate('/cms');
       return;
     }
@@ -88,14 +88,16 @@ export class ManuscriptReviewFormComponent implements OnInit {
     } else {
       if (e.data) {
         const filePath = this.utilsService.decryptByAES(e.data);
-        // console.log(filePath)
+        this.review.file = filePath;
+        this.review.fileFullPath = this.appService.getFileFullPath(this.review.file);
+        this.review.fileName = this.utilsService.getFileNameByPath(this.review.file);
       }
     }
 
   }
 
   delReviewFile(): void {
-
+    this.review.file = this.review.fileName = this.review.fileFullPath = '';
   }
 
   //#endregion
@@ -103,9 +105,10 @@ export class ManuscriptReviewFormComponent implements OnInit {
   //#region author-type status category periodical
 
   onStatusChange(e: any): void {
+    this.delReviewFile();
     this.isPassed = this.isReturn = this.isRefused = false;
     switch (e.value) {
-      case ManuscriptStatusEnum.Passed:
+      case ManuscriptStatusEnum.Stored:
         this.isPassed = true;
         this.fu = this.fuCfg.p;
         break;
@@ -122,8 +125,8 @@ export class ManuscriptReviewFormComponent implements OnInit {
 
   private initStatusList(): void {
     this.statusList.push({
-      id: ManuscriptStatusEnum.Passed,
-      name: EnumClass.getManuscriptStatusName(ManuscriptStatusEnum.Passed)
+      id: ManuscriptStatusEnum.Stored,
+      name: '通过'
     });
     this.statusList.push({
       id: ManuscriptStatusEnum.Return,

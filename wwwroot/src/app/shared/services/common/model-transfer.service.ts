@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 import '@app/interfaces';
 
-import { CustomerRequestOptions, User, ManuscriptInfoModel, ManuscriptAuthorModel, ManuscriptListModel, UserProfile } from '@app/models';
+import { CustomerRequestOptions, User, ManuscriptInfoModel, ManuscriptAuthorModel, ManuscriptListModel, ManuscriptReviewModel, UserProfile } from '@app/models';
 
 @Injectable()
 export class ModelTransferService {
@@ -61,7 +61,8 @@ export class ModelTransferService {
         companyName: d['company_name'],
         isPublish: d['publish_id'] > 0,
         isConfirm: d['confirm_id'] > 0,
-        isStored: d['store_id'] > 0
+        isStored: d['store_id'] > 0,
+        storeTime: d['store_time'] ? (new Date(d['store_time'])).format('yyyy-MM-dd') : '-',
       });
     });
     return list;
@@ -101,6 +102,18 @@ export class ModelTransferService {
       companyName: data['company_name'],
       companyAddress: data['company_address'],
       companyZipCode: data['company_zip_code'],
+    };
+  }
+
+  transferManuscriptReviewModel(data: any): ManuscriptReviewModel {
+    return {
+      id: data['id'],
+      manuscriptId: data['manuscript_id'],
+      status: data['status'],
+      file: data['file'],
+      expire: data['expire'],
+      userId: data['user_id'],
+      createTime: (new Date(data['create_time'])).format('yyyy-MM-dd'),
     };
   }
 

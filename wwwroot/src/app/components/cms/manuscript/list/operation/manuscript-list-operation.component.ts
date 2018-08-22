@@ -4,7 +4,7 @@ import { DialogService, SnackBarService } from '@app/service/ui';
 import { CommonService, UtilsService, ModelTransferService } from '@app/service/common';
 import { ManuscriptListModel } from '@app/models';
 import { DialogConfig } from '@app/models/ui';
-import { ManuscriptStatusEnum } from '@app/enums';
+import { ManuscriptStatusEnum, PermissionGroupEnum } from '@app/enums';
 
 @Component({
   selector: 'app-cms-manuscript-list-operation',
@@ -26,6 +26,8 @@ export class ManuscriptListOperationComponent implements OnInit, OnChanges {
   data: ManuscriptListModel;
   @Input()
   permissions: any;
+  @Input()
+  user: any;
   @Output()
   operationEmitted = new EventEmitter<any>();
 
@@ -87,8 +89,8 @@ export class ManuscriptListOperationComponent implements OnInit, OnChanges {
 
   private checkPermissions(): void {
     this.canEdit = this.permissions.canEdit && (this.data.status === ManuscriptStatusEnum.Pending || this.data.status === ManuscriptStatusEnum.Return);
-    this.canCancel = this.permissions.canCancel && (this.data.status === ManuscriptStatusEnum.Pending);
-    this.canConfirm = this.permissions.canConfirm && (this.data.status === ManuscriptStatusEnum.Stored && !this.data.isStored);
+    this.canCancel = (this.permissions.canCancel && this.data.status === ManuscriptStatusEnum.Pending && this.data.userId === this.user.id) || this.user.permissionGroup === PermissionGroupEnum.SA;
+    this.canConfirm = this.permissions.canConfirm && this.data.status === ManuscriptStatusEnum.Stored;
     this.canReview = this.permissions.canReview && (this.data.status === ManuscriptStatusEnum.Pending || this.data.status === ManuscriptStatusEnum.Edited);
   }
 
