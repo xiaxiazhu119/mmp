@@ -12,17 +12,17 @@ import { CmsLayoutComponent } from './cms-layout.component';
 import { CmsHomeDashboardComponent } from './home/dashboard/cms-home-dashboard.component';
 
 //#region user
-const userProfileModules = _cmsModules.modules.user.modules.profile.modules;
-const userProfileRoutes: Route = {
-  path: _cmsModules.modules.user.modules.profile.path,
+const userModules = _cmsModules.modules.user.modules;
+const userRoutes: Route = {
+  path: _cmsModules.modules.user.path,
   children: [
     {
-      path: userProfileModules.info.path,
-      loadChildren: userProfileModules.info.module
+      path: userModules.profile.path,
+      loadChildren: userModules.profile.module
     },
     {
-      path: userProfileModules.pwd.path,
-      loadChildren: userProfileModules.pwd.module
+      path: userModules.pwd.path,
+      loadChildren: userModules.pwd.module
     },
   ]
 };
@@ -121,12 +121,7 @@ const routes: Routes = [
         path: '',
         component: CmsHomeDashboardComponent
       },
-      {
-        path: _cmsModules.modules.user.path,
-        children: [
-          userProfileRoutes
-        ]
-      },
+      userRoutes,
       manuscriptRoutes,
       magazineRoutes,
       candidateRoutes,

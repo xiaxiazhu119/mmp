@@ -51,6 +51,9 @@
       "@app/ui": [
         "app/shared/ui/shared-ui"
       ],
+      "@app/area": [
+        "app/shared/components/area/shared-app-area.module"
+      ],
       "@app/pagination": [
         "app/shared/components/pagination/bootstrap/shared-app-pagination.module"
       ],

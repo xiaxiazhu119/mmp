@@ -7,18 +7,16 @@ import { AppService, PassportService, UserService } from '@app/service/app';
 import { DialogService, SnackBarService, DialogBaseService } from '@app/service/ui';
 import { CommonService, UtilsService } from '@app/service/common';
 import { User, KeyValuePair, UserPwd } from '@app/models';
-import { DialogConfig } from '@app/models/ui';
-import { appRouteConfig } from '@app/routing';
 
 import { AppCmsBaseComponent } from '@app/cmsBaseComponent';
 
 @Component({
-  selector: 'app-cms-user-profile-pwd',
-  templateUrl: './cms-user-profile-pwd.component.html',
-  styleUrls: ['./cms-user-profile-pwd.component.scss', './cms-user-profile-pwd.component.theme.scss'],
+  selector: 'app-cms-user-pwd',
+  templateUrl: './cms-user-pwd.component.html',
+  styleUrls: ['./cms-user-pwd.component.scss', './cms-user-pwd.component.theme.scss'],
   providers: [CommonService, SnackBarService, UserService]
 })
-export class CmsUserProfilePwdComponent extends AppCmsBaseComponent implements OnInit {
+export class CmsUserPwdComponent extends AppCmsBaseComponent implements OnInit {
 
   up: UserPwd = new UserPwd();
 
@@ -63,11 +61,15 @@ export class CmsUserProfilePwdComponent extends AppCmsBaseComponent implements O
     const d = { data: pwd + '_' + newPwd };
 
     this.userService
-      .updatePwd(d, (res) => {
+      .updatePwd(d, (rsp: any) => {
+        const rc = Number(rsp.data);
+        const msg = rc > 0 ? '更新成功' : '更新失败，请稍后再试';
+        this.snackBarService.open(msg);
+        if (rc > 0) {
+          this.up = new UserPwd();
+        }
 
         this.isSubmit = false;
-        this.snackBarService.open('更新成功');
-        this.up = new UserPwd();
 
       }, () => {
         this.isSubmit = false;

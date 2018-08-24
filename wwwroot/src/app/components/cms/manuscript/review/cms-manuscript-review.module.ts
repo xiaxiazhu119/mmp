@@ -2,7 +2,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { MatInputModule, MatSelectModule, MatButtonModule, MatIconModule, MatSnackBarModule, MatCheckboxModule, MatTooltipModule, MatExpansionModule, MatRadioModule } from '@angular/material';
+import { MatInputModule, MatSelectModule, MatButtonModule, MatSnackBarModule, MatCheckboxModule, MatExpansionModule, MatRadioModule } from '@angular/material';
 
 import { CmsManuscriptReviewRoutingModule } from './cms-manuscript-review-routing.module';
 import { CmsManuscriptReviewComponent } from './cms-manuscript-review.component';
@@ -14,7 +14,7 @@ import { ManuscriptReviewFormModule } from '../../_manuscript/review/manuscript-
   imports: [
     CommonModule,
     FormsModule, ReactiveFormsModule,
-    MatInputModule, MatSelectModule, MatButtonModule, MatSnackBarModule, MatCheckboxModule, MatTooltipModule, MatExpansionModule, MatRadioModule,
+    MatInputModule, MatSelectModule, MatButtonModule, MatSnackBarModule, MatCheckboxModule, MatExpansionModule, MatRadioModule,
     ManuscriptEditFormModule, ManuscriptReviewFormModule,
     CmsManuscriptReviewRoutingModule
   ],

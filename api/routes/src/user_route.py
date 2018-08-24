@@ -1,6 +1,6 @@
 # -*- coding=utf-8 -*-
 
-from handlers.handlers import UserHandler, UserSignInHandler, UserSignUpHandler, UserPwdHandler
+from handlers.handlers import UserHandler, UserSignInHandler, UserSignUpHandler, UserPwdHandler, UserProfileHandler
 
 
 user_routes = [{
@@ -15,4 +15,7 @@ user_routes = [{
 }, {
     'path': r"user/pwd",
     'handler': UserPwdHandler
+}, {
+    'path': r"user/profile",
+    'handler': UserProfileHandler
 }]

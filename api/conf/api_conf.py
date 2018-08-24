@@ -68,6 +68,16 @@ API_CONF = {
                     'code': 10000004,
                     'msg': 'get user info success'
                 },
+            },
+            'profile': {
+                'success': {
+                    'code': 10000005,
+                    'msg': 'update profile success'
+                },
+                'failed': {
+                    'code': -10000005,
+                    'msg': 'update profile failed'
+                }
             }
         },
         'manuscript': {
@@ -157,6 +167,16 @@ API_CONF = {
                 'failed': {
                     'code': -20000008,
                     'msg': 'manuscript publish failed'
+                }
+            },
+            'ori': {
+                'success': {
+                    'code': 20000009,
+                    'msg': 'manuscript original info success'
+                },
+                'failed': {
+                    'code': -20000009,
+                    'msg': 'manuscript original info failed'
                 }
             },
         }

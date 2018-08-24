@@ -18,3 +18,6 @@ class UserBLL(object):
 
     def update_pwd(self, id, ori_pwd, new_pwd):
         return self.__dal.update_pwd(id, ori_pwd, new_pwd)
+
+    def update_profile(self, profile):
+        return self.__dal.update_profile(profile)

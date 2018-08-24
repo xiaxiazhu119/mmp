@@ -1,9 +1,9 @@
 import { Component, OnChanges, OnInit, SimpleChange, Input, ViewChild } from '@angular/core';
 
-import { AppService, PassportService, UserService, AreaService, ManuscriptService } from '@app/service/app';
-import { DialogService, SnackBarService, DialogBaseService } from '@app/service/ui';
-import { CommonService, UtilsService, ModelTransferService } from '@app/service/common';
-import { ManuscriptInfoModel, ManuscriptAuthorModel, ManuscriptReviewModel, User, UserProfile } from '@app/models';
+import { AppService, PassportService } from '@app/service/app';
+import { SnackBarService } from '@app/service/ui';
+import { CommonService, UtilsService } from '@app/service/common';
+import { ManuscriptReviewModel, User, UserProfile } from '@app/models';
 
 import { ManuscriptStatusEnum, EnumClass, PermissionGroupEnum } from '@app/enums';
 import { MatDatepicker } from '@angular/material';
@@ -12,7 +12,7 @@ import { MatDatepicker } from '@angular/material';
   selector: 'app-cms-manuscript-review-form',
   templateUrl: './manuscript-review-form.component.html',
   styleUrls: ['./manuscript-review-form.component.scss', './manuscript-review-form.component.theme.scss'],
-  providers: [CommonService, SnackBarService, UserService, AreaService, AppService, ManuscriptService, ModelTransferService]
+  providers: [CommonService, SnackBarService, AppService]
 })
 export class ManuscriptReviewFormComponent implements OnInit {
 
@@ -50,12 +50,8 @@ export class ManuscriptReviewFormComponent implements OnInit {
   constructor(private commonService: CommonService,
     private utilsService: UtilsService,
     private snackBarService: SnackBarService,
-    private areaService: AreaService,
     private passportService: PassportService,
-    private appService: AppService,
-    private userService: UserService,
-    private modelTransferService: ModelTransferService,
-    private manuscriptService: ManuscriptService) {
+    private appService: AppService) {
 
     this._user = passportService.getUserCookie();
     this._profile = passportService.getUserProfileCookie();

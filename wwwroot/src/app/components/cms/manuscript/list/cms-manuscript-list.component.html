@@ -36,8 +36,8 @@
         <th>拟投栏目</th>
         <th>投稿日期</th>
         <th>所属地区</th>
-        <th>稿件状态</th>
-        <th>评审意见</th>
+        <th class="text-center">稿件状态</th>
+        <th class="text-center">评审意见</th>
         <th class="text-center">操作</th>
       </tr>
       </thead>
@@ -49,10 +49,10 @@
         <td>{{data.categoryName}}</td>
         <td>{{data.createTimeFmt}}</td>
         <td>{{data.provinceName}} - {{data.cityName}} - {{data.districtName}}</td>
-        <td>
+        <td class="text-center">
           <span class="app-label {{getStatusLabelStyle(data.status)}}">{{data.statusName}}</span>
         </td>
-        <td> - </td>
+        <td class="text-center"><a *ngIf="data.reviewFile" [href]="getFileFullPath(data.reviewFile)" target="_blank">查看</a></td>
         <td class="text-center info-data-list-op">
           <app-cms-manuscript-list-operation [data]="data" [permissions]="permissions" [user]="user" (operationEmitted)="onOperationEmit($event)"></app-cms-manuscript-list-operation>
         </td>

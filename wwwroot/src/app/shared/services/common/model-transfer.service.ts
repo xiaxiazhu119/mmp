@@ -38,6 +38,8 @@ export class ModelTransferService {
       companyName: data['company_name'],
       companyAddress: data['company_address'],
       companyZipCode: data['company_zip_code'],
+      idCard: data['id_card'],
+      avatar: data['avatar'],
     };
   }
 
@@ -63,6 +65,7 @@ export class ModelTransferService {
         isConfirm: d['confirm_id'] > 0,
         isStored: d['store_id'] > 0,
         storeTime: d['store_time'] ? (new Date(d['store_time'])).format('yyyy-MM-dd') : '-',
+        reviewFile: d['review_file']
       });
     });
     return list;

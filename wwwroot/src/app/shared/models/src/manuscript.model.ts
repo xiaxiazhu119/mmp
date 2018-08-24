@@ -37,6 +37,7 @@ export class ManuscriptListModel {
   isConfirm?: boolean;
   isStored?: boolean;
   storeTime?: string;
+  reviewFile?: string;
 }
 
 export class ManuscriptInfoModel {

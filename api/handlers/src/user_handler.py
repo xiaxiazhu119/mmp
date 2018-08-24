@@ -91,4 +91,16 @@ class UserPwdHandler(UserBaseHandler):
         ps = data.split('_')
         r = self._ctrl.update_pwd(self.user_id, ps[0], ps[1])
 
-        return self.build_response(['user', 'pwd', 'success' if r > 0 else 'failed'])
+        return self.build_response(['user', 'pwd', 'success' if r > 0 else 'failed'], r, use_encrypt=False)
+
+
+class UserProfileHandler(UserBaseHandler):
+
+    def post(self):
+        p = self.get_request_json_data('profile')
+        p_th = UserProfileModelTransferHelper()
+        profile = p_th.transfer_to_py(p)
+
+        r = self._ctrl.update_profile(profile)
+
+        return self.build_response(['user', 'profile', 'success' if r > 0 else 'failed'], r, use_encrypt=False)

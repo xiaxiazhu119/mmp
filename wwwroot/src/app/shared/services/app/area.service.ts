@@ -21,7 +21,7 @@ export class AreaService {
 
   }
 
-  list(pid: number, callback?: any): any {
+  getList(pid: number, callback?: any): any {
 
     const opts: CustomerRequestOptions = {
       api: this.path + this.apiModules.list.replace('{pid}', pid),

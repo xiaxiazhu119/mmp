@@ -1,0 +1,21 @@
+<div class="app-mat-dialog-container app-mat-dialog-container-lg">
+
+  <h2 mat-dialog-title class="app-mat-dialog-title">确认信息</h2>
+
+  <h3>{{data.title}}</h3>
+  <p>
+    <mat-checkbox [(ngModel)]="agreement">我已查看编辑部评审后的稿件最新版本并且没有异议，同时已确认作者信息无误</mat-checkbox>
+  </p>
+  <input type="text" style="position: absolute;top: -100%;">
+  <p>
+    <mat-form-field class="mat-form-field-100">
+      <input matInput placeholder="补充本人或作者身份证号信息" class="form-ctrl" [(ngModel)]="data.idCard" maxlength="20">
+    </mat-form-field>
+  </p>
+
+  <div class="app-mat-dialog-action-container text-center">
+    <button type="button" mat-raised-button color="primary" class="m-r-lg" (click)="confirm()" [disabled]="!agreement || !data.idCard">确定</button>
+    <button type="button" mat-button (click)="cancel()">取消</button>
+  </div>
+
+</div>

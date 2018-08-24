@@ -41,6 +41,11 @@ export enum PermissionGroupEnum {
   Editor = 4
 }
 
+export enum AnnouncementTypeEnum {
+  Public = 1,
+  Private
+}
+
 export class EnumClass {
 
   static getManuscriptStatusName(status: ManuscriptStatusEnum): string {
@@ -151,6 +156,35 @@ export class EnumClass {
         list.push({
           id: c,
           name: this.getPeriodicalCategoryName(c)
+        });
+
+      }
+    }
+    return list;
+  }
+
+  static getAnnouncementTypeName(t: AnnouncementTypeEnum): string {
+
+    switch (t) {
+      case AnnouncementTypeEnum.Public:
+        return '网站公告';
+      case AnnouncementTypeEnum.Private:
+        return '个人通知';
+      default:
+        return '-';
+    }
+
+  }
+
+  static getAnnouncementTypeList(): any {
+    const list = [];
+
+    for (const t in AnnouncementTypeEnum) {
+      if (!isNaN(Number(t))) {
+        const c = Number(t);
+        list.push({
+          id: c,
+          name: this.getAnnouncementTypeName(c)
         });
 
       }

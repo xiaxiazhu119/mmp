@@ -73,7 +73,7 @@ export class CmsMagazineListComponent extends AppCmsBaseComponent implements OnI
 
   private getList(): void {
     this.manuscriptService
-      .list(this.sc, (data: any) => {
+      .getList(this.sc, (data: any) => {
         // console.log(data);
         if (data.data) {
           const d = JSON.parse(this.utilsService.decryptByAES(data.data));

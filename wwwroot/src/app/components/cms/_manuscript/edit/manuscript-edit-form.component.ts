@@ -119,7 +119,7 @@ export class ManuscriptEditFormComponent implements OnInit {
         this.initSelfAuthorAreaInfo();
       } else {
         this.userService
-          .info(this.info.userId, (rsp: any) => {
+          .getInfo(this.info.userId, (rsp: any) => {
             console.log(rsp);
           });
       }
@@ -218,7 +218,7 @@ export class ManuscriptEditFormComponent implements OnInit {
     this.info.userId = this.info.editUserId = this._user.id;
     if (this.info.id > 0) {
       this.manuscriptService
-        .info(this.info.id, (rsp: any) => {
+        .getInfo(this.info.id, (rsp: any) => {
           // console.log(data);
           if (rsp.data) {
             const d = JSON.parse(rsp.data);
@@ -259,7 +259,7 @@ export class ManuscriptEditFormComponent implements OnInit {
 
   private getAreaList(pid: number, callback: any): void {
     this.areaService
-      .list(pid, (rsp: any) => {
+      .getList(pid, (rsp: any) => {
         if (rsp.data) {
           const d = this.utilsService.decryptByAES(rsp.data);
           if (d !== '') {

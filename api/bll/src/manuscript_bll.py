@@ -39,3 +39,5 @@ class ManuscriptBLL(object):
     def get_latest_review(self, manuscript_id):
         return self.__dal.get_latest_review(manuscript_id)
 
+    def get_original_info(self, manuscript_id):
+        return self.__dal.get_original_info(manuscript_id)

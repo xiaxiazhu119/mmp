@@ -2,7 +2,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { MatInputModule, MatSelectModule, MatButtonModule, MatIconModule, MatSnackBarModule, MatCheckboxModule, MatTooltipModule, MatExpansionModule, MatRadioModule } from '@angular/material';
+import { MatInputModule, MatSelectModule, MatButtonModule, MatSnackBarModule, MatCheckboxModule, MatExpansionModule, MatRadioModule } from '@angular/material';
 
 import { ManuscriptEditFormComponent } from './manuscript-edit-form.component';
 
@@ -12,7 +12,7 @@ import { SharedAppFileUploadModule } from '@app/fileUpload';
   imports: [
     CommonModule,
     FormsModule, ReactiveFormsModule,
-    MatInputModule, MatSelectModule, MatButtonModule, MatSnackBarModule, MatCheckboxModule, MatTooltipModule, MatExpansionModule, MatRadioModule,
+    MatInputModule, MatSelectModule, MatButtonModule, MatSnackBarModule, MatCheckboxModule, MatExpansionModule, MatRadioModule,
     SharedAppFileUploadModule,
   ],
   declarations: [ManuscriptEditFormComponent],

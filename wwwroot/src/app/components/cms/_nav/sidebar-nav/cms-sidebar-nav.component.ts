@@ -141,26 +141,23 @@ export class CmsSidebarNavComponent implements OnInit, OnChanges {
     }
     //#endregion
 
+    //#region user profile
+
+    const userProfileModule = modules.user.modules.profile;
+
+    const userProfileNav: AppNavItem = {
+      id: userProfileModule.id,
+      title: userProfileModule.documentTitle,
+      toolTipTitle: userProfileModule.toolTipTitle,
+      link: userProfileModule.link,
+      icon: userProfileModule.icon
+    };
+
+    this.appSidebarNavList.push(userProfileNav);
+
+    //#endregion
 
 
-    /*
-    if (this.user.permissionGroup === PermissionGroupEnum.SA) {
-      const infoDataNavCfg = modules.info.modules.data.nav;
-      const infoDataNavDefaultModule = modules.info.modules.data.modules[infoDataNavCfg.defaultModule];
-
-      const infoDataNav: AppNavItem = {
-        id: infoDataNavCfg.id,
-        module: infoDataNavCfg.id,
-        title: infoDataNavDefaultModule.documentTitle,
-        toolTipTitle: infoDataNavDefaultModule.toolTipTitle,
-        link: infoDataNavDefaultModule.link,
-        icon: infoDataNavCfg.icon
-      };
-
-      // this.appSidebarNavList.push(infoDataNav);
-    }
-
-    */
 
   }
 

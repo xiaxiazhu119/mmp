@@ -71,7 +71,7 @@ class ManuscriptDAL(object):
 
         if sc.get('type') == 2:
             condition += """  """
-            status_condition = """ AND status IN ("""+ str(ManuscriptStatusEnum.Stored.value)+""","""+str(ManuscriptStatusEnum.Confirmed.value)+""")"""
+            status_condition = """ AND status IN (""" + str(ManuscriptStatusEnum.Stored.value)+""","""+str(ManuscriptStatusEnum.Confirmed.value)+""")"""
 
             if sc.get('isConfirm') is not None:
                 v = ManuscriptStatusEnum.Stored.value if sc.get('isConfirm') == 0 else ManuscriptStatusEnum.Confirmed.value
@@ -92,7 +92,7 @@ class ManuscriptDAL(object):
         rst = self.__base.fetch_one(cnt_sql, params)
         cnt = rst['cnt']
 
-        sql = """SELECT id,title,category_name,status,user_id,user_name,create_time,province_name,city_name,district_name,author_name,company_name,confirm_id,publish_id,store_id,store_time FROM mmp__v_manuscript """
+        sql = """SELECT id,title,category_name,status,user_id,user_name,create_time,province_name,city_name,district_name,author_name,company_name,confirm_id,publish_id,store_id,store_time,review_file FROM mmp__v_manuscript """
         sql += condition
         sql += """ ORDER BY id DESC """
         sql += """ LIMIT %s OFFSET %s ; """
@@ -134,3 +134,8 @@ class ManuscriptDAL(object):
     def publish(self, pub):
         sql = """INSERT INTO mmp_manuscript_publish_log(manuscript_id,year,term,user_id)VALUES(%s,%s,%s,%s);"""
         return self.__base.fetch_rowcount(sql, (pub.manuscript_id, pub.year, pub.term, pub.user_id))
+
+    def get_original_info(self, manuscript_id):
+        sql = """SELECT * FROM mmp_manuscript_edit_log WHERE manuscript_id = %s ORDER BY id LIMIT 1;"""
+        rst = self.__base.fetch_all(sql, (str(manuscript_id),))
+        return None if len(rst) == 0 else rst[0]

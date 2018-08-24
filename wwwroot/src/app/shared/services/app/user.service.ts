@@ -21,6 +21,48 @@ export class UserService {
 
   }
 
+  verifyProfile(profile: UserProfile): string {
+
+    if (!profile.name) {
+      return '请填写真实姓名';
+    }
+
+    if (!profile.mobile) {
+      return '请填写手机号码';
+    }
+
+    if (!profile.email) {
+      return '请填写电子邮件';
+    }
+
+    if (profile.province === 0) {
+      return '请选择省/直辖市信息';
+    }
+
+    if (profile.city === 0) {
+      return '请选择市信息';
+    }
+
+    if (profile.district === 0) {
+      return '请选择区信息';
+    }
+
+    if (!profile.companyName) {
+      return '请填写单位名称';
+    }
+
+    if (!profile.companyAddress) {
+      return '请填写单位地址';
+    }
+
+    if (!profile.companyZipCode) {
+      return '请填写单位邮编';
+    }
+
+    return '';
+
+  }
+
   signIn(user: User, callback?: any, errCallback?: any): any {
 
     const opts: CustomerRequestOptions = {
@@ -49,7 +91,7 @@ export class UserService {
   updatePwd(data: any, callback?: any, errCallback?: any): any {
 
     const opts: CustomerRequestOptions = {
-      api: this.path + this.apiModules.updatePwd,
+      api: this.path + this.apiModules.pwd,
       data: data
     };
 
@@ -57,7 +99,7 @@ export class UserService {
 
   }
 
-  info(id: number, callback?: any): any {
+  getInfo(id: number, callback?: any): any {
 
     const opts: CustomerRequestOptions = {
       api: this.path + this.apiModules.info.replace('{id}', id)
@@ -65,6 +107,18 @@ export class UserService {
 
     return this.ajaxService.get(opts, callback);
 
+  }
+
+  updateProfile(profile: UserProfile, callback?: any, errCallback?: any): any {
+
+    const opts: CustomerRequestOptions = {
+      api: this.path + this.apiModules.profile,
+      data: {
+        profile: profile
+      }
+    };
+
+    return this.ajaxService.post(opts, callback, errCallback);
   }
 
 

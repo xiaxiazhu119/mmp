@@ -20,11 +20,5 @@ class UserController(BaseController):
     def update_pwd(self, id, ori_pwd, new_pwd):
         return self.__bll.update_pwd(id, ori_pwd, new_pwd)
 
-    def get_info(self, id=1):
-        pass
-
-    def get_list(self):
-        pass
-
-    def create(self, user):
-        pass
+    def update_profile(self, profile):
+        return self.__bll.update_profile(profile)

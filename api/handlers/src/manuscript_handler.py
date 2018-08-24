@@ -110,9 +110,12 @@ class ManuscriptLatestReviewHandler(ManuscriptBaseHandler):
 
     def get(self, manuscript_id):
         review = self._ctrl.get_latest_review(manuscript_id)
+        tag = 'success'
         if review is not None:
             review = ManuscriptReview(**review)
-        return self.build_response(['manuscript', 'latest-review', 'success'], review)
+        else:
+            tag = 'failed'
+        return self.build_response(['manuscript', 'latest-review', tag], review)
 
 
 class ManuscriptStoreHandler(ManuscriptBaseHandler):
@@ -140,3 +143,22 @@ class ManuscriptPublishHandler(ManuscriptBaseHandler):
 
         id = self._ctrl.publish(pub)
         return self.build_response(['manuscript', 'publish', 'success' if id > 0 else 'failed'], id)
+
+
+class ManuscriptOriginalHandler(ManuscriptBaseHandler):
+
+    def get(self, manuscript_id):
+        ori = self._ctrl.get_original_info(manuscript_id)
+        rsp = None
+        tag = 'success'
+        if ori is not None:
+            info = ManuscriptInfo(**ori)
+            author = ManuscriptAuthor(**ori)
+            rsp = {
+                'info': info,
+                'author': author
+            }
+        else:
+            tag = 'failed'
+
+        return self.build_response(['manuscript', 'ori', tag], rsp)

@@ -22,7 +22,8 @@ const _appConfig = {
         signIn: '/sign-in',
         signUp: '/sign-up',
         info: '/{id}',
-        updatePwd: '/pwd'
+        pwd: '/pwd',
+        profile: '/profile'
       },
     },
     manuscript: {
@@ -36,6 +37,7 @@ const _appConfig = {
         store: '/store',
         confirm: '/confirm',
         publish: '/publish',
+        ori: '/ori/{id}',
       }
     },
     area: {

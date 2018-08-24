@@ -1,0 +1,56 @@
+<div class="user-info-container">
+
+
+  <p>
+    <mat-form-field class="mat-form-field-lg-xx m-r-lg" [class.mat-form-field-invalid]="invalid.name">
+      <input matInput placeholder="姓名" class="form-ctrl" [(ngModel)]="profile.name" maxlength="20">
+    </mat-form-field>
+    <mat-hint *ngIf="invalid.name" class="mat-text-warn">{{invalid.name}}</mat-hint>
+  </p>
+
+  <p>
+    <mat-form-field class="mat-form-field-lg-xx m-r-lg" [class.mat-form-field-invalid]="invalid.mobile">
+      <input matInput placeholder="电话" class="form-ctrl" [(ngModel)]="profile.mobile" maxlength="20">
+    </mat-form-field>
+    <mat-hint *ngIf="invalid.mobile" class="mat-text-warn">{{invalid.mobile}}</mat-hint>
+  </p>
+
+  <p>
+    <mat-form-field class="mat-form-field-lg-xx m-r-lg" [class.mat-form-field-invalid]="invalid.email">
+      <input matInput placeholder="邮箱" class="form-ctrl" [(ngModel)]="profile.email" maxlength="50">
+    </mat-form-field>
+    <mat-hint *ngIf="invalid.email" class="mat-text-warn">{{invalid.email}}</mat-hint>
+  </p>
+
+  <p>
+    <app-area [area]="area" (areaChanged)="onAreaChange($event)"></app-area>
+  </p>
+
+  <p>
+    <mat-form-field class="mat-form-field-lg-xx m-r-lg" [class.mat-form-field-invalid]="invalid.companyName">
+      <input matInput placeholder="公司名称" class="form-ctrl" [(ngModel)]="profile.companyName" maxlength="30">
+    </mat-form-field>
+    <mat-hint *ngIf="invalid.companyName" class="mat-text-warn">{{invalid.companyName}}</mat-hint>
+  </p>
+
+  <p>
+    <mat-form-field class="mat-form-field-lg-xx m-r-lg" [class.mat-form-field-invalid]="invalid.companyAddress">
+      <input matInput placeholder="公司地址" class="form-ctrl" [(ngModel)]="profile.companyAddress" maxlength="50">
+    </mat-form-field>
+    <mat-hint *ngIf="invalid.companyAddress" class="mat-text-warn">{{invalid.companyAddress}}</mat-hint>
+  </p>
+
+  <p>
+    <mat-form-field class="mat-form-field-lg-xx m-r-lg" [class.mat-form-field-invalid]="invalid.companyZipCode">
+      <input matInput placeholder="公司邮编" class="form-ctrl" [(ngModel)]="profile.companyZipCode" maxlength="10">
+    </mat-form-field>
+    <mat-hint *ngIf="invalid.companyZipCode" class="mat-text-warn">{{invalid.companyZipCode}}</mat-hint>
+  </p>
+
+  <p>
+    <mat-form-field class="mat-form-field-lg-xx m-r-lg">
+      <input matInput placeholder="身份证（用于确认稿件）" class="form-ctrl" [(ngModel)]="profile.idCard" maxlength="20">
+    </mat-form-field>
+  </p>
+
+</div>

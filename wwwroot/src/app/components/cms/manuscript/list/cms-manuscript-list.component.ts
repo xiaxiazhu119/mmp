@@ -3,16 +3,17 @@ import { Component, OnChanges, OnInit, SimpleChange, Input } from '@angular/core
 import { AppService, PassportService, UserService, AppRoutingService, ManuscriptService } from '@app/service/app';
 import { DialogService, SnackBarService, DialogBaseService } from '@app/service/ui';
 import { CommonService, UtilsService, ModelTransferService } from '@app/service/common';
-import { ManuscriptSearchModel, ManuscriptListModel, User, ManuscriptReviewModel } from '@app/models';
+import { ManuscriptSearchModel, ManuscriptListModel, User, ManuscriptReviewModel, UserProfile } from '@app/models';
 import { DialogConfig, AppPaginationConfig } from '@app/models/ui';
 import { EnumClass, ManuscriptSearchTypeEnum, ManuscriptStatusEnum, PermissionGroupEnum } from '@app/enums';
 import { AppCmsBaseComponent } from '@app/cmsBaseComponent';
+import { CmsManuscriptConfirmDialogComponent } from './dialog/confirm/cms-manuscript-confirm-dialog.component';
 
 @Component({
   selector: 'app-cms-manuscript-list',
   templateUrl: './cms-manuscript-list.component.html',
   styleUrls: ['./cms-manuscript-list.component.scss', './cms-manuscript-list.component.theme.scss'],
-  providers: [CommonService, SnackBarService, DialogService, UserService, AppRoutingService, ManuscriptService, ModelTransferService]
+  providers: [CommonService, AppService, SnackBarService, DialogService, UserService, AppRoutingService, ManuscriptService, ModelTransferService, DialogBaseService]
 })
 export class CmsManuscriptListComponent extends AppCmsBaseComponent implements OnInit {
 
@@ -31,11 +32,14 @@ export class CmsManuscriptListComponent extends AppCmsBaseComponent implements O
   user: User;
 
   private manuscriptRouteConfig: any;
+  private _profile: UserProfile;
 
   constructor(private commonService: CommonService,
+    private appService: AppService,
     private utilsService: UtilsService,
     private snackBarService: SnackBarService,
     private dialogService: DialogService,
+    private dialogBaseService: DialogBaseService,
     private passportService: PassportService,
     private manuscriptService: ManuscriptService,
     private modelTransferService: ModelTransferService,
@@ -46,6 +50,7 @@ export class CmsManuscriptListComponent extends AppCmsBaseComponent implements O
     const appCmsRouteConfig = appRoutingService.getCmsRouteConfig();
     this.manuscriptRouteConfig = appCmsRouteConfig.modules.manuscript;
     this.sc.type = ManuscriptSearchTypeEnum.Manuscript;
+    this._profile = passportService.getUserProfileCookie();
 
     this.checkPermission();
   }
@@ -86,7 +91,7 @@ export class CmsManuscriptListComponent extends AppCmsBaseComponent implements O
         this.commonService.routerNavigate([this.manuscriptRouteConfig.modules.edit.link, id]);
         break;
       case 'cancel':
-        this.dialogService.openConfirmDialog('是否确认要取消投稿', (dialogRef: any, data?: any) => {
+        this.dialogService.openConfirmDialog('是否确认要取消投稿', (dialogRef: any) => {
           this.updateReview(id, ManuscriptStatusEnum.Confirmed, '取消', () => {
             dialogRef.close();
           });
@@ -110,7 +115,33 @@ export class CmsManuscriptListComponent extends AppCmsBaseComponent implements O
       case 'upload':
         break;
       case 'confirm':
-        this.updateReview(id, ManuscriptStatusEnum.Confirmed, '确认');
+        // this.updateReview(id, ManuscriptStatusEnum.Confirmed, '确认');
+
+        const data = {
+          title: e.data.title,
+          idCard: this._profile.idCard
+        };
+
+        this.openConfirmDialog(data, (dialogRef: any) => {
+          this._profile.idCard = data.idCard;
+
+          this.updateReview(id, ManuscriptStatusEnum.Confirmed, '确认', () => {
+
+            this.userService.updateProfile(this._profile, (rsp: any) => {
+              const rc = Number(rsp.data);
+              // const msg = rc > 0 ? '确认成功' : '确认失败，请稍后再试';
+              // this.snackBarService.open(msg);
+              if (rc > 0) {
+                this.passportService.putUserProfileCookie(this._profile);
+                // this.getList();
+              }
+              dialogRef.close();
+            });
+
+          });
+
+        });
+
         break;
       case 'review':
         this.commonService.routerNavigate([this.manuscriptRouteConfig.modules.review.link, id]);
@@ -124,6 +155,10 @@ export class CmsManuscriptListComponent extends AppCmsBaseComponent implements O
     return this.utilsService.getEnumStr(ManuscriptStatusEnum, s);
   }
 
+  getFileFullPath(path: string): string {
+    return this.appService.getFileFullPath(path);
+  }
+
   //#endregion
 
   private initStatusList(): void {
@@ -132,7 +167,7 @@ export class CmsManuscriptListComponent extends AppCmsBaseComponent implements O
 
   private getList(): void {
     this.manuscriptService
-      .list(this.sc, (rsp: any) => {
+      .getList(this.sc, (rsp: any) => {
         // console.log(data);
         if (rsp.data) {
           const d = JSON.parse(this.utilsService.decryptByAES(rsp.data));
@@ -189,6 +224,29 @@ export class CmsManuscriptListComponent extends AppCmsBaseComponent implements O
           callback();
         }
       });
+  }
+
+  private openConfirmDialog(data: any, callback: any): void {
+
+    const cfg: DialogConfig = new DialogConfig();
+    cfg.data = data;
+    // cfg.onInit = (dialogRef: any, e: any) => {
+    //   // console.log(e);
+    // };
+    cfg.onConfirm = (dialogRef: any, e: any) => {
+      // console.log(cfg.data)
+      // console.log(e);
+
+      callback(dialogRef);
+
+    };
+    // cfg.onCancel = (dialogRef: any, e: any) => {
+    //   // console.log(e);
+    //   dialogRef.close();
+    // };
+    this.dialogBaseService
+      .openDialogBase<CmsManuscriptConfirmDialogComponent>(cfg, CmsManuscriptConfirmDialogComponent);
+
   }
 
 }

@@ -158,74 +158,84 @@ export class PassportSignUpComponent extends AppPassportBaseComponent implements
     this.isSubmit = false;
   }
 
+  private showSnackBarMsg(msg: string): void {
+    this.snackBarService.open(msg);
+  }
+
   private verifyForm(): boolean {
 
     // console.log(this.user, this.userProfile);
 
     if (!this.user.userName) {
-      this.snackBarService.open('请填写用户名');
+      this.showSnackBarMsg('请填写用户名');
       return false;
     }
 
     if (!this.pwd) {
-      this.snackBarService.open('请填写密码');
+      this.showSnackBarMsg('请填写密码');
       return false;
     }
 
     if (!this.confirmPwd) {
-      this.snackBarService.open('请填写密码');
+      this.showSnackBarMsg('请填写密码');
       return false;
     }
 
     if (this.pwd !== this.confirmPwd) {
-      this.snackBarService.open('密码与确认密码不一致');
+      this.showSnackBarMsg('密码与确认密码不一致');
       return false;
     }
 
-    if (!this.userProfile.name) {
-      this.snackBarService.open('请填写真实姓名');
+    const verifyProfileMsg = this.userService.verifyProfile(this.userProfile);
+    if (verifyProfileMsg !== '') {
+      this.showSnackBarMsg(verifyProfileMsg);
       return false;
     }
 
-    if (!this.userProfile.mobile) {
-      this.snackBarService.open('请填写手机号码');
-      return false;
-    }
+    // if (!this.userProfile.name) {
+    //   this.snackBarService.open('请填写真实姓名');
+    //   return false;
+    // }
 
-    if (!this.userProfile.email) {
-      this.snackBarService.open('请填写电子邮件');
-      return false;
-    }
+    // if (!this.userProfile.mobile) {
+    //   this.snackBarService.open('请填写手机号码');
+    //   return false;
+    // }
 
-    if (this.userProfile.province === 0) {
-      this.snackBarService.open('请选择省/直辖市信息');
-      return false;
-    }
+    // if (!this.userProfile.email) {
+    //   this.snackBarService.open('请填写电子邮件');
+    //   return false;
+    // }
 
-    if (this.userProfile.city === 0) {
-      this.snackBarService.open('请选择市信息');
-      return false;
-    }
+    // if (this.userProfile.province === 0) {
+    //   this.snackBarService.open('请选择省/直辖市信息');
+    //   return false;
+    // }
 
-    if (this.userProfile.district === 0) {
-      this.snackBarService.open('请选择区信息');
-      return false;
-    }
+    // if (this.userProfile.city === 0) {
+    //   this.snackBarService.open('请选择市信息');
+    //   return false;
+    // }
 
-    if (!this.userProfile.companyName) {
-      this.snackBarService.open('请填写单位名称');
-      return false;
-    }
+    // if (this.userProfile.district === 0) {
+    //   this.snackBarService.open('请选择区信息');
+    //   return false;
+    // }
 
-    if (!this.userProfile.companyAddress) {
-      this.snackBarService.open('请填写单位地址');
-      return false;
-    }
+    // if (!this.userProfile.companyName) {
+    //   this.snackBarService.open('请填写单位名称');
+    //   return false;
+    // }
 
-    if (!this.userProfile.companyZipCode) {
-      this.snackBarService.open('请填写单位邮编');
-      return false;
-    }
+    // if (!this.userProfile.companyAddress) {
+    //   this.snackBarService.open('请填写单位地址');
+    //   return false;
+    // }
+
+    // if (!this.userProfile.companyZipCode) {
+    //   this.snackBarService.open('请填写单位邮编');
+    //   return false;
+    // }
 
     return true;
 
@@ -243,7 +253,7 @@ export class PassportSignUpComponent extends AppPassportBaseComponent implements
 
   private getAreaList(pid: number, callback: any): void {
     this.areaService
-      .list(pid, (data: any) => {
+      .getList(pid, (data: any) => {
         if (data.data) {
           const d = this.utilsService.decryptByAES(data.data);
           if (d !== '') {

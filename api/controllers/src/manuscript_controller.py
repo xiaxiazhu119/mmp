@@ -38,3 +38,6 @@ class ManuscriptController(BaseController):
 
     def get_latest_review(self, manuscript_id):
         return self.__bll.get_latest_review(manuscript_id)
+
+    def get_original_info(self, manuscript_id):
+        return self.__bll.get_original_info(manuscript_id)

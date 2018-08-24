@@ -1,0 +1,18 @@
+<mat-form-field class="mat-form-field-lg m-r-lg">
+  <mat-select class="sc-slt" placeholder="省/直辖市" [(ngModel)]="p" (change)="onAreaChange($event, 'province')" [disabled]="disabled">
+    <mat-option [value]="0">全部</mat-option>
+    <mat-option *ngFor="let province of provinceList" [value]="province.id">{{province.name}}</mat-option>
+  </mat-select>
+</mat-form-field>
+<mat-form-field class="mat-form-field-lg m-r-lg">
+  <mat-select class="sc-slt" placeholder="市" [(ngModel)]="c"(change)="onAreaChange($event, 'city')" [disabled]="disabled">
+    <mat-option [value]="0">全部</mat-option>
+    <mat-option *ngFor="let city of cityList" [value]="city.id">{{city.name}}</mat-option>
+  </mat-select>
+</mat-form-field>
+<mat-form-field class="mat-form-field-lg m-r-lg">
+  <mat-select class="sc-slt" placeholder="区" [(ngModel)]="d" (change)="onAreaChange($event, 'district')" [disabled]="disabled">
+    <mat-option [value]="0">全部</mat-option>
+    <mat-option *ngFor="let district of districtList" [value]="district.id">{{district.name}}</mat-option>
+  </mat-select>
+</mat-form-field>

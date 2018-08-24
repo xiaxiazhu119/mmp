@@ -77,7 +77,7 @@ export class ManuscriptService {
     return '';
   }
 
-  info(id, callback?: any): any {
+  getInfo(id, callback?: any): any {
 
     const opts: CustomerRequestOptions = {
       api: this.path + this.apiModules.info.replace('{id}', id),
@@ -102,7 +102,7 @@ export class ManuscriptService {
 
   }
 
-  list(sc: ManuscriptSearchModel, callback?: any): any {
+  getList(sc: ManuscriptSearchModel, callback?: any): any {
 
     const opts: CustomerRequestOptions = {
       api: this.path + this.apiModules.list,
@@ -171,6 +171,16 @@ export class ManuscriptService {
     };
 
     return this.ajaxService.post(opts, callback);
+
+  }
+
+  ori(id, callback?: any): any {
+
+    const opts: CustomerRequestOptions = {
+      api: this.path + this.apiModules.ori.replace('{id}', id),
+    };
+
+    return this.ajaxService.get(opts, callback);
 
   }
 

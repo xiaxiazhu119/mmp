@@ -38,6 +38,8 @@ export class UserProfile {
   companyName: string;
   companyAddress: string;
   companyZipCode: string;
+  idCard?: string;
+  avatar?: string;
 
   constructor() {
     this.userId = this.province = this.city = this.district = 0;

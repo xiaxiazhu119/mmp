@@ -5,13 +5,6 @@ from models.src.base_model import BaseModel
 
 class User(BaseModel):
 
-    def __init__(self, id=None, user_name=None, pwd=None, permission_group=None, token_id=None):
-        self.id = id
-        self.user_name = user_name
-        self.pwd = pwd
-        self.permission_group = permission_group
-        self.token_id = token_id
-
     def __init__(self, **kw):
         self.id = kw.get('id')
         self.user_name = kw.get('user_name')
@@ -21,21 +14,6 @@ class User(BaseModel):
 
 
 class UserProfile(BaseModel):
-
-    def __init__(self, user_id=None, name=None, mobile=None, email=None, province=None, province_name=None, city=None, city_name=None, district=None, district_name=None, company_name=None, company_address=None, company_zip_code=None):
-        self.user_id = user_id
-        self.name = name
-        self.mobile = mobile
-        self.email = email
-        self.province = province
-        self.province_name = province_name
-        self.city = city
-        self.city_name = city_name
-        self.district = district
-        self.district_name = district_name
-        self.company_name = company_name
-        self.company_address = company_address
-        self.company_zip_code = company_zip_code
 
     def __init__(self, **kw):
         self.user_id = kw.get('user_id')
@@ -51,6 +29,7 @@ class UserProfile(BaseModel):
         self.company_name = kw.get('company_name')
         self.company_address = kw.get('company_address')
         self.company_zip_code = kw.get('company_zip_code')
+        self.id_card = kw.get('id_card')
 
 
 """

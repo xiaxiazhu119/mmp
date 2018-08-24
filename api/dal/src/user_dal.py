@@ -64,3 +64,21 @@ class UserDAL(object):
         sql = """UPDATE mmp_users SET pwd = %s WHERE id = %s AND pwd = %s;"""
         r = self.__base.fetch_rowcount(sql, (new_pwd, id, ori_pwd))
         return r
+
+    def update_profile(self, profile):
+        sql = """UPDATE mmp_user_profiles SET """
+        params = []
+        fields = []
+        for d in profile.__dict__:
+            if d == 'user_id':
+                continue
+
+            v = getattr(profile, d)
+            if v is not None:
+                fields.append(d + ' = %s')
+                params.append(v)
+        sql += ', '.join(fields) + """ WHERE user_id = %s;"""
+        params.append(getattr(profile, 'user_id'))
+        # r = 0
+        r = self.__base.fetch_rowcount(sql, tuple(params))
+        return r

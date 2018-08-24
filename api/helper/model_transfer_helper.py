@@ -30,7 +30,8 @@ class UserProfileModelTransferHelper(ModelTransferHelper):
         self.keys_relation = [('userId', 'user_id'), ('name', 'name'), ('mobile', 'mobile'), ('email', 'email'),
                               ('province', 'province'), ('city', 'city'), ('district', 'district'),
                               ('provinceName', 'province_name'), ('cityName', 'city_name'), ('districtName', 'district_name'),
-                              ('companyName', 'company_name'), ('companyAddress', 'company_address'), ('companyZipCode', 'company_zip_code')]
+                              ('companyName', 'company_name'), ('companyAddress', 'company_address'), ('companyZipCode', 'company_zip_code'),
+                              ('idCard', 'id_card')]
         self.obj = UserProfile()
 
 

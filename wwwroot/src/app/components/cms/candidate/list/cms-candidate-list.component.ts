@@ -86,7 +86,7 @@ export class CmsCandidateListComponent extends AppCmsBaseComponent implements On
 
   private getList(): void {
     this.manuscriptService
-      .list(this.sc, (rsp: any) => {
+      .getList(this.sc, (rsp: any) => {
         // console.log(data);
         if (rsp.data) {
           const d = JSON.parse(this.utilsService.decryptByAES(rsp.data));

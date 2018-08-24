@@ -1,16 +1,16 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-import {appRouteConfig} from '@app/routing';
+import { AppRoutingService } from '@app/service/app';
 
-import {CommonService} from '@app/service/common';
+import { CommonService } from '@app/service/common';
 
-import {User} from '@app/models';
+import { User } from '@app/models';
 
 @Component({
   selector: 'app-cms-top-nav',
   templateUrl: './cms-top-nav.component.html',
   styleUrls: ['./cms-top-nav.component.scss'],
-  providers: []
+  providers: [AppRoutingService]
 })
 export class CmsTopNavComponent implements OnInit {
 
@@ -22,19 +22,20 @@ export class CmsTopNavComponent implements OnInit {
 
   private userModule: any;
 
-  constructor(private commonService: CommonService) {
-    // this.userModule = appRouteConfig.modules.user;
+  constructor(private commonService: CommonService, private appRoutingService: AppRoutingService) {
+    const appRouteConfig = appRoutingService.getCmsRouteConfig();
+    this.userModule = appRouteConfig.modules.user;
   }
 
   ngOnInit(): void {
   }
 
   goToProfile(): void {
-    // this.commonService.routerNavigate(this.userModule.modules.profile.link);
+    this.commonService.routerNavigate(this.userModule.modules.profile.link);
   }
 
   editPwd(): void {
-    this.commonService.routerNavigate(appRouteConfig.modules.cms.modules.user.modules.profile.modules.pwd.link);
+    this.commonService.routerNavigate(this.userModule.modules.pwd.link);
   }
 
   signOut(): void {
