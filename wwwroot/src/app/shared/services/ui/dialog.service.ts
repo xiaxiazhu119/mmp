@@ -21,6 +21,30 @@ export class DialogService extends DialogBaseService {
   }
 
 
+  public openCustomDialog<T>(data: any, component: any, callback: any): void {
+
+    const cfg: DialogConfig = new DialogConfig();
+    cfg.data = data;
+    // cfg.onInit = (dialogRef: any, e: any) => {
+    //   // console.log(e);
+    // };
+    cfg.onConfirm = (dialogRef: any, e: any) => {
+      // console.log(cfg.data)
+      // console.log(e);
+
+      callback(dialogRef);
+
+    };
+    // cfg.onCancel = (dialogRef: any, e: any) => {
+    //   // console.log(e);
+    //   dialogRef.close();
+    // };
+    this
+      .openDialogBase<T>(cfg, component);
+
+  }
+
+
   public openConfirmDialog(config: any, confirm?: any): Observable<boolean> {
 
     let cfg: DialogConfig = new DialogConfig();

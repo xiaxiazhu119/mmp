@@ -1,18 +1,19 @@
 import { Component, OnChanges, OnInit, SimpleChange, Input } from '@angular/core';
 
 import { AppService, PassportService, UserService, AppRoutingService, ManuscriptService } from '@app/service/app';
-import { DialogService, SnackBarService, DialogBaseService } from '@app/service/ui';
+import { DialogService, SnackBarService } from '@app/service/ui';
 import { CommonService, UtilsService, ModelTransferService } from '@app/service/common';
-import { ManuscriptSearchModel, ManuscriptListModel } from '@app/models';
+import { ManuscriptSearchModel, ManuscriptListModel, ManuscriptPublishModel, User, ManuscriptReviewModel } from '@app/models';
 import { DialogConfig, AppPaginationConfig } from '@app/models/ui';
 import { EnumClass, ManuscriptStatusEnum, ManuscriptSearchTypeEnum } from '@app/enums';
 import { AppCmsBaseComponent } from '@app/cmsBaseComponent';
+import { CmsManuscriptPublishDialogComponent } from './dialog/publish/cms-manuscript-publish-dialog.component';
 
 @Component({
   selector: 'app-cms-candidate-list',
   templateUrl: './cms-candidate-list.component.html',
   styleUrls: ['./cms-candidate-list.component.scss', './cms-candidate-list.component.theme.scss'],
-  providers: [CommonService, SnackBarService, UserService, AppRoutingService, ManuscriptService, ModelTransferService]
+  providers: [CommonService, SnackBarService, UserService, AppRoutingService, ManuscriptService, ModelTransferService, DialogService]
 })
 export class CmsCandidateListComponent extends AppCmsBaseComponent implements OnInit {
 
@@ -21,10 +22,13 @@ export class CmsCandidateListComponent extends AppCmsBaseComponent implements On
   categoryList = [];
 
   pgCfg: AppPaginationConfig = new AppPaginationConfig();
+
   private manuscriptRouteConfig: any;
+  private _user: User;
 
   constructor(private commonService: CommonService,
     private utilsService: UtilsService,
+    private dialogService: DialogService,
     private snackBarService: SnackBarService,
     private passportService: PassportService,
     private manuscriptService: ManuscriptService,
@@ -32,6 +36,8 @@ export class CmsCandidateListComponent extends AppCmsBaseComponent implements On
     private userService: UserService,
     private appRoutingService: AppRoutingService) {
     super();
+
+    this._user = passportService.getUserCookie();
 
     const appCmsRouteConfig = appRoutingService.getCmsRouteConfig();
     this.manuscriptRouteConfig = appCmsRouteConfig.modules.manuscript;
@@ -77,7 +83,57 @@ export class CmsCandidateListComponent extends AppCmsBaseComponent implements On
 
   publish(data: any): void {
 
+    const publishData: ManuscriptPublishModel = {
+      manuscriptId: data.id,
+      userId: this._user.id
+    };
+
+    const dialogData = {
+      title: data.title,
+      year: undefined,
+      term: undefined
+    };
+
+    const callback = (dialogRef: any) => {
+
+      publishData.year = dialogData.year;
+      publishData.term = dialogData.term;
+      console.log(publishData);
+
+      const reviewData: ManuscriptReviewModel = {
+        id: 0,
+        manuscriptId: data.id,
+        status: ManuscriptStatusEnum.Published,
+        userId: this._user.id,
+        pub: publishData
+      };
+
+      this.manuscriptService
+        .review(reviewData, (rsp: any) => {
+
+          const rc = Number(this.utilsService.decryptByAES(rsp.data));
+          const msg = rc > 0 ? '刊登成功' : '刊登失败，请稍后再试';
+          // this.snackBarService.open(msg);
+          if (rc > 0) {
+            this.getList();
+          }
+          this.snackBarService.open(msg);
+          dialogRef.close();
+
+        });
+
+    };
+
+    this.dialogService
+      .openCustomDialog<CmsManuscriptPublishDialogComponent>(dialogData, CmsManuscriptPublishDialogComponent, callback);
+
+
   }
+
+  goToInfo(id: number): void {
+    this.commonService.routerNavigate(['/cms/candidate/info', id]);
+  }
+
   //#endregion
 
   private initCategoryList(): void {
@@ -97,5 +153,6 @@ export class CmsCandidateListComponent extends AppCmsBaseComponent implements On
         }
       });
   }
+
 
 }

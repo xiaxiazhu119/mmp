@@ -14,7 +14,7 @@ class UserBaseHandler(BaseHandler):
     _ctrl = UserController()
 
     def gen_token(self, user):
-        plain_text = str(user.id) + ',' + str(user.permission_group) + ',' + Utils.now()
+        plain_text = str(user.id) + ',' + str(user.permission_group) + ',' + Utils.get_timestamp()
         crypto = Crypto()
         token = crypto.encrypt_by_aes(plain_text)
         return token

@@ -55,8 +55,13 @@ class Utils(object):
         return Utils.now(f='%Y-%m-%d %H:%M:%S')
 
     @staticmethod
+    def get_timestamp():
+        return Utils.now('%Y%m%d%H%M%S')
+
+    @staticmethod
     def now(f=None):
-        f = '%Y%m%d%H%M%S' if f == None else f
+        if f is None:
+            return time
         return time.strftime(f)
 
     @staticmethod

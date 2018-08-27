@@ -95,6 +95,7 @@ class ManuscriptReviewHandler(ManuscriptBaseHandler):
         rv = self.get_request_json_data('review')
         rv_th = ManuscriptReviewModelTransferHelper()
         review = rv_th.transfer_to_py(rv)
+        review.user_id = self.user_id
 
         id = self._ctrl.review(review)
         if id > 0:
@@ -102,6 +103,12 @@ class ManuscriptReviewHandler(ManuscriptBaseHandler):
                 self._ctrl.store(review.manuscript_id, self.user_id)
             elif review.status == ManuscriptStatusEnum.Confirmed.value:
                 self._ctrl.confirm(review.manuscript_id, self.user_id)
+            elif review.status == ManuscriptStatusEnum.Published.value:
+                p = rv['pub']
+                pub_th = ManuscriptPublishModelTransferHelper()
+                pub = pub_th.transfer_to_py(p)
+                pub.user_id = self.user_id
+                id = self._ctrl.publish(pub)
 
         return self.build_response(['manuscript', 'review', 'success' if id > 0 else 'failed'], id)
 
@@ -147,8 +154,8 @@ class ManuscriptPublishHandler(ManuscriptBaseHandler):
 
 class ManuscriptOriginalHandler(ManuscriptBaseHandler):
 
-    def get(self, manuscript_id):
-        ori = self._ctrl.get_original_info(manuscript_id)
+    def get(self, id):
+        ori = self._ctrl.get_original_info(id)
         rsp = None
         tag = 'success'
         if ori is not None:
@@ -161,4 +168,4 @@ class ManuscriptOriginalHandler(ManuscriptBaseHandler):
         else:
             tag = 'failed'
 
-        return self.build_response(['manuscript', 'ori', tag], rsp)
+        return self.build_response(['manuscript', 'ori', tag], rsp, use_encrypt=False)

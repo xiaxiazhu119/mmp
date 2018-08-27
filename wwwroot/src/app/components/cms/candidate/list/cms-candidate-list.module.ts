@@ -7,6 +7,9 @@ import { MatInputModule, MatSelectModule, MatButtonModule, MatSnackBarModule } f
 import { CmsCandidateListRoutingModule } from './cms-candidate-list-routing.module';
 import { CmsCandidateListComponent } from './cms-candidate-list.component';
 
+import { CmsManuscriptPublishDialogModule } from './dialog/publish/cms-manuscript-publish-dialog.module';
+import { CmsManuscriptPublishDialogComponent } from './dialog/publish/cms-manuscript-publish-dialog.component';
+
 import { AppPaginationModule } from '@app/pagination';
 
 @NgModule({
@@ -14,13 +17,13 @@ import { AppPaginationModule } from '@app/pagination';
     CommonModule,
     FormsModule, ReactiveFormsModule,
     MatInputModule, MatSelectModule, MatButtonModule, MatSnackBarModule,
-    AppPaginationModule,
+    AppPaginationModule, CmsManuscriptPublishDialogModule,
     CmsCandidateListRoutingModule
   ],
   declarations: [CmsCandidateListComponent],
   exports: [CmsCandidateListComponent],
-  entryComponents: [],
-  schemas: []
+  entryComponents: [CmsManuscriptPublishDialogComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class CmsCandidateListModule {
 }

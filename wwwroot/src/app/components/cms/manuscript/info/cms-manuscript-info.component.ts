@@ -27,7 +27,10 @@ export class CmsManuscriptInfoComponent extends AppCmsBaseComponent implements O
   }
 
   ngOnInit(): void {
-    this.commonService.componentLoaded();
+  }
+
+  goBack(): void {
+    this.commonService.goBack();
   }
 
 }

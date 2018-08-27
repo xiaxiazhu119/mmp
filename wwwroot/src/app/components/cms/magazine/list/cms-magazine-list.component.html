@@ -38,24 +38,21 @@
 
     <table class="table table-striped">
       <thead>
-      <tr>
-        <!-- <th></th> -->
-        <th>栏目</th>
-        <th>文章标题</th>
-        <th>作者</th>
-        <th>作者单位</th>
-      </tr>
+        <tr>
+          <!-- <th></th> -->
+          <th>栏目</th>
+          <th>文章标题</th>
+          <th>作者</th>
+          <th>作者单位</th>
+        </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let data of dataList;let i = index">
-        <td>{{data.categoryName}}</td>
-        <td>{{data.title}}</td>
-        <td>{{data.authorName}}</td>
-        <td>{{data.companyName}}</td>
-        <td> - </td>
-        <td class="text-center info-data-list-op">
-        </td>
-      </tr>
+        <tr *ngFor="let data of dataList;let i = index">
+          <td>{{data.categoryName}}</td>
+          <td><a class="mag-title" (click)="goToInfo(data.id)">{{data.title}}</a></td>
+          <td>{{data.authorName}}</td>
+          <td>{{data.companyName}}</td>
+        </tr>
       </tbody>
     </table>
 

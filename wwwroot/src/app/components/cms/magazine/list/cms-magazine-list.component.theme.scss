@@ -3,4 +3,14 @@
 
 #app-cms-magazine-list-container {
 
+  .mag-title {
+    color: $app-primary-color;
+
+    &:hover {
+      color: $app-primary-color-dark;
+    }
+
+  }
+
+
 }

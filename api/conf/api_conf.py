@@ -26,6 +26,10 @@ API_CONF = {
             'file-upload-failed': {
                 'code': -90100000,
                 'msg': 'file upload failed'
+            },
+            'server-date-time-success': {
+                'code': 90200000,
+                'msg': 'get server date time success'
             }
         },
         'user': {

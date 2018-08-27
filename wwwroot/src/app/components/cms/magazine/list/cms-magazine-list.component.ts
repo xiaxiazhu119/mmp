@@ -65,6 +65,10 @@ export class CmsMagazineListComponent extends AppCmsBaseComponent implements OnI
     this.search(Number(e));
   }
 
+  goToInfo(id: number): void {
+    this.commonService.routerNavigate(['/cms/magazine/info', id]);
+  }
+
   //#endregion
 
   private initCategoryList(): void {

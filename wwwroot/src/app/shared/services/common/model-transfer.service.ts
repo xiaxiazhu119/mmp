@@ -97,8 +97,11 @@ export class ModelTransferService {
     return {
       manuscriptId: data['manuscript_id'],
       province: data['province'],
+      provinceName: data['province_name'],
       city: data['city'],
+      cityName: data['city_name'],
       district: data['district'],
+      districtName: data['district_name'],
       name: data['name'],
       tel: data['tel'],
       email: data['email'],

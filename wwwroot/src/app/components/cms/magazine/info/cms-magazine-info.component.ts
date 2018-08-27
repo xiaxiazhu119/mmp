@@ -27,7 +27,10 @@ export class CmsMagazineInfoComponent extends AppCmsBaseComponent implements OnI
   }
 
   ngOnInit(): void {
-    this.commonService.componentLoaded();
+  }
+
+  goBack(): void {
+    this.commonService.goBack();
   }
 
 }

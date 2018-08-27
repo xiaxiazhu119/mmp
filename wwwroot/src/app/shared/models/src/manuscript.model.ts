@@ -55,7 +55,7 @@ export class ManuscriptInfoModel {
   isPublished: boolean;
   periodicalCategory: number;
   periodicalCategoryName?: string;
-  periodicalSummary: string;
+  periodicalSummary?: string;
   userId: number;
   userName?: string;
   editUserId: number;
@@ -79,7 +79,10 @@ export class ManuscriptReviewModel {
   fileFullPath?: string;
   expire?: string;
   userId: number;
-  createTime: string;
+  createTime?: string;
+
+  pub?: ManuscriptPublishModel;
+
 }
 
 export class ManuscriptAuthorModel {
@@ -105,8 +108,8 @@ export class ManuscriptAuthorModel {
 
 export class ManuscriptPublishModel {
   manuscriptId: number;
-  year: number;
-  term: number;
+  year?: number;
+  term?: number;
   userId: number;
-  createTime: string;
+  createTime?: string;
 }

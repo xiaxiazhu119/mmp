@@ -45,11 +45,11 @@ class ManuscriptAuthor(BaseModel):
         self.district = kw.get('district')
         self.district_name = kw.get('district_name')
         self.name = kw.get('author_name') if kw.get('name') is None else kw.get('name')
-        self.tel = kw.get('tel')
-        self.email = kw.get('email')
-        self.company_name = kw.get('company_name')
-        self.company_address = kw.get('company_address')
-        self.company_zip_code = kw.get('company_zip_code')
+        self.tel = kw.get('author_tel') if kw.get('tel') is None else kw.get('tel')
+        self.email = kw.get('author_email') if kw.get('email') is None else kw.get('email')
+        self.company_name = kw.get('author_company_name') if kw.get('company_name') is None else kw.get('company_name')
+        self.company_address = kw.get('author_company_address') if kw.get('company_address') is None else kw.get('company_address')
+        self.company_zip_code = kw.get('author_company_zip_code') if kw.get('company_zip_code') is None else kw.get('company_zip_code')
 
 
 class ManuscriptReview(BaseModel):

@@ -32,9 +32,10 @@ class IO(object):
         # file_name = secure_filename(file.filename)
 
         if use_ts:
-            file_name, file_extension = os.path.splitext(file_name)
-            file_name += '_' + time.strftime('%Y%m%d%H%M%S') + str(random.randrange(1000, 9999))
-            file_name = file_name + file_extension
+            file_name = IO.rename(file_name)
+            # file_name, file_extension = os.path.splitext(file_name)
+            # file_name += '_' + Utils.get_timestamp() + str(random.randrange(100, 999))
+            # file_name = file_name + file_extension
 
         file_path = os.path.join(p, file_name)
         file.save(file_path)
@@ -46,9 +47,10 @@ class IO(object):
 
         # file_name = file_path if file_path != None else 'data_'
         if use_ts:
-            file_name, file_extension = os.path.splitext(file_path)
-            file_name += '_' + time.strftime('%Y%m%d%H%M%S') + str(random.randrange(1000, 9999))
-            file_path = file_name + file_extension
+            file_path = IO.rename(file_path)
+            # file_name, file_extension = os.path.splitext(file_path)
+            # file_name += '_' + Utils.get_timestamp() + str(random.randrange(1000, 9999))
+            # file_name = file_name + file_extension
 
         mode = 'a' if os.path.exists(file_path) else 'w'
 
@@ -56,6 +58,13 @@ class IO(object):
             f.write(text)
 
         return file_path
+
+    @staticmethod
+    def rename(file):
+        file_name, file_extension = os.path.splitext(file)
+        file_name += '_' + Utils.get_timestamp() + str(random.randrange(100, 999))
+        file_name = file_name + file_extension
+        return file_name
 
     @staticmethod
     def load_file(file_path, encoding='utf-8'):

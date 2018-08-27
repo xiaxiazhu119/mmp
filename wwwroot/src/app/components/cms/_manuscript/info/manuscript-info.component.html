@@ -1,0 +1,157 @@
+<div id="manuscript-info-container">
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th style="width: 20%;"></th>
+        <th style="width: 40%;">原始信息</th>
+        <th>最新版本</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr [class.bg-warning]="infoOri.title !== info.title">
+        <td>文章标题</td>
+        <td>{{infoOri.title}}</td>
+        <td>{{info.title}}</td>
+      </tr>
+      <tr [class.bg-warning]="infoOri.keywords !== info.keywords">
+        <td>关键字</td>
+        <td>{{infoOri.keywords}}</td>
+        <td>{{info.keywords}}</td>
+      </tr>
+      <tr [class.bg-warning]="infoOri.subject !== info.subject">
+        <td>对应研究课题</td>
+        <td>{{infoOri.subject}}</td>
+        <td>{{info.subject}}</td>
+      </tr>
+      <tr [class.bg-warning]="infoOri.result !== info.result">
+        <td>项目名称成果</td>
+        <td>{{infoOri.result}}</td>
+        <td>{{info.result}}</td>
+      </tr>
+      <tr [class.bg-warning]="infoOri.categoryName !== info.categoryName">
+        <td>拟投栏目</td>
+        <td>{{infoOri.categoryName}}</td>
+        <td>{{info.categoryName}}</td>
+      </tr>
+      <tr [class.bg-warning]="infoOri.file !== info.file">
+        <td>稿件文档</td>
+        <td><a [href]="getFileFullPath(infoOri.file)" target="_blank">{{infoOri.fileName}}</a></td>
+        <td><a [href]="getFileFullPath(info.file)" target="_blank">{{info.fileName}}</a></td>
+      </tr>
+      <tr [class.bg-warning]="infoOri.isPublished !== info.isPublished">
+        <td>是否公开发表</td>
+        <td>{{infoOri.isPublished ? '是' : '否'}}</td>
+        <td>{{info.isPublished ? '是' : '否'}}</td>
+      </tr>
+      <tr [class.bg-warning]="infoOri.periodicalCategoryName !== info.periodicalCategoryName">
+        <td>期刊类型</td>
+        <td>{{infoOri.periodicalCategoryName || '-'}}</td>
+        <td>{{info.periodicalCategoryName || '-'}}</td>
+      </tr>
+      <tr [class.bg-warning]="infoOri.periodicalSummary !== info.periodicalSummary">
+        <td>期刊情况说明</td>
+        <td>{{infoOri.periodicalSummary || '-'}}</td>
+        <td>{{info.periodicalSummary || '-'}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>&nbsp;</p>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th style="width: 20%;"></th>
+        <th *ngIf="!info.isSelf" style="width: 40%;">投稿者</th>
+        <th>{{ info.isSelf ? '投稿者/作者' : '作者'}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>姓名</td>
+        <td *ngIf="!info.isSelf">{{profile.name}}</td>
+        <td>{{author.name}}</td>
+      </tr>
+      <tr>
+        <td>地区</td>
+        <td *ngIf="!info.isSelf">{{profile.provinceName}}-{{profile.cityName}}-{{profile.districtName}}</td>
+        <td>{{author.provinceName}}-{{author.cityName}}-{{author.districtName}}</td>
+        <!-- <td>{{(author.provinceName + '-' + author.cityName + '-' + author.districtName)}}</td> -->
+      </tr>
+      <tr>
+        <td>手机号</td>
+        <td *ngIf="!info.isSelf">{{profile.tel}}</td>
+        <td>{{author.tel}}</td>
+      </tr>
+      <tr>
+        <td>电子邮箱</td>
+        <td *ngIf="!info.isSelf">{{profile.email}}</td>
+        <td>{{author.email}}</td>
+      </tr>
+      <tr>
+        <td>单位名称</td>
+        <td *ngIf="!info.isSelf">{{profile.companyName}}</td>
+        <td>{{author.companyName}}</td>
+      </tr>
+      <tr>
+        <td>单位邮编</td>
+        <td *ngIf="!info.isSelf">{{profile.companyZipCode}}</td>
+        <td>{{author.companyZipCode}}</td>
+      </tr>
+      <tr>
+        <td>单位地址</td>
+        <td *ngIf="!info.isSelf">{{profile.companyAddress}}</td>
+        <td>{{author.companyAddress}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- <table class="table">
+    <thead>
+      <tr>
+        <th style="width: 20%;"></th>
+        <th style="width: 40%;">投稿者{{ info.isSelf ? '/作者' : ''}}</th>
+        <th>{{ !info.isSelf ? '作者' : ''}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>姓名</td>
+        <td>{{profile.name}}</td>
+        <td>{{ !info.isSelf ? author.name : ''}}</td>
+      </tr>
+      <tr>
+        <td>地区</td>
+        <td>{{profile.provinceName}}-{{profile.cityName}}-{{profile.districtName}}</td>
+        <td>{{ !info.isSelf ? (author.provinceName + '-' + author.cityName + '-' + author.districtName) : ''}}</td>
+      </tr>
+      <tr>
+        <td>手机号</td>
+        <td>{{profile.tel}}</td>
+        <td>{{ !info.isSelf ? author.tel : ''}}</td>
+      </tr>
+      <tr>
+        <td>电子邮箱</td>
+        <td>{{profile.email}}</td>
+        <td>{{ !info.isSelf ? author.email : ''}}</td>
+      </tr>
+      <tr>
+        <td>单位名称</td>
+        <td>{{profile.companyName}}</td>
+        <td>{{ !info.isSelf ? author.companyName : ''}}</td>
+      </tr>
+      <tr>
+        <td>单位邮编</td>
+        <td>{{profile.companyZipCode}}</td>
+        <td>{{ !info.isSelf ? author.companyZipCode : ''}}</td>
+      </tr>
+      <tr>
+        <td>单位地址</td>
+        <td>{{profile.companyAddress}}</td>
+        <td>{{ !info.isSelf ? author.companyAddress : ''}}</td>
+      </tr>
+    </tbody>
+  </table> -->
+
+</div>

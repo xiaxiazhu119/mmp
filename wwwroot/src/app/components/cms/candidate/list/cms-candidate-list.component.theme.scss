@@ -1,0 +1,16 @@
+@import '~style/variables.theme';
+@import '~style/mixins';
+
+#app-cms-candidate-list-container {
+
+  .mag-title {
+    color: $app-primary-color;
+
+    &:hover {
+      color: $app-primary-color-dark;
+    }
+
+  }
+
+
+}

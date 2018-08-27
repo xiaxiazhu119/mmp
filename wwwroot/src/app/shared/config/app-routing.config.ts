@@ -194,9 +194,9 @@ export const appRouteConfig = {
             },
             info: {
               id: 'app-cms-candidate',
-              documentTitle: '候选稿件详情',
-              pageTitle: '候选稿件详情',
-              title: '候选稿件详情',
+              documentTitle: '稿件详情',
+              pageTitle: '稿件详情',
+              title: '稿件详情',
               link: '/cms/candidate/info',
               path: 'info',
               params: '/:id',

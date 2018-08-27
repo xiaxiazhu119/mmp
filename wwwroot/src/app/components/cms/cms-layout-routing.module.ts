@@ -67,7 +67,7 @@ const magazineRoutes: Route = {
       loadChildren: magazineModules.list.module
     },
     {
-      path: magazineModules.info.path,
+      path: magazineModules.info.path + magazineModules.info.params,
       loadChildren: magazineModules.info.module
     },
   ]
@@ -84,7 +84,7 @@ const candidateRoutes: Route = {
       loadChildren: candidateModules.list.module
     },
     {
-      path: candidateModules.info.path,
+      path: candidateModules.info.path + candidateModules.info.params,
       loadChildren: candidateModules.info.module
     },
   ]
@@ -101,11 +101,11 @@ const announcementRoutes: Route = {
       loadChildren: announcementModules.list.module
     },
     {
-      path: announcementModules.info.path,
+      path: announcementModules.info.path + announcementModules.info.params,
       loadChildren: announcementModules.info.module
     },
     {
-      path: announcementModules.edit.path,
+      path: announcementModules.edit.path + announcementModules.info.params,
       loadChildren: announcementModules.edit.module
     },
   ]

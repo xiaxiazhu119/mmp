@@ -4,6 +4,6 @@ import os
 from test.src.test import Test
 
 t = Test()
-t.getcwd()
+t.test_io()
 
 # print(os.getcwd())

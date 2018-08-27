@@ -1,4 +1,4 @@
-<div id="app-cms-manuscript-list-container">
+<div id="app-cms-candidate-list-container">
 
   <div class="search-condition-container">
 
@@ -47,7 +47,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let data of dataList;let i = index">
-          <td>{{data.title}}</td>
+          <td><a class="mag-title" (click)="goToInfo(data.id)">{{data.title}}</a></td>
           <td>{{data.userName}}</td>
           <td>{{data.authorName}}</td>
           <td>{{data.categoryName}}</td>

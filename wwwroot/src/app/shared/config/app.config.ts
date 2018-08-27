@@ -14,6 +14,7 @@ const _appConfig = {
       path: '/common',
       modules: {
         fileUpload: '/file/upload',
+        datetime: '/datetime',
       }
     },
     user: {

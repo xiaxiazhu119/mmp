@@ -27,7 +27,10 @@ export class CmsCandidateInfoComponent extends AppCmsBaseComponent implements On
   }
 
   ngOnInit(): void {
-    this.commonService.componentLoaded();
+  }
+
+  goBack(): void {
+    this.commonService.goBack();
   }
 
 }

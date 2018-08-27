@@ -133,3 +133,7 @@ class Test(object):
 
         # print(p, os.path.exists(p))
         return Utils.get_proj_root_path()
+
+    def test_io(self):
+        p = '../../../abc.txt'
+        print(os.path.splitext(p))

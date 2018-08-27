@@ -2,13 +2,13 @@ import { Component, OnChanges, OnInit, SimpleChange, Input, Output, EventEmitter
 
 
 @Component({
-  selector: 'app-cms-manuscript-confirm-dialog',
-  templateUrl: './cms-manuscript-confirm-dialog.component.html',
-  styleUrls: ['./cms-manuscript-confirm-dialog.component.scss', './cms-manuscript-confirm-dialog.component.theme.scss'],
+  selector: 'app-cms-manuscript-publish-dialog',
+  templateUrl: './cms-manuscript-publish-dialog.component.html',
+  styleUrls: ['./cms-manuscript-publish-dialog.component.scss', './cms-manuscript-publish-dialog.component.theme.scss'],
   providers: [],
   encapsulation: ViewEncapsulation.None
 })
-export class CmsManuscriptConfirmDialogComponent implements OnInit {
+export class CmsManuscriptPublishDialogComponent implements OnInit {
 
 
   @Input()
@@ -16,7 +16,7 @@ export class CmsManuscriptConfirmDialogComponent implements OnInit {
   @Input()
   public config: any;
 
-  agreement = false;
+  termList = [1, 2, 3, 4, 5, 6];
 
   @Output()
   initialized = new EventEmitter<any>();

@@ -1,6 +1,6 @@
 # -*- coding=utf-8 -*-
 
-from handlers.handlers import ManuscriptEditHandler, ManuscriptListHandler,  ManuscriptReviewHandler, ManuscriptLatestReviewHandler, ManuscriptStoreHandler, ManuscriptConfirmHandler, ManuscriptPublishHandler
+from handlers.handlers import ManuscriptEditHandler, ManuscriptListHandler,  ManuscriptReviewHandler, ManuscriptLatestReviewHandler, ManuscriptStoreHandler, ManuscriptConfirmHandler, ManuscriptPublishHandler, ManuscriptOriginalHandler
 
 
 manuscript_routes = [{
@@ -24,4 +24,7 @@ manuscript_routes = [{
 }, {
     'path': r"manuscript/publish",
     'handler': ManuscriptPublishHandler
+}, {
+    'path': r"manuscript/ori/<int:id>",
+    'handler': ManuscriptOriginalHandler
 }]

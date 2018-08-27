@@ -52,7 +52,7 @@
         <td class="text-center">
           <span class="app-label {{getStatusLabelStyle(data.status)}}">{{data.statusName}}</span>
         </td>
-        <td class="text-center"><a *ngIf="data.reviewFile" [href]="getFileFullPath(data.reviewFile)" target="_blank">查看</a></td>
+        <td class="text-center"><a *ngIf="data.reviewFile" [href]="getFileFullPath(data.reviewFile)" target="_blank">评审文档</a></td>
         <td class="text-center info-data-list-op">
           <app-cms-manuscript-list-operation [data]="data" [permissions]="permissions" [user]="user" (operationEmitted)="onOperationEmit($event)"></app-cms-manuscript-list-operation>
         </td>
