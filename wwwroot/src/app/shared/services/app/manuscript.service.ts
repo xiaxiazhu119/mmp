@@ -22,10 +22,10 @@ export class ManuscriptService {
   }
 
   verifyManuscriptForm(info: ManuscriptInfoModel, author: ManuscriptAuthorModel): string {
-    if (info.title === '') {
+    if (info.title === '' || info.title.trim() === '') {
       return '请填写文章标题';
     }
-    if (info.keywords === '') {
+    if (info.keywords === '' || info.keywords.trim() === '') {
       return '请填写关键字';
     }
     if (typeof (info.category) === 'undefined') {
@@ -41,7 +41,7 @@ export class ManuscriptService {
       if (typeof (info.periodicalCategory) === 'undefined') {
         return '请选择期刊栏目';
       }
-      if (info.periodicalSummary === '') {
+      if (info.periodicalSummary === '' || info.periodicalSummary.trim() === '') {
         return '请填写期刊名、刊号等情况说明';
       }
     }
@@ -49,27 +49,27 @@ export class ManuscriptService {
       if (typeof (author.province) === 'undefined' || typeof (author.province) === 'undefined' || typeof (author.province) === 'undefined') {
         return '请选择地区';
       }
-      if (author.name === '') {
+      if (author.name === '' || author.name.trim() === '') {
         return '请填写作者姓名';
 
       }
-      if (author.tel === '') {
+      if (author.tel === '' || author.tel.trim() === '') {
         return '请填写作者电话';
 
       }
-      if (author.email === '') {
+      if (author.email === '' || author.email.trim() === '') {
         return '请填写作者邮箱';
 
       }
-      if (author.companyName === '') {
+      if (author.companyName === '' || author.companyName.trim() === '') {
         return '请填写作者单位';
 
       }
-      if (author.companyAddress === '') {
+      if (author.companyAddress === '' || author.companyAddress.trim() === '') {
         return '请填写作者单位地址';
 
       }
-      if (author.companyZipCode === '') {
+      if (author.companyZipCode === '' || author.companyZipCode.trim() === '') {
         return '请填写作者单位邮编';
 
       }

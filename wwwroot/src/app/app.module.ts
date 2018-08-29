@@ -9,7 +9,7 @@ import { MatListModule, MatMenuModule, MatIconModule, MatButtonModule, MatLineMo
 
 import { CookieModule } from 'ngx-cookie';
 
-import { AjaxBaseService, AjaxService, AppCookieService, EventAnnounceService, CommonService, UtilsService, CryptoJsService, MessageService } from '@app/service/common';
+import { AjaxBaseService, AjaxService, AppCookieService, EventAnnounceService, CommonService, UtilsService, CryptoJsService } from '@app/service/common';
 import { PassportService, AppService, AppConfigService } from '@app/service/app';
 
 import { AppRoutingModule } from './app-routing.modules';
@@ -46,7 +46,6 @@ import 'hammerjs';
     CommonService,
     UtilsService,
     CryptoJsService,
-    MessageService,
     PassportService,
     AppService
   ],

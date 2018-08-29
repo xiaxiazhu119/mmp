@@ -1,0 +1,30 @@
+<div id="app-cms-announcement-edit-container">
+
+
+  <p>
+    <mat-form-field class="mat-form-field-100">
+      <input matInput placeholder="标题" class="form-ctrl" [(ngModel)]="msg.title" maxlength="50">
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field class="mat-form-field-md m-r-lg">
+      <mat-select class="sc-slt" placeholder="推送范围" [(ngModel)]="msg.scopeType">
+        <mat-option *ngFor="let s of scopeTypeList" [value]="s.id">{{s.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field class="mat-form-field-100">
+      <textarea matInput placeholder="公告内容" rows="8" [(ngModel)]="msg.content" [disabled]="isFormSubmit"></textarea>
+    </mat-form-field>
+  </p>
+
+  <p>
+
+    <button mat-raised-button (click)="submit()" class="m-r-lg mat-success-btn" [disabled]="isFormSubmit">提交</button>
+    <button mat-raised-button (click)="goBack()" [disabled]="isFormSubmit">返回</button>
+
+  </p>
+
+</div>

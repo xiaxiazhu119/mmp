@@ -1,6 +1,6 @@
 # -*- coding=utf-8 -*-
 
-from models.models import User, UserProfile, ManuscriptInfo, ManuscriptAuthor, ManuscriptReview, ManuscriptPublish
+from models.models import User, UserProfile, ManuscriptInfo, ManuscriptAuthor, ManuscriptReview, ManuscriptPublish, MessageInfo
 
 
 class ModelTransferHelper(object):
@@ -71,3 +71,11 @@ class ManuscriptPublishModelTransferHelper(ModelTransferHelper):
     def __init__(self):
         self.keys_relation = [('manuscriptId', 'manuscript_id'), ('year', 'year'), ('term', 'term'), ('userId', 'user_id')]
         self.obj = ManuscriptPublish()
+
+
+class MessageInfoModelTransferHelper(ModelTransferHelper):
+
+    def __init__(self):
+        self.keys_relation = [('id', 'id'), ('title', 'title'), ('type', 'type'), ('content', 'content'),
+                              ('scopeType', 'scope_type'), ('scopeValue', 'scope_value'), ('userId', 'user_id')]
+        self.obj = MessageInfo()

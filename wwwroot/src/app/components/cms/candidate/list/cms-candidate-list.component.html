@@ -56,7 +56,7 @@
           <td>{{data.storeTime}}</td>
           <td [innerHTML]="getConfirmLabelStyle(data.isConfirm)"></td>
           <td class="text-center info-data-list-op">
-            <a class="op-item success" *ngIf="data.isConfirm" (click)="publish(data)">刊登</a>
+            <a class="op-item normal" *ngIf="data.isConfirm" (click)="publish(data)">刊登</a>
           </td>
         </tr>
       </tbody>

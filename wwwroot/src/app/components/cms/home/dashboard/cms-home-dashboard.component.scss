@@ -1,0 +1,20 @@
+@import '~style/variables';
+@import '~style/mixins';
+
+#app-cms-home-dashboard-container {
+
+  .msg-title {
+    font-weight: $font-weight-bold;
+  }
+
+  .message-list {
+
+    > li {
+      padding-left: $spacing;
+      margin-left: $spacing-lg-x;
+      list-style-type: disc;
+    }
+
+  }
+
+}

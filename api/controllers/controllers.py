@@ -3,3 +3,4 @@
 from controllers.src.user_controller import UserController
 from controllers.src.area_controller import AreaController
 from controllers.src.manuscript_controller import ManuscriptController
+from controllers.src.message_controller import MessageController

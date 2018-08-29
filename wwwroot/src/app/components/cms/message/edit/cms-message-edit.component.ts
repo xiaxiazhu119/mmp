@@ -9,12 +9,12 @@ import { DialogConfig } from '@app/models/ui';
 import { AppCmsBaseComponent } from '@app/cmsBaseComponent';
 
 @Component({
-  selector: 'app-cms-announcement-info',
-  templateUrl: './cms-announcement-info.component.html',
-  styleUrls: ['./cms-announcement-info.component.scss', './cms-announcement-info.component.theme.scss'],
+  selector: 'app-cms-message-edit',
+  templateUrl: './cms-message-edit.component.html',
+  styleUrls: ['./cms-message-edit.component.scss', './cms-message-edit.component.theme.scss'],
   providers: [CommonService, SnackBarService, UserService]
 })
-export class CmsAnnouncementInfoComponent extends AppCmsBaseComponent implements OnInit {
+export class CmsMessageEditComponent extends AppCmsBaseComponent implements OnInit {
 
 
   constructor(private commonService: CommonService,

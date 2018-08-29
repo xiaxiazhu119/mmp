@@ -6,8 +6,6 @@ import {of} from 'rxjs/observable/of';
 import {catchError, map, tap} from 'rxjs/operators';
 import 'rxjs/add/observable/throw';
 
-import {MessageService} from './message.service';
-
 export enum HttpMethod {
   GET    = 0,
   POST   = 1,
@@ -18,8 +16,7 @@ export enum HttpMethod {
 @Injectable()
 export class AjaxBaseService {
 
-  constructor(private http: HttpClient,
-              private messageService: MessageService) {
+  constructor(private http: HttpClient) {
   }
 
   private get(url: string, httpOptions: any): Observable<any> {
@@ -63,7 +60,7 @@ export class AjaxBaseService {
 
   /** Log a HeroService message with the MessageService */
   private log(message: string) {
-    this.messageService.add('AjaxBaseService: ' + message);
+    // this.messageService.add('AjaxBaseService: ' + message);
   }
 
 

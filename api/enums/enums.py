@@ -21,12 +21,17 @@ class ManuscriptStatusEnum(Enum):
     Published = 8
 
 
+class MessageTypeEnum(Enum):
+    Announcement = 1
+    Notice = 2
+
+
+class MessageScopeTypeEnum(Enum):
+    All = 1
+    District = 2
+    Teacher = 3
+    Single = 4
+
+
 class EnumClass(object):
-
-    @staticmethod
-    def get_news_category_list():
-        pass
-
-    @staticmethod
-    def get_news_category_name(cid):
-        pass
+    pass

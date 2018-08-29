@@ -4,20 +4,20 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MatInputModule, MatSelectModule, MatButtonModule, MatIconModule, MatSnackBarModule, MatCheckboxModule, MatTooltipModule } from '@angular/material';
 
-import { CmsAnnouncementInfoRoutingModule } from './cms-announcement-info-routing.module';
-import { CmsAnnouncementInfoComponent } from './cms-announcement-info.component';
+import { CmsMessageEditRoutingModule } from './cms-message-edit-routing.module';
+import { CmsMessageEditComponent } from './cms-message-edit.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule, ReactiveFormsModule,
     MatInputModule, MatSelectModule, MatButtonModule, MatSnackBarModule, MatCheckboxModule, MatTooltipModule,
-    CmsAnnouncementInfoRoutingModule
+    CmsMessageEditRoutingModule
   ],
-  declarations: [CmsAnnouncementInfoComponent],
-  exports: [CmsAnnouncementInfoComponent],
+  declarations: [CmsMessageEditComponent],
+  exports: [CmsMessageEditComponent],
   entryComponents: [],
   schemas: []
 })
-export class CmsAnnouncementInfoModule {
+export class CmsMessageEditModule {
 }

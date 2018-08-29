@@ -46,6 +46,15 @@ const _appConfig = {
       modules: {
         list: '/list/{pid}',
       }
+    },
+    message: {
+      path: '/message',
+      modules: {
+        list: '/list',
+        info: '/{id}',
+        edit: '/0',
+        delete: '/{id}',
+      }
     }
   },
   cookies: {
@@ -128,6 +137,16 @@ const _appConfig = {
       }
     }
   },
+  templates: {
+    msg: {
+      review: {
+        return: '您的投稿《{0}》有了最新的修改意见，请于{1}前完成修改。',
+        refused: '您的投稿《{0}》未被采用。',
+        stored: '您的投稿《{0}》已通过评审，请尽快进行确认操作。',
+        published: '您的投稿《{0}》已被刊登在《上海社区教育》{1}年第{1}期。'
+      }
+    }
+  }
 };
 
 export const appConfig = _appConfig;

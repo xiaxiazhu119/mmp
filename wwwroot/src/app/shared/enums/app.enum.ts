@@ -41,9 +41,16 @@ export enum PermissionGroupEnum {
   Editor = 4
 }
 
-export enum AnnouncementTypeEnum {
-  Public = 1,
-  Private
+export enum MessageTypeEnum {
+  Announcement = 1,
+  Notice
+}
+
+export enum MessageScopeTypeEnum {
+  All = 1,
+  District,
+  Teacher,
+  Single
 }
 
 export class EnumClass {
@@ -163,32 +170,48 @@ export class EnumClass {
     return list;
   }
 
-  static getAnnouncementTypeName(t: AnnouncementTypeEnum): string {
+  static getMessageTypeName(t: MessageTypeEnum): string {
 
     switch (t) {
-      case AnnouncementTypeEnum.Public:
+      case MessageTypeEnum.Announcement:
         return '网站公告';
-      case AnnouncementTypeEnum.Private:
-        return '个人通知';
+      case MessageTypeEnum.Notice:
+        return '系统通知';
       default:
         return '-';
     }
 
   }
 
-  static getAnnouncementTypeList(): any {
-    const list = [];
+  static getMessageScopeTypeName(t: MessageScopeTypeEnum): string {
 
-    for (const t in AnnouncementTypeEnum) {
-      if (!isNaN(Number(t))) {
-        const c = Number(t);
-        list.push({
-          id: c,
-          name: this.getAnnouncementTypeName(c)
-        });
-
-      }
+    switch (t) {
+      case MessageScopeTypeEnum.All:
+        return '所有人';
+      case MessageScopeTypeEnum.District:
+        return '区管理员';
+      case MessageScopeTypeEnum.Teacher:
+        return '教师';
+      default:
+        return '-';
     }
+
+  }
+
+  static getMessageScopeTypeList(): any {
+    const list = [];
+    list.push({
+      id: MessageScopeTypeEnum.All,
+      name: this.getMessageScopeTypeName(MessageScopeTypeEnum.All)
+    });
+    list.push({
+      id: MessageScopeTypeEnum.District,
+      name: this.getMessageScopeTypeName(MessageScopeTypeEnum.District)
+    });
+    list.push({
+      id: MessageScopeTypeEnum.Teacher,
+      name: this.getMessageScopeTypeName(MessageScopeTypeEnum.Teacher)
+    });
     return list;
   }
 

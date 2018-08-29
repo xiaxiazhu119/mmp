@@ -91,6 +91,27 @@ const candidateRoutes: Route = {
 };
 //#endregion
 
+//#region message
+const messageModules = _cmsModules.modules.message.modules;
+const messageRoutes: Route = {
+  path: _cmsModules.modules.message.path,
+  children: [
+    {
+      path: messageModules.list.path,
+      loadChildren: messageModules.list.module
+    },
+    {
+      path: messageModules.info.path + messageModules.info.params,
+      loadChildren: messageModules.info.module
+    },
+    {
+      path: messageModules.edit.path + messageModules.edit.params,
+      loadChildren: messageModules.edit.module
+    },
+  ]
+};
+//#endregion
+
 //#region announcement
 const announcementModules = _cmsModules.modules.announcement.modules;
 const announcementRoutes: Route = {
@@ -101,11 +122,7 @@ const announcementRoutes: Route = {
       loadChildren: announcementModules.list.module
     },
     {
-      path: announcementModules.info.path + announcementModules.info.params,
-      loadChildren: announcementModules.info.module
-    },
-    {
-      path: announcementModules.edit.path + announcementModules.info.params,
+      path: announcementModules.edit.path + announcementModules.edit.params,
       loadChildren: announcementModules.edit.module
     },
   ]
@@ -125,6 +142,7 @@ const routes: Routes = [
       manuscriptRoutes,
       magazineRoutes,
       candidateRoutes,
+      messageRoutes,
       announcementRoutes,
     ]
   },

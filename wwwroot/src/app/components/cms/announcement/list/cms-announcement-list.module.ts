@@ -6,12 +6,14 @@ import { MatInputModule, MatSelectModule, MatButtonModule, MatSnackBarModule } f
 
 import { CmsAnnouncementListRoutingModule } from './cms-announcement-list-routing.module';
 import { CmsAnnouncementListComponent } from './cms-announcement-list.component';
+import { AppPaginationModule } from '@app/pagination';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule, ReactiveFormsModule,
     MatInputModule, MatSelectModule, MatButtonModule, MatSnackBarModule,
+    AppPaginationModule,
     CmsAnnouncementListRoutingModule
   ],
   declarations: [CmsAnnouncementListComponent],

@@ -1,0 +1,59 @@
+<div id="app-cms-announcement-list-container">
+
+  <div class="search-condition-container">
+
+    <mat-form-field class="mat-form-field-md m-r-lg">
+      <mat-select class="sc-slt" placeholder="推送范围" [(ngModel)]="sc.scopeType">
+        <mat-option [value]="0">全部</mat-option>
+        <mat-option *ngFor="let s of scopeTypeList" [value]="s.id">{{s.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="mat-form-field-lg m-r-lg">
+      <input matInput placeholder="标题" class="form-ctrl" [(ngModel)]="sc.title" maxlength="20">
+      <button *ngIf="sc.title" mat-icon-button (click)="clearTitle()" matSuffix>
+        <i class="close sc-close">&times;</i>
+      </button>
+    </mat-form-field>
+
+    <button mat-raised-button (click)="search();" class="m-r-lg" color="primary"><i class="material-icons">search</i> 检索</button>
+
+    <button mat-raised-button (click)="goToCreate()" class="m-r-lg mat-success-btn"><i class="material-icons">add</i> 发布公告</button>
+
+    <!-- <button mat-raised-button color="warn"><i class="material-icons">file_upload</i> 导入信息</button> -->
+
+  </div>
+
+  <div class="data-list-container lg app-elevation" *ngIf="pgCfg.totalItems > 0">
+
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <!-- <th></th> -->
+        <th>标题</th>
+        <th>推送范围</th>
+        <th>发布日期</th>
+        <th class="text-center">操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let msg of messageList;let i = index">
+        <td>{{msg.title}}</td>
+        <td>{{msg.scopeTypeName}}</td>
+        <td>{{msg.createTime}}</td>
+        <td class="text-center info-data-list-op app-operation-container">
+          <a class="op-item normal" (click)="goToEdit(msg.id)">修改</a>
+          <a class="op-item danger" (click)="del(msg.id)">删除</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+  <app-pagination [appPaginationConfig]="pgCfg" (pageChanged)="onPageChange($event)"></app-pagination>
+
+  <p class="no-data" *ngIf="pgCfg.totalItems === 0">{{noDataTxt}}</p>
+
+
+</div>

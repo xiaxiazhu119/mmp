@@ -1,0 +1,29 @@
+<div id="app-message-tab-item-container">
+
+  <div class="data-list-container lg app-elevation" *ngIf="pgCfg.totalItems > 0">
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <!-- <th></th> -->
+          <th>标题</th>
+          <th>类型</th>
+          <th>日期</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let msg of messageList;let i = index">
+          <td><a (click)="goToInfo(msg.id)">{{msg.title}}</a></td>
+          <td>{{msg.typeName}}</td>
+          <td>{{msg.createTime}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+  <app-pagination [appPaginationConfig]="pgCfg" (pageChanged)="onPageChange($event)"></app-pagination>
+
+  <p class="no-data" *ngIf="pgCfg.totalItems === 0">{{noDataTxt}}</p>
+
+</div>

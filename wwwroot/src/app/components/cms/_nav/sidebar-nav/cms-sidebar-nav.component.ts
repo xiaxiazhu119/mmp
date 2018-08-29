@@ -110,23 +110,23 @@ export class CmsSidebarNavComponent implements OnInit, OnChanges {
     this.appSidebarNavList.push(magazineNav);
     //#endregion
 
-    //#region announcement
-    const announcementModule = modules.announcement.modules.list;
+    //#region message
+    const messageModule = modules.message.modules.list;
 
-    const announcementNav: AppNavItem = {
-      id: announcementModule.id,
-      title: announcementModule.documentTitle,
-      toolTipTitle: announcementModule.toolTipTitle,
-      link: announcementModule.link,
-      icon: announcementModule.icon
+    const messageNav: AppNavItem = {
+      id: messageModule.id,
+      title: messageModule.documentTitle,
+      toolTipTitle: messageModule.toolTipTitle,
+      link: messageModule.link,
+      icon: messageModule.icon
     };
 
-    this.appSidebarNavList.push(announcementNav);
+    this.appSidebarNavList.push(messageNav);
     //#endregion
 
-    //#region candidate
+    //#region candidate announcement
 
-    if (this.user.permissionGroup !== PermissionGroupEnum.Teacher) {
+    if (this.user.permissionGroup === PermissionGroupEnum.Editor || this.user.permissionGroup === PermissionGroupEnum.SA) {
       const candidateModule = modules.candidate.modules.list;
 
       const candidateNav: AppNavItem = {
@@ -138,6 +138,19 @@ export class CmsSidebarNavComponent implements OnInit, OnChanges {
       };
 
       this.appSidebarNavList.push(candidateNav);
+
+
+      const announcementModule = modules.announcement.modules.list;
+
+      const announcementNav: AppNavItem = {
+        id: announcementModule.id,
+        title: announcementModule.documentTitle,
+        toolTipTitle: announcementModule.toolTipTitle,
+        link: announcementModule.link,
+        icon: announcementModule.icon
+      };
+
+      this.appSidebarNavList.push(announcementNav);
     }
     //#endregion
 

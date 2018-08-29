@@ -1,0 +1,35 @@
+<div id="app-cms-message-info-container">
+
+  <p>&nbsp;</p>
+
+  <table class="table">
+    <tr>
+      <td style="width:10%;" class="strong">标题：</td>
+      <td>{{msg.title}}</td>
+    </tr>
+    <tr>
+      <td class="strong">类型：</td>
+      <td>{{msg.typeName}}</td>
+    </tr>
+    <tr>
+      <td class="strong">日期：</td>
+      <td>{{msg.createTime}}</td>
+    </tr>
+    <tr>
+      <td style="vertical-align:top;" class="strong">内容：</td>
+      <td>
+        <pre>{{msg.content}}</pre>
+      </td>
+    </tr>
+  </table>
+
+
+  <p>&nbsp;</p>
+
+  <p>
+
+    <button mat-raised-button (click)="goBack()">返回</button>
+
+  </p>
+
+</div>

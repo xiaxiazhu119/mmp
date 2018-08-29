@@ -1,3 +1,42 @@
-<h1>cms-home-default.component</h1>
+<div id="app-cms-home-dashboard-container">
 
-<a (click)="goToWeb()">go to web</a>
+  <p>&nbsp;</p>
+  <h3 class="msg-title">网站公告</h3>
+  <div id="cms-home-dashboard-announcement-container">
+
+
+    <ul class="message-list">
+      <li *ngFor="let msg of announcementList">
+        <a (click)="goToInfo(msg.id)">{{msg.createTime}}&nbsp;&nbsp;{{msg.title}}</a>
+      </li>
+    </ul>
+
+  </div>
+  <p class="no-data" *ngIf="announcementList.length === 0">暂时没有网站公告</p>
+  <p>&nbsp;</p>
+  <p *ngIf="announcementList.length > 0">
+    <a (click)="goToAnnouncement()" class="more">更多&gt;&gt;</a>
+  </p>
+  <p>&nbsp;</p>
+  <div class="common-divider"></div>
+  <p>&nbsp;</p>
+
+  <h3 class="msg-title">系统通知</h3>
+  <div id="cms-home-dashboard-notice-container">
+
+    <ul class="message-list">
+      <li *ngFor="let msg of noticeList">
+        <a (click)="goToInfo(msg.id)">{{msg.createTime}}&nbsp;&nbsp;{{msg.title}}</a>
+      </li>
+    </ul>
+
+  </div>
+  <p class="no-data" *ngIf="noticeList.length === 0">暂时没有系统通知</p>
+  <p>&nbsp;</p>
+
+  <p *ngIf="noticeList.length > 0">
+    <a (click)="goToNotice()" class="more">更多&gt;&gt;</a>
+  </p>
+  <p>&nbsp;</p>
+
+</div>

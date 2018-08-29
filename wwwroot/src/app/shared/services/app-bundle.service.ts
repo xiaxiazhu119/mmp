@@ -7,3 +7,4 @@ export * from './app/passport.service';
 export * from './app/user.service';
 export * from './app/manuscript.service';
 export * from './app/area.service';
+export * from './app/message.service';

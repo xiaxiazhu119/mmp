@@ -1,9 +1,9 @@
-import { EnumClass } from '@app/enums';
+import { EnumClass, MessageTypeEnum } from '@app/enums';
 import { Injectable } from '@angular/core';
 
 import '@app/interfaces';
 
-import { CustomerRequestOptions, User, ManuscriptInfoModel, ManuscriptAuthorModel, ManuscriptListModel, ManuscriptReviewModel, UserProfile } from '@app/models';
+import { CustomerRequestOptions, User, ManuscriptInfoModel, ManuscriptAuthorModel, ManuscriptListModel, ManuscriptReviewModel, UserProfile, MessageInfoModel } from '@app/models';
 
 @Injectable()
 export class ModelTransferService {
@@ -121,6 +121,29 @@ export class ModelTransferService {
       userId: data['user_id'],
       createTime: (new Date(data['create_time'])).format('yyyy-MM-dd'),
     };
+  }
+
+  transferMessageInfoModel(data: any): MessageInfoModel {
+    return {
+      id: data['id'],
+      type: data['type'],
+      typeName: EnumClass.getMessageTypeName(data['type']),
+      title: data['title'],
+      content: data['content'],
+      scopeType: data['scope_type'],
+      scopeTypeName: EnumClass.getMessageScopeTypeName(data['scope_type']),
+      scopeValue: data['scope_value'],
+      userId: data['user_id'],
+      createTime: (new Date(data['create_time'])).format('yyyy-MM-dd'),
+    };
+  }
+
+  transferMessageListModel(data: any): MessageInfoModel[] {
+    const list: MessageInfoModel[] = [];
+    data.map((d: any) => {
+      list.push(this.transferMessageInfoModel(d));
+    });
+    return list;
   }
 
 

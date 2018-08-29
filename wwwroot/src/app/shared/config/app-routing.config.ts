@@ -230,30 +230,57 @@ export const appRouteConfig = {
             },
           }
         },
+        message: {
+          path: 'message',
+          modules: {
+            list: {
+              id: 'app-cms-message',
+              documentTitle: '通知公告',
+              pageTitle: '通知公告',
+              title: '通知公告',
+              toolTipTitle: '通知公告',
+              icon: 'message',
+              link: '/cms/message/list',
+              path: 'list',
+              params: '',
+              module: './message/list/cms-message-list.module#CmsMessageListModule',
+            },
+            info: {
+              id: 'app-cms-message',
+              documentTitle: '信息详情',
+              pageTitle: '信息详情',
+              title: '信息详情',
+              link: '/cms/message/info',
+              path: 'info',
+              params: '/:id',
+              module: './message/info/cms-message-info.module#CmsMessageInfoModule',
+            },
+            edit: {
+              id: 'app-cms-message',
+              documentTitle: '新建公告,公告编辑',
+              pageTitle: '新建公告,公告编辑',
+              title: '新建公告,公告编辑',
+              link: '/cms/message/edit',
+              path: 'edit',
+              params: '',
+              module: './message/edit/cms-message-edit.module#CmsMessageEditModule',
+            },
+          }
+        },
         announcement: {
           path: 'announcement',
           modules: {
             list: {
               id: 'app-cms-announcement',
-              documentTitle: '通知公告',
-              pageTitle: '通知公告',
-              title: '通知公告',
-              toolTipTitle: '通知公告',
-              icon: 'announcement',
+              documentTitle: '公告管理',
+              pageTitle: '公告管理',
+              title: '公告管理',
+              toolTipTitle: '公告管理',
+              icon: 'add_comment',
               link: '/cms/announcement/list',
               path: 'list',
               params: '',
               module: './announcement/list/cms-announcement-list.module#CmsAnnouncementListModule',
-            },
-            info: {
-              id: 'app-cms-announcement',
-              documentTitle: '信息详情',
-              pageTitle: '信息详情',
-              title: '信息详情',
-              link: '/cms/announcement/info',
-              path: 'info',
-              params: '/:id',
-              module: './announcement/info/cms-announcement-info.module#CmsAnnouncementInfoModule',
             },
             edit: {
               id: 'app-cms-announcement',
@@ -262,11 +289,11 @@ export const appRouteConfig = {
               title: '新建公告,公告编辑',
               link: '/cms/announcement/edit',
               path: 'edit',
-              params: '',
+              params: '/:id',
               module: './announcement/edit/cms-announcement-edit.module#CmsAnnouncementEditModule',
             },
           }
-        },
+        }
       }
     },
   }

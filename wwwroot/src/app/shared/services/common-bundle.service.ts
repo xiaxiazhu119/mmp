@@ -7,5 +7,4 @@ export * from './common/common.service';
 export * from './common/utils.service';
 export * from './common/crypto-js.service';
 export * from './common/component-load.service';
-export * from './common/message.service';
 export * from './common/model-transfer.service';

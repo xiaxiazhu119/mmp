@@ -183,6 +183,54 @@ API_CONF = {
                     'msg': 'manuscript original info failed'
                 }
             },
+        },
+        'message': {
+            'list': {
+                'success': {
+                    'code': 30000000,
+                    'msg': 'message list success'
+                },
+                'failed': {
+                    'code': -30000000,
+                    'msg': 'message list failed'
+                }
+            },
+            'create': {
+                'success': {
+                    'code': 30000001,
+                    'msg': 'message create success'
+                },
+                'failed': {
+                    'code': -30000001,
+                    'msg': 'message create failed'
+                }
+            },
+            'info': {
+                'success': {
+                    'code': 30000002,
+                    'msg': 'message get info success'
+                },
+            },
+            'edit': {
+                'success': {
+                    'code': 30000003,
+                    'msg': 'message edit success'
+                },
+                'failed': {
+                    'code': -30000003,
+                    'msg': 'message edit failed'
+                }
+            },
+            'delete': {
+                'success': {
+                    'code': 30000004,
+                    'msg': 'message delete success'
+                },
+                'failed': {
+                    'code': -30000004,
+                    'msg': 'message delete failed'
+                }
+            },
         }
     }
 }

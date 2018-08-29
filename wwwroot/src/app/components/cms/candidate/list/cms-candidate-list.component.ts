@@ -146,7 +146,7 @@ export class CmsCandidateListComponent extends AppCmsBaseComponent implements On
         // console.log(data);
         if (rsp.data) {
           const d = JSON.parse(this.utilsService.decryptByAES(rsp.data));
-          console.log(d);
+          // console.log(d);
           // console.log(d.list);
           this.dataList = this.modelTransferService.transferManuscriptListModel(d.list);
           this.pgCfg.totalItems = d.total;

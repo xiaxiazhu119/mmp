@@ -97,8 +97,8 @@ class ManuscriptDAL(object):
         sql += """ ORDER BY id DESC """
         sql += """ LIMIT %s OFFSET %s ; """
 
-        page_size = int(sc['pageSize'])
-        page_index = int(sc['pageIndex'])-1
+        page_size = int(sc['pageSize'] if sc['pageSize'] is not None else 10)
+        page_index = int(sc['pageIndex'] if sc['pageIndex'] is not None else 1 )-1
 
         params.append(page_size)
         params.append(page_size*page_index)

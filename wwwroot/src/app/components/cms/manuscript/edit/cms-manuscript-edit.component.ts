@@ -99,7 +99,7 @@ export class CmsManuscriptEditComponent extends AppCmsBaseComponent implements O
 
         let msg = '';
         if (id > 0) {
-          msg = this.info.id > 0 ? '投稿编辑成功' : '投稿成功，请等待评审结果';
+          msg = this.info.id > 0 ? '投稿编辑成功' : ('投稿成功' + (this._user.permissionGroup !== PermissionGroupEnum.SA && this._user.permissionGroup !== PermissionGroupEnum.Editor ? '，请等待评审结果' : ''));
 
           if (this._review && this._review.status === ManuscriptStatusEnum.Return) {
             const rv = new ManuscriptReviewModel();
